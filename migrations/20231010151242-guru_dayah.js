@@ -11,7 +11,7 @@ module.exports = {
 			},
 
 			NIK: {
-				type: Sequelize.UUID,
+				type: Sequelize.BIGINT(16),
 				references: {
 					model: "masyarakat",
 					key: "NIK",
@@ -42,24 +42,6 @@ module.exports = {
 			updatedAt: {
 				type: Sequelize.DATE,
 				defaultValue: Sequelize.NOW,
-			},
-			createdBy: {
-				type: Sequelize.UUID,
-				references: {
-					model: "admin",
-					key: "id",
-				},
-				onDelete: "RESTRICT",
-				onUpdate: "CASCADE",
-			},
-			updatedBy: {
-				type: Sequelize.UUID,
-				references: {
-					model: "admin",
-					key: "id",
-				},
-				onDelete: "RESTRICT",
-				onUpdate: "CASCADE",
 			},
 		});
 	},

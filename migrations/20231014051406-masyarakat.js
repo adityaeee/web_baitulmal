@@ -5,9 +5,8 @@ module.exports = {
 		await queryInterface.createTable("masyarakat", {
 			no_KK: Sequelize.BIGINT(16),
 			NIK: {
-				type: Sequelize.UUID,
+				type: Sequelize.BIGINT(16),
 				primaryKey: true,
-				defaultValue: Sequelize.UUIDV4,
 			},
 			nama: Sequelize.STRING(50),
 			tempat_lahir: Sequelize.STRING(15),
@@ -34,24 +33,6 @@ module.exports = {
 			updatedAt: {
 				type: Sequelize.DATE,
 				defaultValue: Sequelize.NOW,
-			},
-			createdBy: {
-				type: Sequelize.UUID,
-				references: {
-					model: "admin",
-					key: "id",
-				},
-				onDelete: "RESTRICT",
-				onUpdate: "CASCADE",
-			},
-			updatedBy: {
-				type: Sequelize.UUID,
-				references: {
-					model: "admin",
-					key: "id",
-				},
-				onDelete: "RESTRICT",
-				onUpdate: "CASCADE",
 			},
 		});
 	},
