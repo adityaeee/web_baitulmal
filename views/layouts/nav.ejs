@@ -1,6 +1,6 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+<nav class="navbar navbar-expand-lg navbar-dark bg-success">
   <div class="container">
-    <a class="navbar-brand fw-bolder" href="#">KATAM</a>
+    <a class="navbar-brand fw-bolder" href="#">BAITULMAL</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -9,29 +9,20 @@
         <li class="nav-item">
           <a class="nav-link active" aria-current="page" href="/home">Home</a>
         </li>
-        <li class="nav-item">
+        <!-- <li class="nav-item">
           <a class="nav-link active" aria-current="page" href="/katam">Kalender Tanam</a>
         </li>
         <li class="nav-item">
           <a class="nav-link active" aria-current="page" href="/hasil">Hasil Prediksi</a>
         </li>
-        <% if (user?.username) { %>
           <li class="nav-item hide-item">
             <a class="nav-link active" aria-current="page" href="/data">Pengelolaan Data</a>
-          </li>
-        <% } %>
-       
+          </li> -->
       </ul>
       <ul class="navbar-nav ms-auto">
-        <% if (user?.username) { %>
           <li>
-            <a class="nav-link active" aria-current="page" href="/auth/logout"><%= user.name %> / Logout</a>
+          <a class="nav-link active" aria-current="page" href="/auth/login">Register</a>
           </li>
-        <% } else {%>
-          <li>
-            <a class="nav-link active" aria-current="page" href="/auth/login">Login</a>
-          </li>
-        <% } %>
       </ul>
     </div>
   </div>

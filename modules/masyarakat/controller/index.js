@@ -16,7 +16,8 @@ const getMasyarakat = async (req, res) => {
 
 const getMasyarakatById = async (req, res) => {
 	try {
-		const masyarakat = await Masyarakat.findByPk(req.params.NIK);
+		const masyarakat = await Masyarakat.findOne({ where: { NIK: req.params.NIK}});
+		console.log(masyarakat)
 		if (!masyarakat) {
 			return res.status(404).json({ message: "not found" });
 		}
