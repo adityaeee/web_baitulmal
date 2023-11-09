@@ -1,0 +1,87 @@
+<div class="container">
+  <div class="d-flex justify-content-center">
+    <div class="card mt-5" style="width: 18rem">
+      <div class="card-body">
+        <h5 class="card-title text-center">
+          <%= masyarakat.nama.toUpperCase() %>
+        </h5>
+        <p class="card-subtitle mb-3 text-muted text-center">
+          <%= masyarakat.golongan.toUpperCase() %>
+        </p>
+        <p class="card-text mb-1">No. KK: <%= masyarakat.no_KK %></p>
+        <p class="card-text mb-1">NIK: <%= masyarakat.NIK %></p>
+        <p class="card-text mb-1">
+          Tempat Lahir: <%= masyarakat.tempat_lahir %>
+        </p>
+        <p class="card-text mb-1">
+          Tanggal Lahir: <%= masyarakat.tanggal_lahir %>
+        </p>
+        <p class="card-text mb-1">
+          Alamat: <%= gampong.dusun %>, <%= gampong.nama_gampong %>, <%=
+          gampong.kecamatan %>
+        </p>
+        <a
+          href="/masyarakat/edit/<%= masyarakat.NIK %>"
+          class="btn btn-warning badge"
+          >Edit</a
+        >
+        <form
+          action="/masyarakat/<%= masyarakat.NIK %>?_method=DELETE"
+          id="formDelete"
+          method="POST"
+        >
+          <button
+            type="button"
+            class="btn btn-danger badge"
+            onclick="return confirmHandler(this, '<%= masyarakat.nama %>')"
+          >
+            Del
+          </button>
+        </form>
+        <a href="/masyarakat">&laquo; Kembali</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  function confirmHandler(button, nama) {
+    const swalWithBootstrapButtons = Swal.mixin({
+      customClass: {
+        confirmButton: "btn btn-success",
+        cancelButton: "btn btn-danger",
+      },
+      buttonsStyling: false,
+    });
+
+    swalWithBootstrapButtons
+      .fire({
+        title: "Apakah anda yakin?",
+        text: `menghapus data ${nama} ?`,
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonText: "Ya, hapus!",
+        cancelButtonText: "Batal!",
+        reverseButtons: true,
+      })
+      .then((result) => {
+        if (result.isConfirmed) {
+          button.parentElement.submit();
+          swalWithBootstrapButtons.fire(
+            "Deleted!",
+            `Data ${nama} berhasil dihapus`,
+            "success"
+          );
+        } else if (
+          /* Read more about handling dismissals below */
+          result.dismiss === Swal.DismissReason.cancel
+        ) {
+          swalWithBootstrapButtons.fire(
+            "Cancelled",
+            `Data ${nama} masih tersimpan`,
+            "error"
+          );
+        }
+      });
+  }
+</script>

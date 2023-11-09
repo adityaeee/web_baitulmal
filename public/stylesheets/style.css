@@ -6,3 +6,12 @@
 a {
   color: #00B7FF;
 } */
+
+body {
+  /* background-color: lightgreen; */
+  background-image: url(../images/background/gambar2.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center;
+}

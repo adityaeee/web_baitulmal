@@ -1,0 +1,55 @@
+<div class="container mt-3">
+  <div class="row">
+    <div class="col-md-3"></div>
+    <div class="col-md-6">
+      <h2 class="fw-bold">DAFTAR PENERIMA ZAKAT MAL</h2>
+    </div>
+    <div class="col-md-2">
+      <a href="/masyarakat/tambah" class="btn btn-success">Tambah Penerima</a>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md">
+      <% if (msg.length !== 0) { %>
+      <script>
+        Swal.fire({
+          icon: "success",
+          title: "<%= msg %>",
+          showConfirmButton: false,
+          timer: 2000,
+        });
+      </script>
+      <% } %>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">No</th>
+            <th scope="col">NIK</th>
+            <th scope="col">Nama</th>
+            <th scope="col">Periode</th>
+            <th scope="col">Status</th>
+            <th scope="col">Keterangan</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% masyarakat.forEach((orang,i) => { %>
+          <tr>
+            <th scope="row"><%= i+1 %></th>
+            <td><%= orang.NIK %></td>
+            <td><%= orang.nama %></td>
+            <td><%= orang.periode %></td>
+            <td><%= orang.status %></td>
+            <td>
+              <a
+                href="/masyarakat/<%= orang.NIK %>"
+                class="btn btn-success badge"
+                >Detail</a
+              >
+            </td>
+          </tr>
+          <% }) %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,128 @@
+<div class="container mt-3">
+  <div class="row center">
+    <div class="col-md-3">
+      <a href="/masyarakat" class="btn btn-success badge">&laquo; Kembali</a>
+    </div>
+    <div class="col-md-6">
+      <h2 class="fw-bold">REGISTRASI GAMPONG</h2>
+    </div>
+  </div>
+  <% if (typeof errors != 'undefined') { %> <% errors.forEach(error => { %>
+  <div class="alert alert-danger" role="alert">
+    <ul>
+      <li><%= error%></li>
+      <% }) %>
+    </ul>
+    <% } %>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <form method="post" action="/auth/register">
+        <div class="mb-3">
+          <label for="nama_gampong" class="form-label">Nama Gampong</label>
+          <input
+            type="text"
+            class="form-control"
+            id="nama_gampong"
+            name="nama_gampong"
+            required
+          />
+        </div>
+        <div class="mb-3">
+          <label for="kode_gampong" class="form-label">Kode Gampong</label>
+          <input
+            type="text"
+            class="form-control"
+            id="kode_gampong"
+            name="kode_gampong"
+            required
+          />
+        </div>
+        <div class="mb-3">
+          <label for="dusun" class="form-label">Dusun</label>
+          <input
+            type="text"
+            class="form-control"
+            id="dusun"
+            name="dusun"
+            required
+          />
+        </div>
+        <div class="mb-3">
+          <label for="kecamatan" class="form-label">Kecamatan</label>
+          <input
+            type="text"
+            class="form-control"
+            id="kecamatan"
+            name="kecamatan"
+            required
+          />
+        </div>
+        <div class="mb-3">
+          <label for="nama" class="form-label">Nama Admin</label>
+          <input
+            type="text"
+            class="form-control"
+            id="nama"
+            name="nama"
+            required
+          />
+        </div>
+        <div class="mb-3">
+          <label for="NIK" class="form-label">Nomor KTP</label>
+          <input
+            type="text"
+            class="form-control"
+            id="NIK"
+            name="NIK"
+            required
+          />
+        </div>
+        <div class="mb-3">
+          <label for="email" class="form-label">Email</label>
+          <input
+            type="email"
+            class="form-control"
+            id="email"
+            name="email"
+            required
+          />
+        </div>
+        <div class="mb-3">
+          <label for="username" class="form-label">Username</label>
+          <input
+            type="text"
+            class="form-control"
+            id="username"
+            name="username"
+            required
+          />
+        </div>
+        <div class="mb-3">
+          <label for="password" class="form-label">Password</label>
+          <input
+            type="password"
+            class="form-control"
+            id="password"
+            name="password"
+            required
+          />
+        </div>
+        <div class="mb-3">
+          <label for="confirm" class="form-label">Konfirmasi Password</label>
+          <input
+            type="password"
+            class="form-control"
+            id="confirm"
+            name="confirm"
+            required
+          />
+        </div>
+
+        <button type="submit" class="btn btn-success mb-5">
+          Tambah Gampong
+        </button>
+      </form>
+    </div>
+  </div>
+</div>

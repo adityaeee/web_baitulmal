@@ -1,87 +1,121 @@
-const { parse } = require("dotenv");
-const { Masyarakat } = require("../../../models");
-const { validasiCreateData, validasiUpdateData } = require("../utils/index");
+const { Masyarakat, Gampong } = require("../../../models");
+const { findGolongan } = require("../utils/index");
 
-const Validator = require("fastest-validator");
-const v = new Validator();
+const multer = require("multer");
 
 const getMasyarakat = async (req, res) => {
-	try {
-		const masyarakat = await Masyarakat.findAll();
-		res.status(200).json(masyarakat);
-	} catch (error) {
-		res.status(500).json({ message: error.message });
-	}
+  try {
+    const masyarakat = await Masyarakat.findAll();
+    res.render("1_daftarPenerima", {
+      layout: "layouts/main-layouts",
+      msg: req.flash("msg"),
+      title: "Zaqat",
+      masyarakat,
+    });
+    res.status(200);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
 };
 
 const getMasyarakatById = async (req, res) => {
-	try {
-		const masyarakat = await Masyarakat.findOne({ where: { NIK: req.params.NIK}});
-		console.log(masyarakat)
-		if (!masyarakat) {
-			return res.status(404).json({ message: "not found" });
-		}
-		res.status(200).json(masyarakat);
-	} catch (error) {
-		res.status(404).json({ message: error.message });
-	}
+  try {
+    const masyarakat = await Masyarakat.findOne({
+      where: { NIK: req.params.NIK },
+    });
+    const gampong = await Gampong.findByPk(masyarakat.kode_gampong);
+
+    res.render("1_detailPenerima", {
+      layout: "layouts/main-layouts",
+      title: "Zaqat",
+      masyarakat,
+      gampong,
+    });
+
+    if (!masyarakat) {
+      return res.status(404).json({ message: "not found" });
+    }
+    res.status(200);
+  } catch (error) {
+    res.status(404).json({ message: error.message });
+  }
 };
 
 const createMasyarakat = async (req, res) => {
-	const validate = validasiCreateData(req.body);
-
-	if (validate.length) {
-		return res.status(404).json(validate);
-	}
-
-	try {
-		const createMasyarakat = await Masyarakat.create(req.body);
-		res.status(201).json(createMasyarakat);
-	} catch (error) {
-		res.status(404).json({ message: error.message });
-	}
+  try {
+    if (req.errorValidation) {
+      console.log(req.errorValidation.errors);
+      res.render("1_tambahPenerima", {
+        layout: "layouts/main-layouts",
+        msg: req.flash("msg"),
+        title: "Zaqat",
+        errors: req.errorValidation.errors,
+      });
+      return;
+    }
+    await Masyarakat.create(req.body);
+    const golongan = req.body.golongan;
+    res.redirect(`/${golongan}/tambah?NIK=${req.body.NIK}`);
+  } catch (error) {
+    res.status(404).json({ message: error.message });
+  }
 };
 
 const updateMasyarakatById = async (req, res) => {
-	const masyarakat = await Masyarakat.findByPk(req.params.NIK);
+  const masyarakat = await Masyarakat.findByPk(req.params.NIK);
 
-	if (!masyarakat) {
-		return res.status(404).json({ message: `not found` });
-	}
+  if (!masyarakat) {
+    return res.status(404).json({ message: `not found` });
+  }
 
-	const validate = validasiUpdateData(req.body);
+  const validate = validasiUpdateData(req.body);
 
-	if (validate.length) {
-		return res.status(404).json(validate);
-	}
+  if (validate.length) {
+    return res.status(404).json(validate);
+  }
 
-	try {
-		await masyarakat.update(req.body);
-		res.status(200).json({ message: `the data has been updated`, masyarakat });
-	} catch (error) {
-		res.status(404).json({ message: error.message });
-	}
+  try {
+    await masyarakat.update(req.body);
+    res.status(200).json({ message: `the data has been updated`, masyarakat });
+  } catch (error) {
+    res.status(404).json({ message: error.message });
+  }
 };
 
 const deleteMasyarakatById = async (req, res) => {
-	const masyarakat = await Masyarakat.findByPk(req.params.NIK);
+  const masyarakat = await Masyarakat.findByPk(req.params.NIK);
+  console.log(masyarakat);
+  await findGolongan(masyarakat.golongan, masyarakat.NIK);
 
-	if (!masyarakat) {
-		return res.status(404).json({ message: "not found" });
-	}
+  try {
+    await masyarakat.destroy();
+    res.status(200);
+    req.flash("msg", "Data berhasil dihapus");
+    res.redirect("/masyarakat");
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
+};
 
-	try {
-		await masyarakat.destroy();
-		res.status(200).json({ message: "the data has been deleted" });
-	} catch (error) {
-		res.status(400).json({ message: error.message });
-	}
+const formCreate = async (req, res) => {
+  res.render("1_tambahPenerima", {
+    layout: "layouts/main-layouts",
+    title: "Zaqat",
+  });
+  res.status(200);
+};
+
+const formUpdate = async (req, res) => {
+  masyarakat = await Masyarakat.findByPk(req.params.NIK);
+  res.status(200).json(masyarakat);
 };
 
 module.exports = {
-	getMasyarakat,
-	createMasyarakat,
-	getMasyarakatById,
-	updateMasyarakatById,
-	deleteMasyarakatById,
+  getMasyarakat,
+  createMasyarakat,
+  getMasyarakatById,
+  updateMasyarakatById,
+  deleteMasyarakatById,
+  formCreate,
+  formUpdate,
 };

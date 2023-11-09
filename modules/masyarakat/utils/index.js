@@ -1,26 +1,14 @@
-const Validator = require("fastest-validator");
-const v = new Validator();
+const { Masyarakat, Fakir } = require("../../../models");
 
-const validasiCreateData = (data) => {
-	const schema = {
-		no_KK: "number",
-		NIK: "number",
-		nama: { type: "string", min: 2, max: 50 },
-	};
-
-	const validate = v.validate(data, schema);
-	return validate;
+const findGolongan = async (golongan, NIK) => {
+  console.log(golongan);
+  console.log(NIK);
+  if (golongan == "fakir") {
+    const people = await Fakir.findOne({ where: { NIK: NIK } });
+    await people.destroy();
+  }
 };
 
-const validasiUpdateData = (data) => {
-	const schema = {
-		no_KK: "number|optional",
-		NIK: "number|optional",
-		nama: { type: "string", min: 2, max: 50, optional: true },
-	};
-
-	const validate = v.validate(data, schema);
-	return validate;
+module.exports = {
+  findGolongan,
 };
-
-module.exports = { validasiCreateData, validasiUpdateData };

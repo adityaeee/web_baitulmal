@@ -10,6 +10,7 @@ module.exports = (sequelize, DataTypes) => {
 			nama: DataTypes.STRING(50),
 			tempat_lahir: DataTypes.STRING(15),
 			tanggal_lahir: DataTypes.DATEONLY,
+			golongan: DataTypes.STRING(50),
 			periode: DataTypes.STRING,
 			status: DataTypes.STRING,
 			admin_GP: DataTypes.STRING,
