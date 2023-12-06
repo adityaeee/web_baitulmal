@@ -5,7 +5,9 @@
       <h2 class="fw-bold">DAFTAR PENERIMA ZAKAT MAL</h2>
     </div>
     <div class="col-md-2">
+      <% if (session?.user?.role=="gampong") { %>
       <a href="/masyarakat/tambah" class="btn btn-success">Tambah Penerima</a>
+      <% } %>
     </div>
   </div>
   <div class="row">

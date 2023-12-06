@@ -2,6 +2,7 @@ const multer = require("multer");
 
 const validate = (schema) => async (req, res, next) => {
   try {
+    // console.log(req.body);
     await schema.validate(req.body);
     req.errorValidation = null;
     return next();

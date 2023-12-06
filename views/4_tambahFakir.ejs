@@ -1,5 +1,10 @@
 <div class="container mt-3">
   <div class="row justify-content-center">
+    <div class="col-md-3">
+      <a href="/masyarakat/tambah" class="btn btn-success badge"
+        >&laquo; Kembali</a
+      >
+    </div>
     <div class="col-md-6">
       <h2 class="fw-bold text-center">TAMBAH DATA PENERIMA ZAQAT FAKIR</h2>
     </div>
@@ -13,7 +18,7 @@
     </ul>
     <% } %>
   </div>
-  <div class="row">
+  <div class="row justify-content-center">
     <div class="col-md-6">
       <form
         id="formTambah"
@@ -21,17 +26,6 @@
         action="/fakir/"
         enctype="multipart/form-data"
       >
-        <div class="mb-3">
-          <label for="NIK" class="form-label">NIK</label>
-          <input
-            type="text"
-            class="form-control"
-            id="NIK"
-            name="NIK"
-            value="<%= NIK %>"
-            required
-          />
-        </div>
         <div class="mb-3">
           <label for="umur" class="form-label">Umur</label>
           <input
@@ -90,7 +84,7 @@
           </select>
         </div>
 
-        <label for="surat_domisili" class="form-label mb-2"
+        <!-- <label for="surat_domisili" class="form-label mb-2"
           >KTP / Surat Domisili</label
         >
         <div class="card mb-3">
@@ -121,10 +115,22 @@
               />
             </div>
           </div>
-        </div>
+        </div> -->
+
+        <input
+          type="hidden"
+          name="surat_domisili"
+          value="/public/images/fakir"
+        />
+        <input
+          type="hidden"
+          name="surat_golongan"
+          value="/public/images/fakir"
+        />
 
         <input type="hidden" name="bobot_domisili" value="1" />
         <input type="hidden" name="bobot_golongan" value="1" />
+        <input type="hidden" name="NIK" value="<%= NIK %>" />
 
         <button type="submit" class="btn btn-success mb-5">Tambah</button>
       </form>

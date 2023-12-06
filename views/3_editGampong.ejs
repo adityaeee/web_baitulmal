@@ -1,0 +1,112 @@
+<div class="container mt-3">
+  <div class="row center">
+    <div class="col-md-3">
+      <a
+        href="/gampong/<%= gampong.kode_gampong %>"
+        class="btn btn-success badge"
+        >&laquo; Kembali</a
+      >
+    </div>
+    <div class="col-md-6">
+      <h2 class="fw-bold">
+        UPDATE DATA GAMPONG <%= gampong.nama_gampong.toUpperCase() %>
+      </h2>
+    </div>
+  </div>
+  <% if (typeof errors != 'undefined') { %> <% errors.forEach(error => { %>
+  <div class="alert alert-danger" role="alert">
+    <ul>
+      <li><%= error %></li>
+      <% }) %>
+    </ul>
+    <% } %>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <form
+        method="post"
+        id="formUbah"
+        action="/gampong/<%= gampong.kode_gampong%>?_method=PUT"
+      >
+        <div class="mb-3">
+          <label for="NIK" class="form-label">NIK</label>
+          <input
+            type="text"
+            class="form-control"
+            id="NIK"
+            name="NIK"
+            value="<%= gampong.NIK %>"
+          />
+        </div>
+        <div class="mb-3">
+          <label for="nama" class="form-label">Nama Lengkap</label>
+          <input
+            type="text"
+            class="form-control"
+            id="nama"
+            name="nama"
+            value="<%= gampong.nama %>"
+          />
+        </div>
+        <div class="mb-3">
+          <label for="dusun" class="form-label">Dusun</label>
+          <input
+            type="text"
+            class="form-control"
+            id="dusun"
+            name="dusun"
+            value="<%= gampong.dusun %>"
+          />
+        </div>
+        <div class="mb-3">
+          <label for="email" class="form-label">Email</label>
+          <input
+            type="text"
+            class="form-control"
+            id="email"
+            name="email"
+            value="<%= gampong.email %>"
+          />
+        </div>
+        <div class="mb-3">
+          <label for="username" class="form-label">Username</label>
+          <input
+            type="text"
+            class="form-control"
+            id="username"
+            name="username"
+            value="<%= gampong.username %>"
+          />
+        </div>
+        <div class="mb-3">
+          <label for="password" class="form-label">Password</label>
+          <input
+            type="text"
+            class="form-control"
+            id="password"
+            name="password"
+            value="<%= gampong.password %>"
+          />
+        </div>
+        <button type="submit" class="btn btn-success mb-5">Simpan</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- <script>
+  function confirmHandler(button, nama) {
+    Swal.fire({
+      title: `Apakah Anda yakin ingin mengubah data ${nama}?`,
+      showCancelButton: true,
+      confirmButtonText: "Update",
+    }).then((result) => {
+      /* Read more about isConfirmed, isDenied below */
+      if (result.isConfirmed) {
+        document.getElementById("formUbah").submit();
+      } else if (result.isDenied) {
+        Swal.fire("Perubahan tidak disimpan", "", "info");
+      }
+    });
+  }
+</script> -->

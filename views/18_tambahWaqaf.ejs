@@ -1,0 +1,77 @@
+<div class="container mt-3">
+    <div class="row justify-content-center">
+      <div class="col-md-6">
+        <h2 class="fw-bold text-center">TAMBAH DATA BANTUAN SERTIFIKASI HARTA WAQAF</h2>
+      </div>
+    </div>
+    <% if (typeof errors != 'undefined') { %>
+    <div class="alert alert-danger" role="alert">
+      <ul>
+        <% errors.forEach(error => { %>
+        <li><%= error.msg %></li>
+        <% }) %>
+      </ul>
+      <% } %>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <form
+          id="formTambah"
+          method="post"
+          action="/waqaf/"
+          enctype="multipart/form-data"
+        >
+          <div class="mb-3">
+            <label for="NIK" class="form-label">NIK</label>
+            <input
+              type="text"
+              class="form-control"
+              id="NIK"
+              name="NIK"
+              value="<%= NIK %>"
+              disabled
+            />
+          </div>
+  
+          <label for="proposal" class="form-label mb-2"
+            >Dokumen Hasil Pengukuran & Sketsa Pengukuran</label
+          >
+          <div class="card mb-3">
+            <div class="card-body">
+              <div class="mb-1">
+                <input
+                  type="file"
+                  class="form-control-file"
+                  id="proposal"
+                  name="proposal"
+                  required
+                />
+              </div>
+            </div>
+          </div>
+  
+          <label for="AIW" class="form-label mb-2"
+            >Fotokopi Akta Ikrar Waqaf</label
+          >
+          <div class="card mb-3">
+            <div class="card-body">
+              <div class="mb-1">
+                <input
+                  type="file"
+                  class="form-control-file"
+                  id="AIW"
+                  name="AIW"
+                />
+              </div>
+            </div>
+          </div>
+  
+          <input type="hidden" name="bobot_proposal" value="1" />
+          <input type="hidden" name="bobot_AIW" value="1" />
+  
+          <button type="submit" class="btn btn-success mb-5">Tambah</button>
+        </form>
+      </div>
+    </div>
+  </div>
+  

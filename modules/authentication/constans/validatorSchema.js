@@ -9,4 +9,8 @@ let loginSchemaGampong = object({
   kode_gampong: number().required(),
 });
 
-module.exports = { registerSchema, loginSchemaGampong };
+let loginSchemaAdmin = object({
+  username: string().required(),
+});
+
+module.exports = { registerSchema, loginSchemaGampong, loginSchemaAdmin };

@@ -1,0 +1,57 @@
+<div class="container mt-3">
+  <div class="row center">
+    <div class="col-md-3">
+      <a href="/masyarakat" class="btn btn-success badge">&laquo; Kembali</a>
+    </div>
+    <div class="col-md-6">
+      <h2 class="fw-bold"></h2>
+    </div>
+  </div>
+
+  <div class="row justify-content-center">
+    <div class="col-md-6 mt-5">
+      <div class="card text-dark bg-light">
+        <div class="card-header text-center">
+          <h3>LOGIN ADMIN</h3>
+        </div>
+        <div class="card-body">
+          <form method="post" action="/auth/login/admin">
+            <% if (typeof errors != 'undefined') { %> <% errors.forEach(error =>
+            { %>
+            <div class="alert alert-danger" role="alert">
+              <ul>
+                <li><%= error%></li>
+                <% }) %>
+              </ul>
+              <% } %>
+            </div>
+            <div class="mb-3">
+              <label for="username" class="form-label">Username</label>
+              <input
+                type="string"
+                class="form-control"
+                id="username"
+                name="username"
+                required
+              />
+            </div>
+            <div class="mb-3">
+              <label for="password" class="form-label">Password</label>
+              <input
+                type="password"
+                class="form-control"
+                id="password"
+                name="password"
+                required
+              />
+            </div>
+            <input type="hidden" name="role" value="admin" />
+            <div class="text-center">
+              <button type="submit" class="btn btn-success">Login</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

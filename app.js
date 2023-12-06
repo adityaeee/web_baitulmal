@@ -5,6 +5,7 @@ var path = require("path");
 var logger = require("morgan");
 const expressLayouts = require("express-ejs-layouts");
 const methodOverride = require("method-override");
+const busboyBodyParser = require("busboy-body-parser");
 
 const cookieParser = require("cookie-parser");
 const session = require("express-session");
@@ -14,6 +15,7 @@ var indexRouter = require("./routes/index");
 const adminRouter = require("./modules/admin/route/index");
 const authRouter = require("./modules/authentication/route/index");
 const masyarakatRouter = require("./modules/masyarakat/route/index");
+const gampongRouter = require("./modules/gampong/route/index");
 const fakirRouter = require("./modules/fakir/route/index");
 
 var app = express();
@@ -25,6 +27,11 @@ app.use(expressLayouts);
 //Built-in middelware
 app.use(express.static("public"));
 
+app.use(express.urlencoded({ extended: false }));
+app.use(express.json());
+// app.use(express.multipart());
+app.use(busboyBodyParser());
+
 //method override
 app.use(methodOverride("_method"));
 
@@ -34,7 +41,6 @@ app.use(cookieParser());
 //configurasi flash
 app.use(
   session({
-    cookie: { maxAge: 6000 },
     secret: "secret",
     resave: true,
     saveUninitialized: true,
@@ -43,8 +49,7 @@ app.use(
 app.use(flash());
 
 app.use(logger("dev"));
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
@@ -52,6 +57,7 @@ app.use("/", indexRouter);
 app.use("/auth", authRouter);
 app.use("/admin", adminRouter);
 app.use("/masyarakat", masyarakatRouter);
+app.use("/gampong", gampongRouter);
 app.use("/fakir", fakirRouter);
 
 // catch 404 and forward to error handler

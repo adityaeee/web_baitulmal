@@ -2,7 +2,8 @@ const express = require("express");
 const router = express.Router();
 
 const { validate } = require("../../../middleware/index");
-const { addSchema } = require("../constans/validatorSchema");
+const { addSchema, updateSchema } = require("../constans/validatorSchema");
+const authentication = require("../../../middleware/auth");
 
 const {
   getMasyarakat,
@@ -15,11 +16,16 @@ const {
 } = require("../controller/index");
 
 router.get("/", getMasyarakat);
-router.post("/", validate(addSchema), createMasyarakat);
-router.get("/tambah", formCreate);
-router.get("/edit/:NIK", formUpdate);
+router.post(
+  "/",
+  authentication(["gampong"]),
+  validate(addSchema),
+  createMasyarakat
+);
+router.get("/tambah", authentication(["gampong"]), formCreate);
+router.get("/edit/:NIK", authentication(["gampong"]), formUpdate);
 router.get("/:NIK", getMasyarakatById);
-router.put("/:NIK", updateMasyarakatById);
+router.put("/:NIK", validate(updateSchema), updateMasyarakatById);
 router.delete("/:NIK", deleteMasyarakatById);
 
 module.exports = router;

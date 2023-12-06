@@ -1,0 +1,180 @@
+<div class="container mt-3">
+    <div class="row center">
+      <div class="col-md-3">
+        <a href="/masyarakat/edit/<%= pelajarRantau.NIK %>" class="btn btn-success badge"
+          >&laquo; Kembali</a
+        >
+      </div>
+      <div class="col-md-6">
+        <h2 class="fw-bold">UPDATE DATA PENERIMA ZAQAT PELAJAR RANTAU</h2>
+      </div>
+    </div>
+    <% if (typeof errors != 'undefined') { %> <% errors.forEach(error => { %>
+    <div class="alert alert-danger" role="alert">
+      <ul>
+        <li><%= error%></li>
+        <% }) %>
+      </ul>
+      <% } %>
+    </div>
+    <div class="row mt-3">
+      <div class="col-md-6">
+        <form
+          method="post"
+          id="formUbah"
+          action="/pelajarRantau?_method=PUT"
+          enctype="multipart/form-data"
+        >
+          <div class="mb-3">
+            <label for="NIK" class="form-label">NIK</label>
+            <input
+              type="text"
+              class="form-control"
+              id="NIK"
+              name="NIK"
+              value="<%= NIK %>"
+              disabled
+            />
+          </div>
+  
+          <div class="mb-3">
+            <label for="pekerjaan" class="form-label">Pekerjaan Orang Tua/Wali</label>
+            <select
+              name="pekerjaan"
+              class="form-select"
+              aria-label="Default select example"
+            >
+              <option selected>Pilih Pekerjaan</option>
+              <option value="1">Tidak Bekerja</option>
+              <option value="2">Petani/Nelayan/Ternak/Buruh</option>
+              <option value="3">Pedagang</option>
+              <option value="4">Pegawai Kontrak</option>
+              <option value="5">ASN/Pegawai BUMN</option>
+            </select>
+          </div>
+  
+          <div class="mb-3">
+            <label for="pendapatan" class="form-label">Pendapatan perBulan Orang Tua/Wali</label>
+            <select
+              name="pendapatan"
+              class="form-select"
+              aria-label="Default select example"
+            >
+              <option selected>Pilih Pendapatan</option>
+              <option value="1">Tidak Ada</option>
+              <option value="2">< Rp200.000</option>
+              <option value="3">Rp200.000 - Rp500.000</option>
+              <option value="4">Rp501.000 - Rp800.000</option>
+              <option value="5">Rp801.000 - Rp1.000.000</option>
+              <option value="6">Rp1.001.000 - Rp1.500.000</option>
+              <option value="7">Rp1.501.000 - Rp2.000.000</option>
+              <option value="8">>2.000.000</option>
+            </select>
+          </div>
+  
+          <div class="mb-3">
+            <label for="masa_belajar" class="form-label"
+              >Masa Pendidikan</label
+            >
+            <select
+              name="masa_belajar"
+              class="form-select"
+              aria-label="Default select example"
+            >
+              <option selected>Pilih Masa Pendidikan</option>
+              <option value="1">> 5 tahun</option>
+              <option value="2">4 - 5 tahun</option>
+              <option value="3">3 - 4 tahun</option>
+              <option value="4">2 - 3 tahun</option>
+              <option value="5">1 - 2 tahun</option>
+              <option value="6">< 1 tahun</option>
+            </select>
+          </div>
+
+          <div class="mb-3">
+            <label for="norekening" class="form-label">Nomor Rekening</label>
+            <input
+              type="text"
+              class="form-control" 
+              id="norekening"
+              name="norekening"
+              value="<%= pelajarRantau.norekening %>"
+            />
+          </div>
+  
+          <label for="ijazah" class="form-label mb-2"
+            >Fotokopi Ijazah Terakhir</label
+          >
+          <div class="card mb-3">
+            <div class="card-body">
+              <div class="mb-1">
+                <input
+                  type="file"
+                  class="form-control-file"
+                  id="ijazah"
+                  name="ijazah"
+                  required
+                />
+              </div>
+            </div>
+          </div>
+  
+          <label for="paspor" class="form-label mb-2"
+            >Fotokopi Paspor</label
+          >
+          <div class="card mb-3">
+            <div class="card-body">
+              <div class="mb-1">
+                <input
+                  type="file"
+                  class="form-control-file"
+                  id="paspor"
+                  name="paspor"
+                />
+              </div>
+            </div>
+          </div>
+
+          <label for="surat_keterangan" class="form-label mb-2"
+            >Surat Keterangan Belajar Di Luar Negeri (Meunyoe na)</label
+          >
+          <div class="card mb-3">
+            <div class="card-body">
+              <div class="mb-1">
+                <input
+                  type="file"
+                  class="form-control-file"
+                  id="surat_keterangan"
+                  name="surat_keterangan"
+                />
+              </div>
+            </div>
+          </div>
+
+          <label for="rekening" class="form-label mb-2"
+            >Fotokopi Rekening Bank Aceh</label
+          >
+          <div class="card mb-4">
+            <div class="card-body">
+              <div class="mb-1">
+                <input
+                  type="file"
+                  class="form-control-file"
+                  id="rekening"
+                  name="rekening"
+                />
+              </div>
+            </div>
+          </div>
+  
+          <input type="hidden" name="bobot_ijazah" value="<%= pelajarRantau.bobot_ijazah %>" />
+          <input type="hidden" name="bobot_paspor" value="<%= pelajarRantau.bobot_paspor %>" />
+          <input type="hidden" name="bobot_keterangan" value="<%= pelajarRantau.bobot_keterangan %>" />
+          <input type="hidden" name="bobot_rekening" value="<%= pelajarRantau.bobot_rekening %>" />
+
+          <button type="submit" class="btn btn-success mb-5">Simpan</button>
+        </form>
+      </div>
+    </div>
+  </div>
+  

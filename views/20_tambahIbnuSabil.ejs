@@ -1,0 +1,77 @@
+<div class="container mt-3">
+    <div class="row justify-content-center">
+      <div class="col-md-6">
+        <h2 class="fw-bold text-center">TAMBAH DATA BANTUAN IBNU SABIL</h2>
+      </div>
+    </div>
+    <% if (typeof errors != 'undefined') { %>
+    <div class="alert alert-danger" role="alert">
+      <ul>
+        <% errors.forEach(error => { %>
+        <li><%= error.msg %></li>
+        <% }) %>
+      </ul>
+      <% } %>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <form
+          id="formTambah"
+          method="post"
+          action="/ibnuSabil/"
+          enctype="multipart/form-data"
+        >
+          <div class="mb-3">
+            <label for="NIK" class="form-label">NIK</label>
+            <input
+              type="text"
+              class="form-control"
+              id="NIK"
+              name="NIK"
+              value="<%= NIK %>"
+              disabled
+            />
+          </div>
+  
+          <label for="surat_permohonan" class="form-label mb-2"
+            >Surat Permohonan Kepada Baitul Mal Aceh Besar</label
+          >
+          <div class="card mb-3">
+            <div class="card-body">
+              <div class="mb-1">
+                <input
+                  type="file"
+                  class="form-control-file"
+                  id="surat_permohonan"
+                  name="surat_permohonan"
+                  required
+                />
+              </div>
+            </div>
+          </div>
+  
+          <label for="surat_identitas" class="form-label mb-2"
+            >Fotokopi KTP / KK / Identitas Lainnya</label
+          >
+          <div class="card mb-3">
+            <div class="card-body">
+              <div class="mb-1">
+                <input
+                  type="file"
+                  class="form-control-file"
+                  id="surat_identitas"
+                  name="surat_identitas"
+                />
+              </div>
+            </div>
+          </div>
+  
+          <input type="hidden" name="bobot_surat" value="1" />
+          <input type="hidden" name="bobot_Identitas" value="1" />
+  
+          <button type="submit" class="btn btn-success mb-5">Tambah</button>
+        </form>
+      </div>
+    </div>
+  </div>
+  

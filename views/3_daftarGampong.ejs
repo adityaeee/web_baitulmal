@@ -1,0 +1,50 @@
+<div class="container mt-3">
+  <div class="row">
+    <div class="col-md-4"></div>
+    <div class="col-md-6">
+      <h2 class="fw-bold">DAFTAR GAMPONG</h2>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md">
+      <% if (msg.length !== 0) { %>
+      <script>
+        Swal.fire({
+          icon: "success",
+          title: "<%= msg %>",
+          showConfirmButton: false,
+          timer: 2000,
+        });
+      </script>
+      <% } %>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">No</th>
+            <th scope="col">Kode Gampong</th>
+            <th scope="col">Nama Gampong</th>
+            <th scope="col">Kecamatan</th>
+            <th scope="col">Keterangan</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% gampongs.forEach((gampong,i) => { %>
+          <tr>
+            <th scope="row"><%= i+1 %></th>
+            <td><%= gampong.kode_gampong %></td>
+            <td><%= gampong.nama_gampong %></td>
+            <td><%= gampong.kecamatan %></td>
+            <td>
+              <a
+                href="/gampong/<%= gampong.kode_gampong %>"
+                class="btn btn-success badge"
+                >Detail</a
+              >
+            </td>
+          </tr>
+          <% }) %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

@@ -19,14 +19,94 @@
             >Home</a
           >
         </li>
+        <% if (session?.user?.role=='admin') { %>
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="/gampong"
+            >Gampong</a
+          >
+        </li>
+        <% } %> <% if (session?.user?.role=='gampong') { %>
+        <li class="nav-item">
+          <a
+            class="nav-link active"
+            aria-current="page"
+            href="/gampong/<%= session.user.kode_gampong %>"
+            >Biodata Gampong</a
+          >
+        </li>
+        <% } %> <% if (session?.user?.role=='staff') { %>
+        <li class="nav-item">
+          <a
+            class="nav-link active"
+            aria-current="page"
+            href="/gampong/<%= session.user.NIK %>"
+            >Biodata Gampong</a
+          >
+        </li>
+        <% } %>
       </ul>
       <ul class="navbar-nav ms-auto">
+        <% if (session?.user?.role=="gampong" || session?.user?.role=="admin" ||
+        session?.user?.role=="staf") { %>
+        <li class="nav-item">
+          <button class="btn btn-success badge">
+            <a class="nav-link active" aria-current="page" href="/auth/logout/"
+              >Logout
+            </a>
+          </button>
+        </li>
+        <% } else { %>
         <li>
           <a class="nav-link active" aria-current="page" href="/auth/register"
             >Registrasi Gampong</a
           >
         </li>
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page">|</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a
+            class="nav-link dropdown-toggle"
+            href="#"
+            id="navbarDropdown"
+            role="button"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            Login
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <li>
+              <a class="dropdown-item" href="/auth/login/gampong">Gampong</a>
+            </li>
+            <li>
+              <a class="dropdown-item" href="/auth/login/staf">Staf</a>
+            </li>
+            <li><hr class="dropdown-divider" /></li>
+            <li>
+              <a class="dropdown-item" href="/auth/login/admin">Admin</a>
+            </li>
+          </ul>
+        </li>
+        <% } %>
       </ul>
     </div>
   </div>
 </nav>
+
+<script>
+  function confirmHandlerOut(button) {
+    Swal.fire({
+      title: `Apakah Anda yakin ingin keluar?`,
+      showCancelButton: true,
+      confirmButtonText: "Keluar",
+    }).then((result) => {
+      /* Read more about isConfirmed, isDenied below */
+      if (result.isConfirmed) {
+        document.getElementById("formUbah").submit();
+      } else if (result.isDenied) {
+        Swal.fire("Perubahan tidak disimpan", "", "info");
+      }
+    });
+  }
+</script>

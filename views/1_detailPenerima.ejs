@@ -20,24 +20,42 @@
           Alamat: <%= gampong.dusun %>, <%= gampong.nama_gampong %>, <%=
           gampong.kecamatan %>
         </p>
-        <a
-          href="/masyarakat/edit/<%= masyarakat.NIK %>"
-          class="btn btn-warning badge"
-          >Edit</a
-        >
-        <form
-          action="/masyarakat/<%= masyarakat.NIK %>?_method=DELETE"
-          id="formDelete"
-          method="POST"
-        >
-          <button
-            type="button"
-            class="btn btn-danger badge"
-            onclick="return confirmHandler(this, '<%= masyarakat.nama %>')"
-          >
-            Del
-          </button>
-        </form>
+        <p class="card-text mb-1">Waktu Input: <%= masyarakat.createdAt %></p>
+        <p class="card-text mb-1">Waktu Update: <%= masyarakat.updatedAt %></p>
+        <% if (session?.user?.role=="gampong") { %>
+
+        <div class="row text-center mb-2">
+          <div class="col">
+            <a
+              href="/masyarakat/edit/<%= masyarakat.NIK %>"
+              class="btn btn-warning badge"
+              >Edit
+            </a>
+          </div>
+          <div class="col">
+            <a
+              href="/<%= masyarakat.golongan %>/edit/<%= masyarakat.NIK %>"
+              class="btn btn-warning badge"
+              >Edit Data Golongan</a
+            >
+          </div>
+          <div class="col">
+            <form
+              action="/masyarakat/<%= masyarakat.NIK %>?_method=DELETE"
+              id="formDelete"
+              method="POST"
+            >
+              <button
+                type="button"
+                class="btn btn-danger badge"
+                onclick="return confirmHandler(this, '<%= masyarakat.nama %>')"
+              >
+                Del
+              </button>
+            </form>
+          </div>
+        </div>
+        <% } %>
         <a href="/masyarakat">&laquo; Kembali</a>
       </div>
     </div>

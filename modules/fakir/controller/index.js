@@ -1,4 +1,5 @@
-const { Fakir } = require("../../../models");
+const { Fakir, Masyarakat } = require("../../../models");
+const { dataLayout } = require("../../../utils/index");
 
 const getFakir = async (req, res) => {
   try {
@@ -16,24 +17,45 @@ const getFakir = async (req, res) => {
 };
 
 const createFakir = async (req, res) => {
-  try {
-    console.log("12345678", req.body);
-    await Fakir.create(req.body);
-    // req.flash("msg", `Data berhasil ditambahkan`);
-    // res.redirect("/masyarakat");
-  } catch (error) {
-    console.log({ error });
-    // res.status(404).json({ message: error.message });
-  }
+  const data = req.body;
+  // console.log(data);
+  const dataMasyarakat = req.session?.data;
+  await Masyarakat.create(dataMasyarakat);
+  await Fakir.create(data);
+  req.session.data = "";
+  req.flash("msg", `Data berhasil ditambahkan`);
+  res.redirect("/masyarakat");
+};
+
+const updateFakir = async (req, res) => {
+  const data = req.body;
+  // console.log(data);
+  res.json(data);
 };
 
 const formCreate = async (req, res) => {
-  res.render("4_tambahFakir", {
-    layout: "layouts/main-layouts",
-    title: "Zaqat",
-    NIK: req.query.NIK,
-  });
+  res.render(
+    "4_tambahFakir",
+    dataLayout(req, {
+      NIK: req.query.NIK,
+      data: req.session?.data,
+    })
+  );
   res.status(200);
 };
 
-module.exports = { getFakir, formCreate, createFakir };
+const formUpdate = async (req, res) => {
+  const fakir = await Fakir.findOne({
+    where: {
+      NIK: req.params.NIK,
+    },
+  });
+  res.render(
+    "4_editFakir",
+    dataLayout(req, {
+      fakir,
+    })
+  );
+};
+
+module.exports = { getFakir, formCreate, formUpdate, createFakir, updateFakir };
