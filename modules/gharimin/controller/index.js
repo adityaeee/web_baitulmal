@@ -1,37 +1,37 @@
-const { Miskin, Masyarakat } = require("../../../models");
+const { Gharimin, Masyarakat } = require("../../../models");
 const { dataLayout } = require("../../../utils/index");
 
-const getMiskin = async (req, res) => {
+const getGharimin = async (req, res) => {
   try {
-    const miskin = await Miskin.findAll();
-    res.status(200).json(miskin);
+    const gharimin = await Gharimin.findAll();
+    res.status(200).json(gharimin);
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
 };
 
-const createMiskin = async (req, res) => {
+const createGharimin = async (req, res) => {
   const data = req.body;
   // console.log(data);
   const dataMasyarakat = req.session?.data;
   await Masyarakat.create(dataMasyarakat);
-  await Miskin.create(data);
-  req.session.data = "";
+  await Gharimin.create(data);
+  req.session.data = {};
   req.flash("msg", `Data berhasil ditambahkan`);
   res.redirect("/masyarakat");
 };
 
-const updateMiskin = async (req, res) => {
+const updateGharimin = async (req, res) => {
   const data = req.body;
-  let miskin = await Miskin.findOne({ where: { NIK: req.body.NIK } });
-  miskin.update(data);
+  let gharimin = await Gharimin.findByPk(req.params.id);
+  gharimin.update(data);
   req.flash("msg", `Data berhasil diupdate`);
   res.redirect("/masyarakat");
 };
 
 const formCreate = async (req, res) => {
   res.render(
-    "5_tambahMiskin",
+    "15_tambahGharimin",
     dataLayout(req, {
       NIK: req.query.NIK,
       data: req.session?.data,
@@ -41,23 +41,23 @@ const formCreate = async (req, res) => {
 };
 
 const formUpdate = async (req, res) => {
-  const miskin = await Miskin.findOne({
+  const gharimin = await Gharimin.findOne({
     where: {
       NIK: req.params.NIK,
     },
   });
   res.render(
-    "5_editMiskin",
+    "15_editGharimin",
     dataLayout(req, {
-      miskin,
+      gharimin,
     })
   );
 };
 
 module.exports = {
-  getMiskin,
+  getGharimin,
   formCreate,
   formUpdate,
-  createMiskin,
-  updateMiskin,
+  createGharimin,
+  updateGharimin,
 };

@@ -1,5 +1,10 @@
 <div class="container mt-3">
     <div class="row justify-content-center">
+      <div class="col-md-3">
+        <a href="/masyarakat/tambah" class="btn btn-success badge"
+          >&laquo; Kembali</a
+        >
+      </div>
       <div class="col-md-6">
         <h2 class="fw-bold text-center">TAMBAH DATA PENERIMA ZAQAT SANTRI DAYAH</h2>
       </div>
@@ -124,7 +129,7 @@
                   class="form-control-file"
                   id="surat_domisili"
                   name="surat_domisili"
-                  required
+                  //required
                 />
               </div>
             </div>
@@ -182,6 +187,7 @@
           <input type="hidden" name="bobot_golongan" value="1" />
           <input type="hidden" name="bobot_keterangan" value="1" />
           <input type="hidden" name="bobot_rekening" value="1" />
+          <input type="hidden" name="NIK" value="<%= NIK %>" />
   
           <button type="submit" class="btn btn-success mb-5">Tambah</button>
         </form>

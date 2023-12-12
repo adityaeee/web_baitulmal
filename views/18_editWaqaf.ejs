@@ -1,7 +1,7 @@
 <div class="container mt-3">
     <div class="row center">
       <div class="col-md-3">
-        <a href="/masyarakat/edit/<%= waqaf.NIK %>" class="btn btn-success badge"
+        <a href="/masyarakat/<%= waqaf.NIK %>" class="btn btn-success badge"
           >&laquo; Kembali</a
         >
       </div>
@@ -22,9 +22,11 @@
         <form
           method="post"
           id="formUbah"
-          action="/waqaf?_method=PUT"
+          action="/waqaf/<%= waqaf.id_waqaf %>?_method=PUT"
           enctype="multipart/form-data"
         >
+
+          <input type="hidden" name="NIK" value="<%= waqaf.NIK %>">
           <div class="mb-3">
             <label for="NIK" class="form-label">NIK</label>
             <input
@@ -32,7 +34,7 @@
               class="form-control"
               id="NIK"
               name="NIK"
-              value="<%= NIK %>"
+              value="<%= waqaf.NIK %>"
               disabled
             />
           </div>
@@ -48,7 +50,6 @@
                   class="form-control-file"
                   id="proposal"
                   name="proposal"
-                  required
                 />
               </div>
             </div>

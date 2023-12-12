@@ -1,7 +1,7 @@
 <div class="container mt-3">
     <div class="row center">
       <div class="col-md-2">
-        <a href="/masyarakat/edit/<%= miskinInsidentil.NIK %>" class="btn btn-success badge"
+        <a href="/masyarakat/<%= miskinInsidentil.NIK %>" class="btn btn-success badge"
           >&laquo; Kembali</a
         >
       </div>
@@ -22,9 +22,12 @@
         <form
           method="post"
           id="formUbah"
-          action="/miskinInsidentil?_method=PUT"
+          action="/miskinInsidentil/<%= miskinInsidentil.id_miskin_ins %>?_method=PUT"
           enctype="multipart/form-data"
         >
+
+          <input type="hidden" name="NIK" value="<%= miskinInsidentil.NIK %>">
+
           <div class="mb-3">
             <label for="NIK" class="form-label">NIK</label>
             <input
@@ -32,7 +35,7 @@
               class="form-control"
               id="NIK"
               name="NIK"
-              value="<%= NIK %>"
+              value="<%= miskinInsidentil.NIK %>"
               disabled
             />
           </div>
@@ -144,7 +147,6 @@
                   class="form-control-file"
                   id="surat_domisili"
                   name="surat_domisili"
-                  required
                 />
               </div>
             </div>

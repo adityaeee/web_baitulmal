@@ -22,9 +22,12 @@
       <form
         method="post"
         id="formUbah"
-        action="/guruDayah/?_method=PUT"
+        action="/guruDayah/<%= guruDayah.id_guru_dayah %>?_method=PUT"
         enctype="multipart/form-data"
       >
+
+        <input type="hidden" name="NIK" value="<%= guruDayah.NIK %> /">
+        
         <div class="mb-3">
           <label for="NIK" class="form-label">NIK</label>
           <input
@@ -32,7 +35,7 @@
             class="form-control"
             id="NIK"
             name="NIK"
-            value="<%= NIK %>"
+            value="<%= guruDayah.NIK %>"
             disabled
           />
         </div>
@@ -114,7 +117,6 @@
                 class="form-control-file"
                 id="surat_domisili"
                 name="surat_domisili"
-                required
               />
             </div>
           </div>

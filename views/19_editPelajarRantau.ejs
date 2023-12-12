@@ -1,7 +1,7 @@
 <div class="container mt-3">
     <div class="row center">
       <div class="col-md-3">
-        <a href="/masyarakat/edit/<%= pelajarRantau.NIK %>" class="btn btn-success badge"
+        <a href="/masyarakat/<%= pelajarRantau.NIK %>" class="btn btn-success badge"
           >&laquo; Kembali</a
         >
       </div>
@@ -22,9 +22,11 @@
         <form
           method="post"
           id="formUbah"
-          action="/pelajarRantau?_method=PUT"
+          action="/pelajarRantau/<%= pelajarRantau.id_pelajar_rantau %>?_method=PUT"
           enctype="multipart/form-data"
         >
+
+          <input type="hidden" name="NIK" value="<%= pelajarRantau.NIK %>">
           <div class="mb-3">
             <label for="NIK" class="form-label">NIK</label>
             <input
@@ -32,7 +34,7 @@
               class="form-control"
               id="NIK"
               name="NIK"
-              value="<%= NIK %>"
+              value="<%= pelajarRantau.NIK %>"
               disabled
             />
           </div>

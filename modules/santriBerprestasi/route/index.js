@@ -2,18 +2,18 @@ const express = require("express");
 const router = express.Router();
 
 const {
-  getMiskin,
+  getSantriBerprestasi,
   formCreate,
   formUpdate,
-  createMiskin,
-  updateMiskin,
+  createSantriBerprestasi,
+  updateSantriBerprestasi,
 } = require("../controller/index");
 const { uploadFile } = require("../../../middleware");
 
-router.get("/", getMiskin);
+router.get("/", getSantriBerprestasi);
 router.get("/tambah", formCreate);
 router.get("/edit/:NIK", formUpdate);
-router.post("/", createMiskin);
-router.put("/:id", updateMiskin);
+router.post("/", createSantriBerprestasi);
+router.put("/:id", updateSantriBerprestasi);
 
 module.exports = router;

@@ -13,8 +13,12 @@
         <p class="card-text mb-1">Email: <%= gampong.email %></p>
         <p class="card-text mb-1">Username: <%= gampong.username %></p>
         <p class="card-text mb-1">Password: <%= gampong.password %></p>
-        <p class="" card-text mb-1>Waktu Input: <%= gampong.createdAt %></p>
-        <p class="" card-text mb-1>Waktu Update: <%= gampong.updatedAt %></p>
+        <p class="" card-text mb-1>
+          Waktu Input: <%= gampong.createdAt.toLocaleDateString("id") %>
+        </p>
+        <p class="" card-text mb-1>
+          Waktu Update: <%= gampong.updatedAt.toLocaleDateString("id") %>
+        </p>
         <a
           href="/gampong/edit/<%= gampong.kode_gampong %>"
           class="btn btn-warning badge"

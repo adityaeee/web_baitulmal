@@ -17,6 +17,9 @@ const authRouter = require("./modules/authentication/route/index");
 const masyarakatRouter = require("./modules/masyarakat/route/index");
 const gampongRouter = require("./modules/gampong/route/index");
 const fakirRouter = require("./modules/fakir/route/index");
+const miskinRouter = require("./modules/miskin/route/index");
+const ghariminRouter = require("./modules/gharimin/route/index");
+const santriBerprestasiRouter = require("./modules/santriBerprestasi/route/index");
 
 var app = express();
 
@@ -59,6 +62,9 @@ app.use("/admin", adminRouter);
 app.use("/masyarakat", masyarakatRouter);
 app.use("/gampong", gampongRouter);
 app.use("/fakir", fakirRouter);
+app.use("/miskin", miskinRouter);
+app.use("/gharimin", ghariminRouter);
+app.use("/santri-berprestasi", santriBerprestasiRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

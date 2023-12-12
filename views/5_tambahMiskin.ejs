@@ -1,175 +1,180 @@
 <div class="container mt-3">
-    <div class="row justify-content-center">
-      <div class="col-md-6">
-        <h2 class="fw-bold text-center">TAMBAH DATA PENERIMA ZAQAT MISKIN</h2>
-      </div>
+  <div class="row justify-content-center">
+    <div class="col-md-3">
+      <a href="/masyarakat/tambah" class="btn btn-success badge"
+        >&laquo; Kembali</a
+      >
     </div>
-    <% if (typeof errors != 'undefined') { %>
-    <div class="alert alert-danger" role="alert">
-      <ul>
-        <% errors.forEach(error => { %>
-        <li><%= error.msg %></li>
-        <% }) %>
-      </ul>
-      <% } %>
-    </div>
-    <div class="row">
-      <div class="col-md-6">
-        <form
-          id="formTambah"
-          method="post"
-          action="/miskin/"
-          enctype="multipart/form-data"
-        >
-          <div class="mb-3">
-            <label for="NIK" class="form-label">NIK</label>
-            <input
-              type="text"
-              class="form-control"
-              id="NIK"
-              name="NIK"
-              value="<%= NIK %>"
-              disabled
-            />
-          </div>
-          
-          <div class="mb-3">
-            <label for="pekerjaan" class="form-label">Pekerjaan</label>
-            <select
-              name="pekerjaan"
-              class="form-select"
-              aria-label="Default select example"
-            >
-              <option selected>Pilih Pekerjaan</option>
-              <option value="1">Tidak Bekerja</option>
-              <option value="2">Petani/Nelayan/Ternak/Buruh</option>
-              <option value="3">Pedagang</option>
-              <option value="4">Pegawai Kontrak</option>
-              <option value="5">ASN/Pegawai BUMN</option>
-            </select>
-          </div>
-  
-          <div class="mb-3">
-            <label for="pendapatan" class="form-label">Pendapatan perBulan</label>
-            <select
-              name="pendapatan"
-              class="form-select"
-              aria-label="Default select example"
-            >
-              <option selected>Pilih Pendapatan</option>
-              <option value="1">Tidak Ada</option>
-              <option value="2">< Rp200.000</option>
-              <option value="3">Rp200.000 - Rp500.000</option>
-              <option value="4">Rp501.000 - Rp800.000</option>
-              <option value="5">Rp801.000 - Rp1.000.000</option>
-              <option value="6">Rp1.001.000 - Rp1.500.000</option>
-              <option value="7">Rp1.501.000 - Rp2.000.000</option>
-              <option value="8">>2.000.000</option>
-            </select>
-          </div>
-
-          <div class="mb-3">
-            <label for="aset" class="form-label">Kepemilikan Harta (Aset)</label>
-            <select
-              name="aset"
-              class="form-select"
-              aria-label="Default select example"
-            >
-              <option selected>Pilih Aset</option>
-              <option value="1">Tidak Ada</option>
-              <option value="2">Emas</option>
-              <option value="3">Tanah Produktif</option>
-              <option value="4">Rumah/Toko Sewa</option>
-              <option value="5">Emas + Tanah Produktif</option>
-              <option value="6">Emas + Rumah/Toko Sewa</option>
-              <option value="7">Tanah Produktif + Rumah/Toko Sewa</option>
-              <option value="8">Semua Ada</option>
-            </select>
-          </div>
-  
-          <div class="mb-3">
-            <label for="beban_tanggungan" class="form-label"
-              >Beban Tanggungan</label
-            >
-            <select
-              name="beban_tanggungan"
-              class="form-select"
-              aria-label="Default select example"
-            >
-              <option selected>Pilih Beban Tanggungan</option>
-              <option value="1">Disabilitas dan Janda</option>
-              <option value="2">Disabilitas</option>
-              <option value="2">Janda</option>
-              <option value="3">Tidak ada</option>
-            </select>
-          </div>
-
-          <div class="mb-3">
-            <label for="norekening" class="form-label">Nomor Rekening</label>
-            <input
-              type="text"
-              class="form-control"
-              id="norekening"
-              name="norekening"
-            />
-          </div>
-  
-          <label for="surat_domisili" class="form-label mb-2"
-            >KTP / Surat Domisili</label
-          >
-          <div class="card mb-3">
-            <div class="card-body">
-              <div class="mb-1">
-                <input
-                  type="file"
-                  class="form-control-file"
-                  id="surat_domisili"
-                  name="surat_domisili"
-                  required
-                />
-              </div>
-            </div>
-          </div>
-  
-          <label for="surat_golongan" class="form-label mb-2"
-            >Surat Keterangan Miskin (Meunyoe na)</label
-          >
-          <div class="card mb-3">
-            <div class="card-body">
-              <div class="mb-1">
-                <input
-                  type="file"
-                  class="form-control-file"
-                  id="surat_golongan"
-                  name="surat_golongan"
-                />
-              </div>
-            </div>
-          </div>
-
-          <label for="rekening" class="form-label mb-2"
-            >Fotokopi Rekening Bank Aceh</label
-          >
-          <div class="card mb-4">
-            <div class="card-body">
-              <div class="mb-1">
-                <input
-                  type="file"
-                  class="form-control-file"
-                  id="rekening"
-                  name="rekening"
-                />
-              </div>
-            </div>
-          </div>
-  
-          <input type="hidden" name="bobot_domisili" value="1" />
-          <input type="hidden" name="bobot_golongan" value="1" />
-          <input type="hidden" name="bobot_rekening" value="1" />
-  
-          <button type="submit" class="btn btn-success mb-5">Tambah</button>
-        </form>
-      </div>
+    <div class="col-md-6">
+      <h2 class="fw-bold text-center">TAMBAH DATA PENERIMA ZAQAT MISKIN</h2>
     </div>
   </div>
-  
+  <% if (typeof errors != 'undefined') { %>
+  <div class="alert alert-danger" role="alert">
+    <ul>
+      <% errors.forEach(error => { %>
+      <li><%= error.msg %></li>
+      <% }) %>
+    </ul>
+    <% } %>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <form
+        id="formTambah"
+        method="post"
+        action="/miskin/"
+        enctype="multipart/form-data"
+      >
+        <div class="mb-3">
+          <label for="NIK" class="form-label">NIK</label>
+          <input
+            type="text"
+            class="form-control"
+            id="NIK"
+            name="NIK"
+            value="<%= NIK %>"
+            disabled
+          />
+        </div>
+
+        <div class="mb-3">
+          <label for="pekerjaan" class="form-label">Pekerjaan</label>
+          <select
+            name="pekerjaan"
+            class="form-select"
+            aria-label="Default select example"
+          >
+            <option selected>Pilih Pekerjaan</option>
+            <option value="1">Tidak Bekerja</option>
+            <option value="2">Petani/Nelayan/Ternak/Buruh</option>
+            <option value="3">Pedagang</option>
+            <option value="4">Pegawai Kontrak</option>
+            <option value="5">ASN/Pegawai BUMN</option>
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label for="pendapatan" class="form-label">Pendapatan perBulan</label>
+          <select
+            name="pendapatan"
+            class="form-select"
+            aria-label="Default select example"
+          >
+            <option selected>Pilih Pendapatan</option>
+            <option value="1">Tidak Ada</option>
+            <option value="2">< Rp200.000</option>
+            <option value="3">Rp200.000 - Rp500.000</option>
+            <option value="4">Rp501.000 - Rp800.000</option>
+            <option value="5">Rp801.000 - Rp1.000.000</option>
+            <option value="6">Rp1.001.000 - Rp1.500.000</option>
+            <option value="7">Rp1.501.000 - Rp2.000.000</option>
+            <option value="8">>2.000.000</option>
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label for="aset" class="form-label">Kepemilikan Harta (Aset)</label>
+          <select
+            name="aset"
+            class="form-select"
+            aria-label="Default select example"
+          >
+            <option selected>Pilih Aset</option>
+            <option value="1">Tidak Ada</option>
+            <option value="2">Emas</option>
+            <option value="3">Tanah Produktif</option>
+            <option value="4">Rumah/Toko Sewa</option>
+            <option value="5">Emas + Tanah Produktif</option>
+            <option value="6">Emas + Rumah/Toko Sewa</option>
+            <option value="7">Tanah Produktif + Rumah/Toko Sewa</option>
+            <option value="8">Semua Ada</option>
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label for="beban_tanggungan" class="form-label"
+            >Beban Tanggungan</label
+          >
+          <select
+            name="beban_tanggungan"
+            class="form-select"
+            aria-label="Default select example"
+          >
+            <option selected>Pilih Beban Tanggungan</option>
+            <option value="1">Disabilitas dan Janda</option>
+            <option value="2">Disabilitas</option>
+            <option value="2">Janda</option>
+            <option value="3">Tidak ada</option>
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label for="norekening" class="form-label">Nomor Rekening</label>
+          <input
+            type="text"
+            class="form-control"
+            id="norekening"
+            name="norekening"
+          />
+        </div>
+
+        <label for="surat_domisili" class="form-label mb-2"
+          >KTP / Surat Domisili</label
+        >
+        <div class="card mb-3">
+          <div class="card-body">
+            <div class="mb-1">
+              <input
+                type="file"
+                class="form-control-file"
+                id="surat_domisili"
+                name="surat_domisili"
+                //required
+              />
+            </div>
+          </div>
+        </div>
+
+        <label for="surat_golongan" class="form-label mb-2"
+          >Surat Keterangan Miskin (Meunyoe na)</label
+        >
+        <div class="card mb-3">
+          <div class="card-body">
+            <div class="mb-1">
+              <input
+                type="file"
+                class="form-control-file"
+                id="surat_golongan"
+                name="surat_golongan"
+              />
+            </div>
+          </div>
+        </div>
+
+        <label for="rekening" class="form-label mb-2"
+          >Fotokopi Rekening Bank Aceh</label
+        >
+        <div class="card mb-4">
+          <div class="card-body">
+            <div class="mb-1">
+              <input
+                type="file"
+                class="form-control-file"
+                id="rekening"
+                name="rekening"
+              />
+            </div>
+          </div>
+        </div>
+
+        <input type="hidden" name="bobot_domisili" value="1" />
+        <input type="hidden" name="bobot_golongan" value="1" />
+        <input type="hidden" name="bobot_rekening" value="1" />
+        <input type="hidden" name="NIK" value="<%= NIK %>" />
+
+        <button type="submit" class="btn btn-success mb-5">Tambah</button>
+      </form>
+    </div>
+  </div>
+</div>

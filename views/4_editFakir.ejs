@@ -12,7 +12,7 @@
   <% if (typeof errors != 'undefined') { %> <% errors.forEach(error => { %>
   <div class="alert alert-danger" role="alert">
     <ul>
-      <li><%= error%></li>
+      <li><%= error %></li>
       <% }) %>
     </ul>
     <% } %>
@@ -25,6 +25,8 @@
         action="/fakir/<%= fakir.id_fakir %>?_method=PUT"
         enctype="multipart/form-data"
       >
+        <input type="hidden" name="NIK" value="<%= fakir.NIK %>" />
+
         <div class="mb-3">
           <label for="NIK" class="form-label">NIK</label>
           <input
@@ -36,7 +38,7 @@
             disabled
           />
         </div>
-
+        
         <div class="mb-3">
           <label for="umur" class="form-label">Umur</label>
           <input

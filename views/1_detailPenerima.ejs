@@ -20,8 +20,16 @@
           Alamat: <%= gampong.dusun %>, <%= gampong.nama_gampong %>, <%=
           gampong.kecamatan %>
         </p>
-        <p class="card-text mb-1">Waktu Input: <%= masyarakat.createdAt %></p>
-        <p class="card-text mb-1">Waktu Update: <%= masyarakat.updatedAt %></p>
+        <p class="card-text mb-1">
+          Waktu Proses: <%= masyarakat.waktu_proses.toLocaleDateString("id") %>
+        </p>
+        <p class="card-text mb-1">
+          Waktu Input: <%= masyarakat.createdAt.toLocaleDateString("id") %>
+        </p>
+        <p class="card-text mb-1">
+          Waktu Update: <%= masyarakat.updatedAt.toLocaleDateString("id") %>
+        </p>
+
         <% if (session?.user?.role=="gampong") { %>
 
         <div class="row text-center mb-2">
@@ -34,7 +42,7 @@
           </div>
           <div class="col">
             <a
-              href="/<%= masyarakat.golongan %>/edit/<%= masyarakat.NIK %>"
+              href="/<%= endpoint %>/edit/<%= masyarakat.NIK %>"
               class="btn btn-warning badge"
               >Edit Data Golongan</a
             >

@@ -1,37 +1,38 @@
-const { Miskin, Masyarakat } = require("../../../models");
+const { SantriBerprestasi, Masyarakat } = require("../../../models");
 const { dataLayout } = require("../../../utils/index");
 
-const getMiskin = async (req, res) => {
+const getSantriBerprestasi = async (req, res) => {
   try {
-    const miskin = await Miskin.findAll();
-    res.status(200).json(miskin);
+    const santriBerprestasi = await SantriBerprestasi.findAll();
+    res.status(200);
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
 };
 
-const createMiskin = async (req, res) => {
+const createSantriBerprestasi = async (req, res) => {
   const data = req.body;
-  // console.log(data);
   const dataMasyarakat = req.session?.data;
   await Masyarakat.create(dataMasyarakat);
-  await Miskin.create(data);
+  await SantriBerprestasi.create(data);
   req.session.data = "";
   req.flash("msg", `Data berhasil ditambahkan`);
   res.redirect("/masyarakat");
 };
 
-const updateMiskin = async (req, res) => {
+const updateSantriBerprestasi = async (req, res) => {
   const data = req.body;
-  let miskin = await Miskin.findOne({ where: { NIK: req.body.NIK } });
-  miskin.update(data);
+  let santriBerprestasi = await SantriBerprestasi.findOne({
+    where: { NIK: req.body.NIK },
+  });
+  santriBerprestasi.update(data);
   req.flash("msg", `Data berhasil diupdate`);
   res.redirect("/masyarakat");
 };
 
 const formCreate = async (req, res) => {
   res.render(
-    "5_tambahMiskin",
+    "16_tambahSantriBerprestasi",
     dataLayout(req, {
       NIK: req.query.NIK,
       data: req.session?.data,
@@ -41,23 +42,23 @@ const formCreate = async (req, res) => {
 };
 
 const formUpdate = async (req, res) => {
-  const miskin = await Miskin.findOne({
+  const santriBerprestasi = await SantriBerprestasi.findOne({
     where: {
       NIK: req.params.NIK,
     },
   });
   res.render(
-    "5_editMiskin",
+    "16_editSantriBerprestasi",
     dataLayout(req, {
-      miskin,
+      santriBerprestasi,
     })
   );
 };
 
 module.exports = {
-  getMiskin,
+  getSantriBerprestasi,
   formCreate,
   formUpdate,
-  createMiskin,
-  updateMiskin,
+  createSantriBerprestasi,
+  updateSantriBerprestasi,
 };

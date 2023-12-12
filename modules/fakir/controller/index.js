@@ -29,8 +29,10 @@ const createFakir = async (req, res) => {
 
 const updateFakir = async (req, res) => {
   const data = req.body;
-  // console.log(data);
-  res.json(data);
+  let fakir = await Fakir.findByPk(req.params.id);
+  fakir.update(data);
+  req.flash("msg", `Data berhasil diupdate`);
+  res.redirect("/masyarakat");
 };
 
 const formCreate = async (req, res) => {
@@ -50,6 +52,7 @@ const formUpdate = async (req, res) => {
       NIK: req.params.NIK,
     },
   });
+  console.log(fakir);
   res.render(
     "4_editFakir",
     dataLayout(req, {

@@ -18,7 +18,7 @@
     </ul>
     <% } %>
   </div>
-  <div class="row">
+  <div class="row justify-content-center">
     <div class="col-md-6">
       <form
         method="post"
@@ -27,13 +27,22 @@
         enctype="multipart/form-data"
       >
         <div class="mb-3">
+          <label for="no_KK" class="form-label">Nomor Kartu Keluarga</label>
+          <input
+            type="text"
+            class="form-control"
+            id="no_KK"
+            name="no_KK"
+            value="<%=masyarakat.no_KK%>"
+          />
+        </div>
+        <div class="mb-3">
           <label for="nama" class="form-label">Nama</label>
           <input
             type="text"
             class="form-control"
             id="nama"
             name="nama"
-            required
             value="<%= masyarakat.nama %>"
           />
         </div>
@@ -44,8 +53,27 @@
             class="form-control"
             id="tempat_lahir"
             name="tempat_lahir"
-            required
             value="<%= masyarakat.tempat_lahir %>"
+          />
+        </div>
+        <div class="mb-3">
+          <label for="tanggal_lahir" class="form-label">Tanggal Lahir</label>
+          <input
+            type="date"
+            class="form-control"
+            id="tanggal_lahir"
+            name="tanggal_lahir"
+            value="<%=masyarakat.tanggal_lahir%>"
+          />
+        </div>
+        <div class="mb-3">
+          <label for="dusun" class="form-label">Dusun</label>
+          <input
+            type="text"
+            class="form-control"
+            id="dusun"
+            name="dusun"
+            value="<%=masyarakat.dusun%>"
           />
         </div>
         <button

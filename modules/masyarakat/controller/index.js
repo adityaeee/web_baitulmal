@@ -32,12 +32,14 @@ const getMasyarakatById = async (req, res) => {
       where: { NIK: req.params.NIK },
     });
     const gampong = await Gampong.findByPk(masyarakat.kode_gampong);
+    const endpoint = masyarakat.golongan.replace(/\s/g, "-");
 
     res.render(
       "1_detailPenerima",
       dataLayout(req, {
         masyarakat,
         gampong,
+        endpoint,
       })
     );
 
@@ -51,6 +53,7 @@ const getMasyarakatById = async (req, res) => {
 };
 
 const createMasyarakat = async (req, res) => {
+  // console.log(req.errorValidation?.errors);
   if (req.errorValidation) {
     res.render(
       "1_tambahPenerima",
@@ -63,10 +66,9 @@ const createMasyarakat = async (req, res) => {
   const kodeGampong = req.session.user?.kode_gampong;
   let data = { ...req.body, kode_gampong: kodeGampong };
   req.session.data = data;
-  // console.log(req.session);
-  // await Masyarakat.create(data);
-  const golongan = req.body.golongan;
-  res.redirect(`/${golongan}/tambah?NIK=${req.body.NIK}`);
+  let golongan = req.body.golongan;
+  const endpoint = golongan.replace(/\s/g, "-");
+  res.redirect(`/${endpoint}/tambah?NIK=${req.body.NIK}`);
 };
 
 const updateMasyarakatById = async (req, res) => {
@@ -83,7 +85,7 @@ const updateMasyarakatById = async (req, res) => {
       return;
     }
     const data = req.body;
-    console.log(data);
+    // console.log(data);
     await masyarakat.update(data);
     res.redirect("/masyarakat");
     // res.status(200).json({ message: `the data has been updated`, masyarakat });
