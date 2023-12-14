@@ -20,6 +20,7 @@ const fakirRouter = require("./modules/fakir/route/index");
 const miskinRouter = require("./modules/miskin/route/index");
 const ghariminRouter = require("./modules/gharimin/route/index");
 const santriBerprestasiRouter = require("./modules/santriBerprestasi/route/index");
+const madrasahRouter = require("./modules/madrasah/route/index");
 
 var app = express();
 
@@ -65,6 +66,7 @@ app.use("/fakir", fakirRouter);
 app.use("/miskin", miskinRouter);
 app.use("/gharimin", ghariminRouter);
 app.use("/santri-berprestasi", santriBerprestasiRouter);
+app.use("/madrasah", madrasahRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

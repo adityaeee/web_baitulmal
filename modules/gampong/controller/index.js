@@ -47,7 +47,7 @@ const updateGampongById = async (req, res) => {
     const data = req.body;
     await gampong.update(data);
     req.flash("msg", `Data Gampong Berhasil di ubah`);
-    res.redirect("/gampong");
+    res.redirect("/masyarakat");
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
