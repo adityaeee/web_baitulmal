@@ -1,82 +1,88 @@
 <div class="container mt-3">
-    <div class="row center">
-      <div class="col-md-3">
-        <a href="/masyarakat/<%= ibnuSabil.NIK %>" class="btn btn-success badge"
-          >&laquo; Kembali</a
-        >
-      </div>
-      <div class="col-md-6">
-        <h2 class="fw-bold">UPDATE DATA BANTUAN IBNU SABIL/h2>
-      </div>
+  <div class="row">
+    <div class="col-md-3">
+      <a href="/masyarakat/<%= ibnuSabil.NIK %>" class="btn btn-success badge"
+        >&laquo; Kembali</a
+      >
     </div>
-    <% if (typeof errors != 'undefined') { %> <% errors.forEach(error => { %>
-    <div class="alert alert-danger" role="alert">
-      <ul>
-        <li><%= error%></li>
-        <% }) %>
-      </ul>
-      <% } %>
-    </div>
-    <div class="row mt-3">
-      <div class="col-md-6">
-        <form
-          method="post"
-          id="formUbah"
-          action="/ibnuSabil/<%= ibnuSabil.id_ibnu_sabil %>?_method=PUT"
-          enctype="multipart/form-data"
-        >
-
-          <input type="hidden" name="NIK" value="<%= ibnuSabil.NIK %>" />
-          <div class="mb-3">
-            <label for="NIK" class="form-label">NIK</label>
-            <input
-              type="text"
-              class="form-control"
-              id="NIK"
-              name="NIK"
-              value="<%= ibnuSabil.NIK %>"
-              disabled
-            />
-          </div>
-
-          <label for="surat_permohonan" class="form-label mb-2"
-            >Surat Permohonan Kepada Baitul Mal Aceh Besar</label
-          >
-          <div class="card mb-3">
-            <div class="card-body">
-              <div class="mb-1">
-                <input
-                  type="file"
-                  class="form-control-file"
-                  id="surat_permohonan"
-                  name="surat_permohonan"
-                />
-              </div>
-            </div>
-          </div>
-  
-          <label for="surat_identitas" class="form-label mb-2"
-            >Fotokopi KTP / KK / Identitas Lainnya</label
-          >
-          <div class="card mb-3">
-            <div class="card-body">
-              <div class="mb-1">
-                <input
-                  type="file"
-                  class="form-control-file"
-                  id="surat_identitas"
-                  name="surat_identitas"
-                />
-              </div>
-            </div>
-          </div>
-  
-          <input type="hidden" name="bobot_surat" value="<%= ibnuSabil.bobot_surat %>" />
-          <input type="hidden" name="bobot_identitas" value="<%= ibnuSabil.bobot_identitas %>" />
-
-          <button type="submit" class="btn btn-success mb-5">Simpan</button>
-        </form>
-      </div>
+    <div class="col-md-6">
+      <h2 class="fw-bold text-center">UPDATE DATA BANTUAN IBNU SABIL</h2>
     </div>
   </div>
-  
+  <% if (typeof errors != 'undefined') { %> <% errors.forEach(error => { %>
+  <div class="alert alert-danger" role="alert">
+    <ul>
+      <li><%= error%></li>
+      <% }) %>
+    </ul>
+    <% } %>
+  </div>
+  <div class="row mt-3 justify-content-center">
+    <div class="col-md-6">
+      <form
+        method="post"
+        id="formUbah"
+        action="/ibnu-sabil/<%= ibnuSabil.id_ibnu_sabil %>?_method=PUT"
+        enctype="multipart/form-data"
+      >
+        <input type="hidden" name="NIK" value="<%= ibnuSabil.NIK %>" />
+        <div class="mb-3">
+          <label for="NIK" class="form-label">NIK</label>
+          <input
+            type="text"
+            class="form-control"
+            id="NIK"
+            name="NIK"
+            value="<%= ibnuSabil.NIK %>"
+            disabled
+          />
+        </div>
+
+        <label for="surat_permohonan" class="form-label mb-2"
+          >Surat Permohonan Kepada Baitul Mal Aceh Besar</label
+        >
+        <div class="card mb-3">
+          <div class="card-body">
+            <div class="mb-1">
+              <input
+                type="file"
+                class="form-control-file"
+                id="surat_permohonan"
+                name="surat_permohonan"
+              />
+            </div>
+          </div>
+        </div>
+
+        <label for="surat_identitas" class="form-label mb-2"
+          >Fotokopi KTP / KK / Identitas Lainnya</label
+        >
+        <div class="card mb-3">
+          <div class="card-body">
+            <div class="mb-1">
+              <input
+                type="file"
+                class="form-control-file"
+                id="surat_identitas"
+                name="surat_identitas"
+              />
+            </div>
+          </div>
+        </div>
+
+        <input
+          type="hidden"
+          name="bobot_surat"
+          value="<%= ibnuSabil.bobot_surat %>"
+        />
+        <input
+          type="hidden"
+          name="bobot_identitas"
+          value="<%= ibnuSabil.bobot_identitas %>"
+        />
+
+        <button type="submit" class="btn btn-success mb-5">Simpan</button>
+      </form>
+    </div>
+  </div>
+</div>

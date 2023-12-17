@@ -21,6 +21,19 @@ const miskinRouter = require("./modules/miskin/route/index");
 const ghariminRouter = require("./modules/gharimin/route/index");
 const santriBerprestasiRouter = require("./modules/santriBerprestasi/route/index");
 const madrasahRouter = require("./modules/madrasah/route/index");
+const miskinInsidentilRouter = require("./modules/miskinInsidentil/route/index");
+const guruDayahRouter = require("./modules/guruDayah/route/index");
+const santriDayahRouter = require("./modules/santriDayah/route/index");
+const santriDayahLuarRouter = require("./modules/santriDayahLuar/route/index");
+const anakYatimRouter = require("./modules/anakYatim/route/index");
+const disabilitasRouter = require("./modules/disabilitas/route/index");
+const muallafRouter = require("./modules/muallaf/route/index");
+const pelajarMiskinRouter = require("./modules/pelajarMiskin/route/index");
+const santriMuallafRouter = require("./modules/santriMuallaf/route/index");
+const waqafRouter = require("./modules/waqaf/route/index");
+const pelajarRantauRouter = require("./modules/pelajarRantau/route/index");
+const ibnuSabilRouter = require("./modules/ibnuSabil/route/index");
+const clusteringRouter = require("./modules/clustering/route/index");
 
 var app = express();
 
@@ -66,7 +79,20 @@ app.use("/fakir", fakirRouter);
 app.use("/miskin", miskinRouter);
 app.use("/gharimin", ghariminRouter);
 app.use("/santri-berprestasi", santriBerprestasiRouter);
+app.use("/miskin-insidentil", miskinInsidentilRouter);
+app.use("/guru-dayah", guruDayahRouter);
+app.use("/santri-dayah", santriDayahRouter);
+app.use("/santri-dayah-luar", santriDayahLuarRouter);
+app.use("/anak-yatim", anakYatimRouter);
+app.use("/disabilitas", disabilitasRouter);
+app.use("/muallaf", muallafRouter);
+app.use("/pelajar-miskin", pelajarMiskinRouter);
+app.use("/santri-muallaf", santriMuallafRouter);
 app.use("/madrasah", madrasahRouter);
+app.use("/waqaf", waqafRouter);
+app.use("/pelajar-rantau", pelajarRantauRouter);
+app.use("/ibnu-sabil", ibnuSabilRouter);
+app.use("/clustering", clusteringRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

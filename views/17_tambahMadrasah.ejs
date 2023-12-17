@@ -1,159 +1,161 @@
 <div class="container mt-3">
-  <div class="row">
-    <div class="col-md-3">
-      <a href="/masyarakat/tambah" class="btn btn-success badge"
-        >&laquo; Kembali</a
-      >
+    <div class="row">
+      <div class="col-md-3">
+        <a href="/masyarakat/tambah" class="btn btn-success badge"
+          >&laquo; Kembali</a
+        >
+      </div>
+      <div class="col-md-6">
+        <h2 class="fw-bold text-center">TAMBAH DATA PENERIMA ZAQAT MADRASAH</h2>
+      </div>
     </div>
-    <div class="col-md-6">
-      <h2 class="fw-bold text-center">TAMBAH DATA PENERIMA ZAQAT MADRASAH</h2>
+    <% if (typeof errors != 'undefined') { %>
+    <div class="alert alert-danger" role="alert">
+      <ul>
+        <% errors.forEach(error => { %>
+        <li><%= error.msg %></li>
+        <% }) %>
+      </ul>
+      <% } %>
+    </div>
+    <div class="row mt-3 justify-content-center">
+      <div class="col-md-6">
+        <form
+          id="formTambah"
+          method="post"
+          action="/madrasah/"
+          enctype="multipart/form-data"
+        >
+          <div class="mb-3">
+            <label for="NIK" class="form-label">NIK</label>
+            <input
+              type="text"
+              class="form-control"
+              id="NIK"
+              name="NIK"
+              value="<%= NIK %>"
+              disabled
+            />
+          </div>
+
+          <div class="mb-3">
+            <label for="norekening" class="form-label">Nomor Rekening</label>
+            <input
+              type="text"
+              class="form-control"
+              id="norekening"
+              name="norekening"
+            />
+          </div>
+  
+          <label for="surat_permohonan" class="form-label mb-2"
+            >Surat Permohonan Kepada Baitul Mal Aceh Besar</label
+          >
+          <div class="card mb-3">
+            <div class="card-body">
+              <div class="mb-1">
+                <input
+                  type="file"
+                  class="form-control-file"
+                  id="surat_permohonan"
+                  name="surat_permohonan"
+                  //required
+                />
+              </div>
+            </div>
+          </div>
+  
+          <label for="izin_operasional" class="form-label mb-2"
+            >Fotokopi Izin Operasional TPA / Balai Pengajian</label
+          >
+          <div class="card mb-3">
+            <div class="card-body">
+              <div class="mb-1">
+                <input
+                  type="file"
+                  class="form-control-file"
+                  id="izin_operasional"
+                  name="izin_operasional"
+                />
+              </div>
+            </div>
+          </div>
+
+          <label for="SK_pengurus" class="form-label mb-2"
+            >SK Pengurus TPA / Balai Pengajian</label
+          >
+          <div class="card mb-3">
+            <div class="card-body">
+              <div class="mb-1">
+                <input
+                  type="file"
+                  class="form-control-file"
+                  id="SK_pengurus"
+                  name="SK_pengurus"
+                />
+              </div>
+            </div>
+          </div>
+
+          <label for="data_madrasah" class="form-label mb-2"
+            >Data Santri dan Data Pengajar TPA / Balai Pengajian</label
+          >
+          <div class="card mb-3">
+            <div class="card-body">
+              <div class="mb-1">
+                <input
+                  type="file"
+                  class="form-control-file"
+                  id="data_madrasah"
+                  name="data_madrasah"
+                />
+              </div>
+            </div>
+          </div>
+
+          <label for="foto_PBM" class="form-label mb-2"
+            >Foto Kegiatan PBM di TPA / Balai Pengajian</label
+          >
+          <div class="card mb-3">
+            <div class="card-body">
+              <div class="mb-1">
+                <input
+                  type="file"
+                  class="form-control-file"
+                  id="foto_PBM"
+                  name="foto_PBM"
+                />
+              </div>
+            </div>
+          </div>
+
+          <label for="rekening" class="form-label mb-2"
+            >Fotokopi Rekening Bank Aceh</label
+          >
+          <div class="card mb-4">
+            <div class="card-body">
+              <div class="mb-1">
+                <input
+                  type="file"
+                  class="form-control-file"
+                  id="rekening"
+                  name="rekening"
+                />
+              </div>
+            </div>
+          </div>
+  
+          <input type="hidden" name="bobot_surat" value="1" />
+          <input type="hidden" name="bobot_izin" value="1" />
+          <input type="hidden" name="bobot_SK" value="1" />
+          <input type="hidden" name="bobot_data" value="1" />
+          <input type="hidden" name="bobot_PBM" value="1" />
+          <input type="hidden" name="bobot_rekening" value="1" />
+          <input type="hidden" name="NIK" value="<%= NIK %>" />
+  
+          <button type="submit" class="btn btn-success mb-5">Tambah</button>
+        </form>
+      </div>
     </div>
   </div>
-  <% if (typeof errors != 'undefined') { %>
-  <div class="alert alert-danger" role="alert">
-    <ul>
-      <% errors.forEach(error => { %>
-      <li><%= error.msg %></li>
-      <% }) %>
-    </ul>
-    <% } %>
-  </div>
-  <div class="row justify-content-center">
-    <div class="col-md-6">
-      <form
-        id="formTambah"
-        method="post"
-        action="/madrasah/"
-        enctype="multipart/form-data"
-      >
-        <div class="mb-3">
-          <label for="NIK" class="form-label">NIK</label>
-          <input
-            type="text"
-            class="form-control"
-            id="NIK"
-            name="NIK"
-            value="<%= NIK %>"
-            disabled
-          />
-        </div>
-
-        <div class="mb-3">
-          <label for="norekening" class="form-label">Nomor Rekening</label>
-          <input
-            type="text"
-            class="form-control"
-            id="norekening"
-            name="norekening"
-          />
-        </div>
-
-        <label for="surat_permohonan" class="form-label mb-2"
-          >Surat Permohonan Kepada Baitul Mal Aceh Besar</label
-        >
-        <div class="card mb-3">
-          <div class="card-body">
-            <div class="mb-1">
-              <input
-                type="file"
-                class="form-control-file"
-                id="surat_permohonan"
-                name="surat_permohonan"
-              />
-            </div>
-          </div>
-        </div>
-
-        <label for="izin_operasional" class="form-label mb-2"
-          >Fotokopi Izin Operasional TPA / Balai Pengajian</label
-        >
-        <div class="card mb-3">
-          <div class="card-body">
-            <div class="mb-1">
-              <input
-                type="file"
-                class="form-control-file"
-                id="izin_operasional"
-                name="izin_operasional"
-              />
-            </div>
-          </div>
-        </div>
-
-        <label for="SK_pengurus" class="form-label mb-2"
-          >SK Pengurus TPA / Balai Pengajian</label
-        >
-        <div class="card mb-3">
-          <div class="card-body">
-            <div class="mb-1">
-              <input
-                type="file"
-                class="form-control-file"
-                id="SK_pengurus"
-                name="SK_pengurus"
-              />
-            </div>
-          </div>
-        </div>
-
-        <label for="data_madrasah" class="form-label mb-2"
-          >Data Santri dan Data Pengajar TPA / Balai Pengajian</label
-        >
-        <div class="card mb-3">
-          <div class="card-body">
-            <div class="mb-1">
-              <input
-                type="file"
-                class="form-control-file"
-                id="data_madrasah"
-                name="data_madrasah"
-              />
-            </div>
-          </div>
-        </div>
-
-        <label for="foto_PBM" class="form-label mb-2"
-          >Foto Kegiatan PBM di TPA / Balai Pengajian</label
-        >
-        <div class="card mb-3">
-          <div class="card-body">
-            <div class="mb-1">
-              <input
-                type="file"
-                class="form-control-file"
-                id="foto_PBM"
-                name="foto_PBM"
-              />
-            </div>
-          </div>
-        </div>
-
-        <label for="rekening" class="form-label mb-2"
-          >Fotokopi Rekening Bank Aceh</label
-        >
-        <div class="card mb-4">
-          <div class="card-body">
-            <div class="mb-1">
-              <input
-                type="file"
-                class="form-control-file"
-                id="rekening"
-                name="rekening"
-              />
-            </div>
-          </div>
-        </div>
-
-        <input type="hidden" name="bobot_surat" value="1" />
-        <input type="hidden" name="bobot_izin" value="1" />
-        <input type="hidden" name="bobot_SK" value="1" />
-        <input type="hidden" name="bobot_data" value="1" />
-        <input type="hidden" name="bobot_PBM" value="1" />
-        <input type="hidden" name="bobot_rekening" value="1" />
-        <input type="hidden" name="NIK" value="<%= NIK %>" />
-
-        <button type="submit" class="btn btn-success mb-5">Tambah</button>
-      </form>
-    </div>
-  </div>
-</div>
+  
