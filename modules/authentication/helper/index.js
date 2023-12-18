@@ -1,4 +1,4 @@
-const { Gampong, Admin } = require("../../../models");
+const { Gampong, Admin, Staf } = require("../../../models");
 const { dataLayout } = require("../../../utils/index");
 
 const formRegister = async (req, res) => {
@@ -54,7 +54,11 @@ const loginGampong = async (req, res) => {
       `Saleum Teuka ${gampong.nama} Bak Website Pembagian Zaqat`
     );
 
-    req.session.user = { ...gampong.dataValues, role: req.body.role };
+    req.session.user = {
+      ...gampong.dataValues,
+      role: req.body.role,
+      kodeG: req.body.kode_gampong,
+    };
 
     res.redirect("/masyarakat");
   } catch (error) {
@@ -93,6 +97,39 @@ const loginAdmin = async (req, res) => {
   }
 };
 
+const formLoginStaf = async (req, res) => {
+  if (req.session?.user) {
+    res.redirect("/masyarakat");
+    return;
+  }
+  res.render("2_loginStaf", dataLayout(req, {}));
+};
+
+const loginStaf = async (req, res) => {
+  try {
+    if (req.errorValidation) {
+      res.render(
+        "2_loginStaf",
+        dataLayout({
+          errors: req.errorValidation.errors,
+        })
+      );
+      return;
+    }
+
+    const staf = await Staf.findOne({
+      where: { username: req.body.username },
+    });
+    req.flash("msg", `Saleum Teuka ${staf.nama} Bak Website Pembagian Zaqat`);
+
+    req.session.user = { ...staf.dataValues, role: req.body.role };
+
+    res.redirect("/masyarakat");
+  } catch (error) {
+    res.status(404).json({ message: error.message });
+  }
+};
+
 const logout = async (req, res) => {
   // req.flash("msg", `Terima Kasih`);
   req.session.destroy();
@@ -102,9 +139,11 @@ const logout = async (req, res) => {
 module.exports = {
   formLoginGampong,
   formLoginAdmin,
+  formLoginStaf,
   formRegister,
   register,
   loginGampong,
   loginAdmin,
+  loginStaf,
   logout,
 };

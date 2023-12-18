@@ -13,4 +13,13 @@ let loginSchemaAdmin = object({
   username: string().required(),
 });
 
-module.exports = { registerSchema, loginSchemaGampong, loginSchemaAdmin };
+let loginSchemaStaf = object({
+  username: string().required(),
+});
+
+module.exports = {
+  registerSchema,
+  loginSchemaGampong,
+  loginSchemaAdmin,
+  loginSchemaStaf,
+};

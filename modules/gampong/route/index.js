@@ -16,7 +16,7 @@ const {
 router.get("/", getGampong);
 router.get(
   "/:kode_gampong",
-  authentication(["gampong", "admin"]),
+  authentication(["gampong", "admin", "staf"]),
   getGampongById
 );
 router.get(

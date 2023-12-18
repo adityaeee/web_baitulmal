@@ -19,11 +19,14 @@
         <p class="" card-text mb-1>
           Waktu Update: <%= gampong.updatedAt.toLocaleDateString("id") %>
         </p>
+        <% if (session?.user?.role=='admin' || session?.user?.kodeG ==
+        gampong.kode_gampong) { %>
         <a
           href="/gampong/edit/<%= gampong.kode_gampong %>"
           class="btn btn-warning badge"
           >Edit</a
         >
+        <% } %>
 
         <a href="/gampong">&laquo; Kembali</a>
       </div>

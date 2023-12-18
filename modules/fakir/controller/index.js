@@ -1,16 +1,43 @@
-const { Fakir, Masyarakat } = require("../../../models");
+const { Fakir, Masyarakat, Gampong } = require("../../../models");
 const { dataLayout } = require("../../../utils/index");
 
 const getFakir = async (req, res) => {
   try {
-    const fakir = await Fakir.findAll();
-    // res.render("4_daftarFakir", {
-    //   layout: "layouts/main-layouts",
-    //   msg: req.flash("msg"),
-    //   title: "Zaqat",
-    //   fakir,
-    // });
-    res.status(200).json(fakir);
+    const masyarakat = await Masyarakat.findAll({
+      where: { golongan: "fakir" },
+    });
+    res.render(
+      "4_daftarFakir",
+      dataLayout(req, {
+        masyarakat,
+      })
+    );
+    res.status(200);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+const getFakirById = async (req, res) => {
+  try {
+    const golongan = await Fakir.findOne({
+      where: {
+        NIK: req.params.NIK,
+      },
+    });
+    const masyarakat = await Masyarakat.findByPk(req.params.NIK);
+    const gampong = await Gampong.findByPk(masyarakat.kode_gampong);
+    const endpoint = masyarakat.golongan.replace(/\s/g, "-");
+
+    res.render(
+      "4_detailFakir",
+      dataLayout(req, {
+        masyarakat,
+        golongan,
+        gampong,
+        endpoint,
+      })
+    );
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
@@ -35,6 +62,29 @@ const updateFakir = async (req, res) => {
   res.redirect("/masyarakat");
 };
 
+const updateAll = async (req, res) => {
+  let data = req.body.NIK;
+  let limit = req.body.limit;
+  let penerima = 0;
+  if (limit > data.length) {
+    limit = data.length;
+  }
+
+  const perubahan = {
+    status: "Sudah",
+    periode: "Pertama",
+  };
+
+  for (let i = 0; i < limit; i++) {
+    penerima = await Masyarakat.findOne({ where: { NIK: data[i] } });
+    console.log(penerima);
+    penerima.update(perubahan);
+  }
+
+  req.flash("msg", `Data penerima zakat fakir berhasil diupdate`);
+  res.redirect("/masyarakat");
+};
+
 const formCreate = async (req, res) => {
   res.render(
     "4_tambahFakir",
@@ -52,7 +102,6 @@ const formUpdate = async (req, res) => {
       NIK: req.params.NIK,
     },
   });
-  console.log(fakir);
   res.render(
     "4_editFakir",
     dataLayout(req, {
@@ -61,4 +110,12 @@ const formUpdate = async (req, res) => {
   );
 };
 
-module.exports = { getFakir, formCreate, formUpdate, createFakir, updateFakir };
+module.exports = {
+  getFakir,
+  getFakirById,
+  formCreate,
+  formUpdate,
+  createFakir,
+  updateFakir,
+  updateAll,
+};

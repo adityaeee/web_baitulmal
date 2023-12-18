@@ -1,18 +1,12 @@
 const { sequelize, Op } = require("sequelize");
 const { Masyarakat, Fakir } = require("../../../models");
 const { default: axios } = require("axios");
-
-// let data = [
-//   [1, 2, 3, 4, 5, 6, 7, 8, 9, 0],
-//   [1, 2, 3, 4, 5, 6, 7, 8, 9, 0],
-//   [1, 2, 3, 4, 5, 6, 7, 8, 9, 0],
-//   [1, 2, 3, 4, 5, 6, 7, 8, 9, 0],
-// ];
+const { dataLayout } = require("../../../utils");
 
 const clusterFakir = async (req, res) => {
   try {
-    const masyarakat = await Masyarakat.findAll({
-      where: { status: "belum diproses", golongan: "fakir" },
+    let masyarakat = await Masyarakat.findAll({
+      where: { status: "Menunggu", golongan: "fakir" },
       attributes: ["NIK"],
     });
 
@@ -20,7 +14,7 @@ const clusterFakir = async (req, res) => {
       Object.values(user.get({ plain: true }))
     );
 
-    const golongan = await Fakir.findAll({
+    let golongan = await Fakir.findAll({
       where: {
         NIK: {
           [Op.in]: statusTrue.flat(),
@@ -40,15 +34,30 @@ const clusterFakir = async (req, res) => {
     const data = golongan.map((user) =>
       Object.values(user.get({ plain: true }))
     );
-    // console.log(data);
-
-    const cluster = await axios.post(
+    let result;
+    const response = await axios.post(
       "http://127.0.0.1:5000/clusterDataGolongan",
       data
     );
 
-    console.log(cluster);
-    res.status(200);
+    result = response.data.res;
+
+    masyarakat = await Masyarakat.findAll({
+      where: {
+        NIK: {
+          [Op.in]: result.flat(),
+        },
+      },
+    });
+
+    // console.log(masyarakat);
+
+    res.render(
+      "3_resultGolongan",
+      dataLayout(req, {
+        masyarakat,
+      })
+    );
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
