@@ -7,19 +7,32 @@ const formRegister = async (req, res) => {
 
 const register = async (req, res) => {
   try {
+    console.log(req.errorValidation);
     if (req.errorValidation) {
       res.render(
-        "3_registrasi",
-        dataLayout({
+        "3_registrasiGampong",
+        dataLayout(req, {
           errors: req.errorValidation.errors,
         })
       );
       return;
     }
+
+    if (req.body.password !== req.body.confirm) {
+      res.render(
+        "3_registrasiGampong",
+        dataLayout(req, {
+          errors: ["Konfirmasi password berbeda"],
+        })
+      );
+      return;
+    }
+
     req.flash(
       "msg",
       `Data gampong ${req.body.nama_gampong} berhasil ditambahkan`
     );
+
     await Gampong.create(req.body);
     // console.log(req.body);
     res.redirect("/auth/login/gampong");
@@ -38,17 +51,26 @@ const formLoginGampong = async (req, res) => {
 
 const loginGampong = async (req, res) => {
   try {
-    if (req.errorValidation) {
+    const gampong = await Gampong.findByPk(req.body.kode_gampong);
+    if (gampong == null) {
       res.render(
         "3_loginGampong",
-        dataLayout({
-          errors: req.errorValidation.errors,
+        dataLayout(req, {
+          errors: ["kode gampong atau password salah!"],
+        })
+      );
+      return;
+    }
+    if (gampong.password != req.body.password) {
+      res.render(
+        "3_loginGampong",
+        dataLayout(req, {
+          errors: ["kode gampong atau password salah"],
         })
       );
       return;
     }
 
-    const gampong = await Gampong.findByPk(req.body.kode_gampong);
     req.flash(
       "msg",
       `Saleum Teuka ${gampong.nama} Bak Website Pembagian Zaqat`
@@ -57,7 +79,7 @@ const loginGampong = async (req, res) => {
     req.session.user = {
       ...gampong.dataValues,
       role: req.body.role,
-      kodeG: req.body.kode_gampong,
+      // kodeG: req.body?.kode_gampong,
     };
 
     res.redirect("/masyarakat");
@@ -76,19 +98,28 @@ const formLoginAdmin = async (req, res) => {
 
 const loginAdmin = async (req, res) => {
   try {
-    if (req.errorValidation) {
+    const admin = await Admin.findOne({
+      where: { username: req.body.username },
+    });
+    if (admin == null) {
       res.render(
         "0_loginAdmin",
-        dataLayout({
-          errors: req.errorValidation.errors,
+        dataLayout(req, {
+          errors: ["Username atau password salah!"],
+        })
+      );
+      return;
+    }
+    if (admin.password != req.body.password) {
+      res.render(
+        "0_loginAdmin",
+        dataLayout(req, {
+          errors: ["Username atau password salah"],
         })
       );
       return;
     }
 
-    const admin = await Admin.findOne({
-      where: { username: req.body.username },
-    });
     req.flash("msg", `Saleum Teuka ${admin.nama} Bak Website Pembagian Zaqat`);
     req.session.user = { ...admin.dataValues, role: req.body.role };
     res.redirect("/masyarakat");
@@ -107,19 +138,28 @@ const formLoginStaf = async (req, res) => {
 
 const loginStaf = async (req, res) => {
   try {
-    if (req.errorValidation) {
+    const staf = await Staf.findOne({
+      where: { username: req.body.username },
+    });
+    if (staf == null) {
       res.render(
         "2_loginStaf",
-        dataLayout({
-          errors: req.errorValidation.errors,
+        dataLayout(req, {
+          errors: ["Username atau password salah!"],
+        })
+      );
+      return;
+    }
+    if (staf.password != req.body.password) {
+      res.render(
+        "2_loginStaf",
+        dataLayout(req, {
+          errors: ["Username atau password salah"],
         })
       );
       return;
     }
 
-    const staf = await Staf.findOne({
-      where: { username: req.body.username },
-    });
     req.flash("msg", `Saleum Teuka ${staf.nama} Bak Website Pembagian Zaqat`);
 
     req.session.user = { ...staf.dataValues, role: req.body.role };

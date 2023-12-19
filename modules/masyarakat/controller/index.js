@@ -2,8 +2,6 @@ const { Masyarakat, Gampong } = require("../../../models");
 const { findGolongan } = require("../utils/index");
 
 const { dataLayout } = require("../../../utils/index");
-const session = require("express-session");
-
 const getMasyarakat = async (req, res) => {
   try {
     let masyarakat = await Masyarakat.findAll();
@@ -65,6 +63,7 @@ const createMasyarakat = async (req, res) => {
   }
   const kodeGampong = req.session.user?.kode_gampong;
   let data = { ...req.body, kode_gampong: kodeGampong };
+  console.log(data);
   req.session.data = data;
   let golongan = req.body.golongan;
   const endpoint = golongan.replace(/\s/g, "-");

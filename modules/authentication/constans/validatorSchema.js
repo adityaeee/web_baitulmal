@@ -1,8 +1,8 @@
 const { object, string, number, date, InferType } = require("yup");
 
 let registerSchema = object({
-  nama: string().required(),
-  NIK: number().required(),
+  NIK: number().max(16, "NIK harus 16 karakter"),
+  kode_gampong: number().min(8, "kode gampong harus 8 karakter").required(),
 });
 
 let loginSchemaGampong = object({

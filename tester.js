@@ -17,5 +17,4 @@ const reset = async () => {
     org.update(perubahan);
   });
 };
-
 reset();

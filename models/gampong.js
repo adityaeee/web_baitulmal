@@ -9,11 +9,10 @@ module.exports = (sequelize, DataTypes) => {
       },
       nama_gampong: DataTypes.STRING,
       kecamatan: DataTypes.STRING,
-      dusun: DataTypes.STRING,
+
       NIK: DataTypes.BIGINT(16),
       nama: DataTypes.STRING(50),
       email: DataTypes.STRING(50),
-      username: DataTypes.STRING(20),
       password: DataTypes.STRING,
       createdAt: {
         type: DataTypes.DATE,

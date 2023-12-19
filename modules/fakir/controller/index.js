@@ -26,7 +26,7 @@ const getFakirById = async (req, res) => {
       },
     });
     const masyarakat = await Masyarakat.findByPk(req.params.NIK);
-    const gampong = await Gampong.findByPk(masyarakat.kode_gampong);
+    const gampong = await Gampong.findByPk(masyarakat?.kode_gampong);
     const endpoint = masyarakat.golongan.replace(/\s/g, "-");
 
     res.render(
@@ -45,8 +45,8 @@ const getFakirById = async (req, res) => {
 
 const createFakir = async (req, res) => {
   const data = req.body;
-  // console.log(data);
   const dataMasyarakat = req.session?.data;
+  console.log(dataMasyarakat);
   await Masyarakat.create(dataMasyarakat);
   await Fakir.create(data);
   req.session.data = "";
