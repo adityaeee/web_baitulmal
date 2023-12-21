@@ -1,0 +1,67 @@
+<div class="container mt-3">
+	<div class="row">
+		<div class="col-md-4">
+			<a href="/masyarakat/" class="btn btn-success badge">&laquo; Kembali</a>
+		</div>
+		<div class="col-md-6">
+			<h2 class="fw-bold">HASIL CLUSTERING FAKIR</h2>
+		</div>
+	</div>
+
+	<div class="row justify-content-center">
+		<div class="col-md-7 mt-3">
+			<div class="card" style="width: 40rem">
+				<div class="card-header">
+					<h3 class="fw-bold">Hasil Perhitungan</h3>
+				</div>
+				<div class="card-body">
+					<div class="row">
+						<div class="col-md">
+							<form method="post" action="/fakir?_method=PUT">
+								<label for="limit" class="form-label">Jumlah Kouta Penerima</label>
+								<input
+									type="number"
+									name="limit"
+									class="form-control"
+									id="limit"
+									aria-describedby="limit penerima zakat"
+									required
+								/>
+
+								<table class="table table-striped text-center">
+									<thead>
+										<tr>
+											<th scope="col">URUTAN</th>
+											<th scope="col">NAMA</th>
+											<th scope="col">NIK</th>
+											<th scope="col">Kode Gampong</th>
+										</tr>
+									</thead>
+									<tbody>
+										<% masyarakat.forEach((orang,i) => { %>
+										<tr>
+											<th scope="row"><%= i+1 %></th>
+											<td><%= orang.nama %></td>
+											<td><%= orang.NIK %></td>
+											<td><%= orang.kode_gampong %></td>
+										</tr>
+
+										<input type="hidden" name="NIK" value="<%= orang.NIK %>" />
+										<% }) %>
+									</tbody>
+								</table>
+								<button
+									type="submit"
+									class="btn btn-success"
+									onclick="return confirm('Apakah Anda yakin ingin memperbarui data penerima ?')"
+								>
+									Perbarui Data
+								</button>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

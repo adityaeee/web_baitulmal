@@ -1,131 +1,117 @@
 <div class="container mt-3">
-  <div class="row center">
-    <div class="col-md-3">
-      <a href="/masyarakat" class="btn btn-success badge">&laquo; Kembali</a>
-    </div>
-    <div class="col-md-6">
-      <h2 class="fw-bold">TAMBAH DATA PENERIMA ZAQAT</h2>
-    </div>
-  </div>
-  <% if (typeof errors != 'undefined') { %>
-  <div class="alert alert-danger" role="alert">
-    <% errors.forEach(error => { %>
-    <ul>
-      <li><%= error %></li>
-      <% }) %>
-    </ul>
-  </div>
-  <% } %>
+	<div class="row center">
+		<div class="col-md-3">
+			<a href="/masyarakat" class="btn btn-success badge">&laquo; Kembali</a>
+		</div>
+		<div class="col-md-6">
+			<h2 class="fw-bold">TAMBAH DATA PENERIMA ZAQAT</h2>
+		</div>
+	</div>
+	<% if (typeof errors != 'undefined') { %>
+	<div class="alert alert-danger" role="alert">
+		<% errors.forEach(error => { %>
+		<ul>
+			<li><%= error %></li>
+			<% }) %>
+		</ul>
+	</div>
+	<% } %>
 
-  <div class="row justify-content-center">
-    <div class="col-md-6">
-      <form method="post" action="/masyarakat/">
-        <div class="mb-3">
-          <label for="no_KK" class="form-label">Nomor Kartu Keluarga</label>
-          <input
-            type="text"
-            class="form-control"
-            id="no_KK"
-            name="no_KK"
-            value="<%=data?.no_KK%>"
-            required
-          />
-        </div>
-        <div class="mb-3">
-          <label for="NIK" class="form-label">Nomor KTP</label>
-          <input
-            type="text"
-            class="form-control"
-            id="NIK"
-            name="NIK"
-            value="<%=data?.NIK%>"
-            required
-          />
-        </div>
-        <div class="mb-3">
-          <label for="nama" class="form-label">Nama Lengkap</label>
-          <input
-            type="text"
-            class="form-control"
-            id="nama"
-            name="nama"
-            value="<%=data?.nama%>"
-            required
-          />
-        </div>
-        <div class="mb-3">
-          <label for="tempat_lahir" class="form-label">Tempat Lahir</label>
-          <input
-            type="text"
-            class="form-control"
-            id="tempat_lahir"
-            name="tempat_lahir"
-            value="<%=data?.tempat_lahir%>"
-            required
-          />
-        </div>
-        <div class="mb-3">
-          <label for="tanggal_lahir" class="form-label">Tanggal Lahir</label>
-          <input
-            type="date"
-            class="form-control"
-            id="tanggal_lahir"
-            name="tanggal_lahir"
-            value="<%=data?.tanggal_lahir%>"
-            required
-          />
-        </div>
-        <div class="mb-3">
-          <label for="dusun" class="form-label">Dusun</label>
-          <input
-            type="text"
-            class="form-control"
-            id="dusun"
-            name="dusun"
-            value="<%=data?.dusun%>"
-            required
-          />
-        </div>
-        <label for="golongan" class="form-label">Pilih Golongan</label>
-        <select
-          name="golongan"
-          class="form-select mb-3"
-          aria-label="Default select example"
-        >
-          <option selected>Jenis Bantuan</option>
-          <option value="fakir">Fakir</option>
-          <option value="miskin">Miskin</option>
-          <option value="miskin insidentil">Miskin Insidentil</option>
-          <option value="guru dayah">Insentif Guru Dayah</option>
-          <option value="santri dayah">Santunan Santri Dayah</option>
-          <option value="santri dayah luar">
-            Santunan Santri Dayah di Luar Aceh Besar
-          </option>
-          <option value="anak yatim">Santunan Anak Yatim</option>
-          <option value="disabilitas">Bantuan Disabilitas</option>
-          <option value="muallaf">Santunan Muallaf</option>
-          <option value="pelajar miskin">
-            Bantuan Pendidikan Siswa Miskin
-          </option>
-          <option value="santri muallaf">Santunan Santri Muallaf</option>
-          <option value="gharimin">Bantuan Pelunasan Hutang (Gharimin)</option>
-          <option value="santri berprestasi">
-            Beasiswa Santri Berprestasi
-          </option>
-          <option value="madrasah">
-            Bantuan Oprasional TPA/Balai Pengajian
-          </option>
-          <option value="waqaf">Bantuan Sertifikasi Harta Waqaf</option>
-          <option value="pelajar rantau">
-            Bantuan Pendidikan Pelajar di Luar Negeri
-          </option>
-          <option value="ibnu sabil">Ibnu Sabil</option>
-        </select>
-        <input type="hidden" name="status" value="belum diproses" />
-        <input type="hidden" name="periode" value="menunggu" />
-        <input type="hidden" name="waktu_proses" value="-" />
-        <button type="submit" class="btn btn-success mb-5">Konfirmasi</button>
-      </form>
-    </div>
-  </div>
+	<div class="row justify-content-center">
+		<div class="col-md-6">
+			<form method="post" action="/masyarakat/">
+				<div class="mb-3">
+					<label for="no_KK" class="form-label">Nomor Kartu Keluarga</label>
+					<input
+						type="text"
+						class="form-control"
+						id="no_KK"
+						name="no_KK"
+						value="<%=data?.no_KK%>"
+						required
+					/>
+				</div>
+				<div class="mb-3">
+					<label for="NIK" class="form-label">Nomor KTP</label>
+					<input
+						type="text"
+						class="form-control"
+						id="NIK"
+						name="NIK"
+						value="<%=data?.NIK%>"
+						required
+					/>
+				</div>
+				<div class="mb-3">
+					<label for="nama" class="form-label">Nama Lengkap</label>
+					<input
+						type="text"
+						class="form-control"
+						id="nama"
+						name="nama"
+						value="<%=data?.nama%>"
+						required
+					/>
+				</div>
+				<div class="mb-3">
+					<label for="tempat_lahir" class="form-label">Tempat Lahir</label>
+					<input
+						type="text"
+						class="form-control"
+						id="tempat_lahir"
+						name="tempat_lahir"
+						value="<%=data?.tempat_lahir%>"
+						required
+					/>
+				</div>
+				<div class="mb-3">
+					<label for="tanggal_lahir" class="form-label">Tanggal Lahir</label>
+					<input
+						type="date"
+						class="form-control"
+						id="tanggal_lahir"
+						name="tanggal_lahir"
+						value="<%=data?.tanggal_lahir%>"
+						required
+					/>
+				</div>
+				<div class="mb-3">
+					<label for="dusun" class="form-label">Dusun</label>
+					<input
+						type="text"
+						class="form-control"
+						id="dusun"
+						name="dusun"
+						value="<%=data?.dusun%>"
+						required
+					/>
+				</div>
+				<label for="golongan" class="form-label">Pilih Golongan</label>
+				<select name="golongan" class="form-select mb-3" aria-label="Default select example">
+					<option selected>Jenis Bantuan</option>
+					<option value="fakir">Fakir</option>
+					<option value="miskin">Miskin</option>
+					<option value="miskin insidentil">Miskin Insidentil</option>
+					<option value="guru dayah">Insentif Guru Dayah</option>
+					<option value="santri dayah">Santunan Santri Dayah</option>
+					<option value="santri dayah luar">Santunan Santri Dayah di Luar Aceh Besar</option>
+					<option value="anak yatim">Santunan Anak Yatim</option>
+					<option value="disabilitas">Bantuan Disabilitas</option>
+					<option value="muallaf">Santunan Muallaf</option>
+					<option value="pelajar miskin">Bantuan Pendidikan Siswa Miskin</option>
+					<option value="santri muallaf">Santunan Santri Muallaf</option>
+					<option value="gharimin">Bantuan Pelunasan Hutang (Gharimin)</option>
+					<option value="santri berprestasi">Beasiswa Santri Berprestasi</option>
+					<option value="madrasah">Bantuan Oprasional TPA/Balai Pengajian</option>
+					<option value="waqaf">Bantuan Sertifikasi Harta Waqaf</option>
+					<option value="pelajar rantau">Bantuan Pendidikan Pelajar di Luar Negeri</option>
+					<option value="ibnu sabil">Ibnu Sabil</option>
+				</select>
+				<input type="hidden" name="status" value="Menunggu" />
+				<input type="hidden" name="periode" value="Menunggu" />
+				<input type="hidden" name="waktu_proses" value="-" />
+				<button type="submit" class="btn btn-success mb-5">Konfirmasi</button>
+			</form>
+		</div>
+	</div>
 </div>

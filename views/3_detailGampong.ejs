@@ -1,77 +1,66 @@
 <div class="container">
-  <div class="d-flex justify-content-center">
-    <div class="card mt-5" style="width: 18rem">
-      <div class="card-body">
-        <h5 class="card-title text-center">
-          <%= gampong.nama_gampong.toUpperCase() %>
-        </h5>
-        <p class="card-subtitle mb-3 text-muted text-center">
-          <%= gampong.nama.toUpperCase() %>
-        </p>
-        <p class="card-text mb-1">NIK: <%= gampong.NIK %></p>
-        <p class="card-text mb-1">Dusun: <%= gampong.dusun %></p>
-        <p class="card-text mb-1">Email: <%= gampong.email %></p>
-        <p class="card-text mb-1">Username: <%= gampong.username %></p>
-        <p class="card-text mb-1">Password: <%= gampong.password %></p>
-        <p class="" card-text mb-1>
-          Waktu Input: <%= gampong.createdAt.toLocaleDateString("id") %>
-        </p>
-        <p class="" card-text mb-1>
-          Waktu Update: <%= gampong.updatedAt.toLocaleDateString("id") %>
-        </p>
-        <% if (session?.user?.role=='admin' || session?.user?.kodeG ==
-        gampong.kode_gampong) { %>
-        <a
-          href="/gampong/edit/<%= gampong.kode_gampong %>"
-          class="btn btn-warning badge"
-          >Edit</a
-        >
-        <% } %>
+	<div class="d-flex justify-content-center">
+		<div class="card mt-5" style="width: 18rem">
+			<div class="card-body">
+				<h5 class="card-title text-center"><%= gampong.nama_gampong.toUpperCase() %></h5>
+				<p class="card-subtitle mb-3 text-muted text-center"><%= gampong.nama.toUpperCase() %></p>
+				<p class="card-text mb-1">NIK: <%= gampong.NIK %></p>
+				<p class="card-text mb-1">Email: <%= gampong.email %></p>
+				<p class="card-text mb-1">Password: <%= gampong.password %></p>
+				<p class="" card-text mb-1>
+					Waktu Input: <%= gampong.createdAt.toLocaleDateString("id") %>
+				</p>
+				<p class="" card-text mb-1>
+					Waktu Update: <%= gampong.updatedAt.toLocaleDateString("id") %>
+				</p>
+				<% if (session?.user?.role=='admin' || session?.user?.role == "gampong") { %>
+				<a href="/gampong/edit/<%= gampong.kode_gampong %>" class="btn btn-warning badge">Edit</a>
+				<% } %>
 
-        <a href="/gampong">&laquo; Kembali</a>
-      </div>
-    </div>
-  </div>
+				<a href="/masyarakat">&laquo; Kembali</a>
+			</div>
+		</div>
+	</div>
 </div>
 
 <script>
-  function confirmHandler(button, nama_gampong) {
-    const swalWithBootstrapButtons = Swal.mixin({
-      customClass: {
-        confirmButton: "btn btn-success",
-        cancelButton: "btn btn-danger",
-      },
-      buttonsStyling: false,
-    });
+	function confirmHandler(button, nama_gampong) {
+		const swalWithBootstrapButtons = Swal.mixin({
+			customClass: {
+				confirmButton: "btn btn-success",
+				cancelButton: "btn btn-danger",
+			},
+			buttonsStyling: false,
+		});
 
-    swalWithBootstrapButtons
-      .fire({
-        title: "Apakah anda yakin?",
-        text: `menghapus data ${nama_gampong} ?`,
-        icon: "warning",
-        showCancelButton: true,
-        confirmButtonText: "Ya, hapus!",
-        cancelButtonText: "Batal!",
-        reverseButtons: true,
-      })
-      .then((result) => {
-        if (result.isConfirmed) {
-          button.parentElement.submit();
-          swalWithBootstrapButtons.fire(
-            "Deleted!",
-            `Data ${nama_gampong} berhasil dihapus`,
-            "success"
-          );
-        } else if (
-          /* Read more about handling dismissals below */
-          result.dismiss === Swal.DismissReason.cancel
-        ) {
-          swalWithBootstrapButtons.fire(
-            "Cancelled",
-            `Data ${nama_gampong} masih tersimpan`,
-            "error"
-          );
-        }
-      });
-  }
+		swalWithBootstrapButtons
+			.fire({
+				title: "Apakah anda yakin?",
+				text: `menghapus data ${nama_gampong} ?`,
+				icon: "warning",
+				showCancelButton: true,
+				confirmButtonText: "Ya, hapus!",
+				cancelButtonText: "Batal!",
+				reverseButtons: true,
+			})
+			.then((result) => {
+				if (result.isConfirmed) {
+					button.parentElement.submit();
+					swalWithBootstrapButtons.fire(
+						"Deleted!",
+						`Data ${nama_gampong} berhasil dihapus`,
+						"success"
+					);
+				} else if (
+					/* Read more about handling dismissals below */
+					result.dismiss === Swal.DismissReason.cancel
+				) {
+					swalWithBootstrapButtons.fire(
+						"Cancelled",
+						`Data ${nama_gampong} masih tersimpan`,
+						"error"
+					);
+				}
+			});
+	}
 </script>
