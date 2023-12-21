@@ -1,121 +1,167 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-success">
-  <div class="container">
-    <a class="navbar-brand fw-bolder" href="#">BAITULMAL</a>
-    <button
-      class="navbar-toggler"
-      type="button"
-      data-bs-toggle="collapse"
-      data-bs-target="#navbarNav"
-      aria-controls="navbarNav"
-      aria-expanded="false"
-      aria-label="Toggle navigation"
-    >
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="/masyarakat"
-            >Home</a
-          >
-        </li>
-        <% if (session?.user?.role=='admin' || session?.user?.role=='staf') { %>
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="/gampong"
-            >Gampong</a
-          >
-        </li>
-        <% } %> <% if (session?.user?.role=='gampong') { %>
-        <li class="nav-item">
-          <a
-            class="nav-link active"
-            aria-current="page"
-            href="/gampong/<%= session.user.kode_gampong %>"
-            >Biodata Gampong</a
-          >
-        </li>
-        <% } %> <% if (session?.user?.role=='staf') { %>
-        <li class="nav-item dropdown">
-          <a
-            class="nav-link dropdown-toggle"
-            href="#"
-            id="navbarDropdown"
-            role="button"
-            data-bs-toggle="dropdown"
-            aria-expanded="false"
-          >
-            Proses Golongan
-          </a>
-          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li>
-              <a class="dropdown-item" href="/fakir">Fakir</a>
-            </li>
-          </ul>
-        </li>
-        <% } %>
-      </ul>
-      <ul class="navbar-nav ms-auto">
-        <% if (session?.user?.role=="gampong" || session?.user?.role=="admin" ||
-        session?.user?.role=="staf") { %>
-        <li class="nav-item">
-          <button class="btn btn-success badge">
-            <a class="nav-link active" aria-current="page" href="/auth/logout/"
-              >Logout
-            </a>
-          </button>
-        </li>
-        <% } else { %>
-        <li>
-          <a class="nav-link active" aria-current="page" href="/auth/register"
-            >Registrasi Gampong</a
-          >
-        </li>
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page">|</a>
-        </li>
-        <li class="nav-item dropdown">
-          <a
-            class="nav-link dropdown-toggle"
-            href="#"
-            id="navbarDropdown"
-            role="button"
-            data-bs-toggle="dropdown"
-            aria-expanded="false"
-          >
-            Login
-          </a>
-          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li>
-              <a class="dropdown-item" href="/auth/login/gampong">Gampong</a>
-            </li>
-            <li>
-              <a class="dropdown-item" href="/auth/login/staf">Staf</a>
-            </li>
-            <li><hr class="dropdown-divider" /></li>
-            <li>
-              <a class="dropdown-item" href="/auth/login/admin">Admin</a>
-            </li>
-          </ul>
-        </li>
-        <% } %>
-      </ul>
-    </div>
-  </div>
+	<div class="container">
+		<a class="navbar-brand fw-bolder" href="#">BAITULMAL</a>
+		<button
+			class="navbar-toggler"
+			type="button"
+			data-bs-toggle="collapse"
+			data-bs-target="#navbarNav"
+			aria-controls="navbarNav"
+			aria-expanded="false"
+			aria-label="Toggle navigation"
+		>
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="collapse navbar-collapse" id="navbarNav">
+			<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+				<li class="nav-item">
+					<a class="nav-link active" aria-current="page" href="/masyarakat">Home</a>
+				</li>
+				<% if (session?.user?.role=='admin' || session?.user?.role=='staf') { %>
+				<li class="nav-item">
+					<a class="nav-link active" aria-current="page" href="/gampong">Gampong</a>
+				</li>
+				<% } %> <% if (session?.user?.role=='gampong') { %>
+				<li class="nav-item">
+					<a
+						class="nav-link active"
+						aria-current="page"
+						href="/gampong/<%= session.user.kode_gampong %>"
+						>Biodata Gampong</a
+					>
+				</li>
+				<% } %> <% if (session?.user?.role=='staf') { %>
+				<li class="nav-item dropdown">
+					<a
+						class="nav-link dropdown-toggle"
+						href="#"
+						id="navbarDropdown"
+						role="button"
+						data-bs-toggle="dropdown"
+						aria-expanded="false"
+					>
+						Proses Golongan
+					</a>
+					<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+						<li>
+							<a class="dropdown-item" href="/fakir">Fakir</a>
+						</li>
+						<li>
+							<a class="dropdown-item" href="/miskin">Miskin</a>
+						</li>
+						<li>
+							<a class="dropdown-item" href="/miskin-insidentil">Miskin Insidentil</a>
+						</li>
+						<li>
+							<a class="dropdown-item" href="/guru-dayah">Insentif Guru Dayah</a>
+						</li>
+						<li>
+							<a class="dropdown-item" href="/santri-dayah">Santunan Santri Dayah</a>
+						</li>
+						<li>
+							<a class="dropdown-item" href="/santri-dayah-luar"
+								>Santunan Santri Dayah di Luar Aceh Besar</a
+							>
+						</li>
+						<li>
+							<a class="dropdown-item" href="/anak-yatim">Santunan Anak Yatim</a>
+						</li>
+						<li>
+							<a class="dropdown-item" href="/disabilitas">Bantuan Disabilitas</a>
+						</li>
+						<li>
+							<a class="dropdown-item" href="/muallaf">Santunan Muallaf</a>
+						</li>
+						<li>
+							<a class="dropdown-item" href="/pelajar-miskin">Bantuan Pendidikan Siswa Miskin</a>
+						</li>
+						<li>
+							<a class="dropdown-item" href="/santri-muallaf">Santunan Santri Muallaf</a>
+						</li>
+						<li>
+							<a class="dropdown-item" href="/gharimin">Bantuan Pelunasan Hutang (Gharimin)</a>
+						</li>
+						<li>
+							<a class="dropdown-item" href="/santri-berprestasi">Beasiswa Santri Berprestasi</a>
+						</li>
+						<li>
+							<a class="dropdown-item" href="/madrasah">Bantuan Oprasional TPA/Balai Pengajian</a>
+						</li>
+						<li>
+							<a class="dropdown-item" href="/waqaf">Bantuan Sertifikasi Harta Waqaf</a>
+						</li>
+						<li>
+							<a class="dropdown-item" href="/pelajar-rantau"
+								>Bantuan Pendidikan Pelajar di Luar Negeri</a
+							>
+						</li>
+						<li>
+							<a class="dropdown-item" href="/ibnu-sabil">Ibnu Sabil</a>
+						</li>
+					</ul>
+				</li>
+				<% } %>
+			</ul>
+			<ul class="navbar-nav ms-auto">
+				<% if (session?.user?.role=="gampong" || session?.user?.role=="admin" ||
+				session?.user?.role=="staf") { %>
+				<li class="nav-item">
+					<button class="btn btn-success badge">
+						<a class="nav-link active" aria-current="page" href="/auth/logout/">Logout </a>
+					</button>
+				</li>
+				<% } else { %>
+				<li>
+					<a class="nav-link active" aria-current="page" href="/auth/register"
+						>Registrasi Gampong</a
+					>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link active" aria-current="page">|</a>
+				</li>
+				<li class="nav-item dropdown">
+					<a
+						class="nav-link dropdown-toggle"
+						href="#"
+						id="navbarDropdown"
+						role="button"
+						data-bs-toggle="dropdown"
+						aria-expanded="false"
+					>
+						Login
+					</a>
+					<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+						<li>
+							<a class="dropdown-item" href="/auth/login/gampong">Gampong</a>
+						</li>
+						<li>
+							<a class="dropdown-item" href="/auth/login/staf">Staf</a>
+						</li>
+						<li><hr class="dropdown-divider" /></li>
+						<li>
+							<a class="dropdown-item" href="/auth/login/admin">Admin</a>
+						</li>
+					</ul>
+				</li>
+				<% } %>
+			</ul>
+		</div>
+	</div>
 </nav>
 
 <script>
-  function confirmHandlerOut(button) {
-    Swal.fire({
-      title: `Apakah Anda yakin ingin keluar?`,
-      showCancelButton: true,
-      confirmButtonText: "Keluar",
-    }).then((result) => {
-      /* Read more about isConfirmed, isDenied below */
-      if (result.isConfirmed) {
-        document.getElementById("formUbah").submit();
-      } else if (result.isDenied) {
-        Swal.fire("Perubahan tidak disimpan", "", "info");
-      }
-    });
-  }
+	function confirmHandlerOut(button) {
+		Swal.fire({
+			title: `Apakah Anda yakin ingin keluar?`,
+			showCancelButton: true,
+			confirmButtonText: "Keluar",
+		}).then((result) => {
+			/* Read more about isConfirmed, isDenied below */
+			if (result.isConfirmed) {
+				document.getElementById("formUbah").submit();
+			} else if (result.isDenied) {
+				Swal.fire("Perubahan tidak disimpan", "", "info");
+			}
+		});
+	}
 </script>
