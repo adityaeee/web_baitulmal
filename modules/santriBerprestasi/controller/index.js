@@ -1,10 +1,43 @@
-const { SantriBerprestasi, Masyarakat } = require("../../../models");
+const { SantriBerprestasi, Masyarakat, Gampong } = require("../../../models");
 const { dataLayout } = require("../../../utils/index");
 
 const getSantriBerprestasi = async (req, res) => {
 	try {
-		const santriBerprestasi = await SantriBerprestasi.findAll();
-		res.status(200).json(santriBerprestasi);
+		const masyarakat = await Masyarakat.findAll({
+			where: { golongan: "santri berprestasi" },
+		});
+		res.render(
+			"16_daftarSantriBerprestasi",
+			dataLayout(req, {
+				masyarakat,
+			})
+		);
+		res.status(200);
+	} catch (error) {
+		res.status(500).json({ message: error.message });
+	}
+};
+
+const getSantriBerprestasiById = async (req, res) => {
+	try {
+		const golongan = await SantriBerprestasi.findOne({
+			where: {
+				NIK: req.params.NIK,
+			},
+		});
+		const masyarakat = await Masyarakat.findByPk(req.params.NIK);
+		const gampong = await Gampong.findByPk(masyarakat?.kode_gampong);
+		const endpoint = masyarakat.golongan.replace(/\s/g, "-");
+
+		res.render(
+			"16_detailSantriBerprestasi",
+			dataLayout(req, {
+				masyarakat,
+				golongan,
+				gampong,
+				endpoint,
+			})
+		);
 	} catch (error) {
 		res.status(500).json({ message: error.message });
 	}
@@ -13,6 +46,7 @@ const getSantriBerprestasi = async (req, res) => {
 const createSantriBerprestasi = async (req, res) => {
 	const data = req.body;
 	const dataMasyarakat = req.session?.data;
+	// console.log(dataMasyarakat);
 	await Masyarakat.create(dataMasyarakat);
 	await SantriBerprestasi.create(data);
 	req.session.data = "";
@@ -22,11 +56,36 @@ const createSantriBerprestasi = async (req, res) => {
 
 const updateSantriBerprestasi = async (req, res) => {
 	const data = req.body;
-	let santriBerprestasi = await SantriBerprestasi.findOne({
-		where: { NIK: req.body.NIK },
-	});
+	let santriBerprestasi = await SantriBerprestasi.findByPk(req.params.id);
 	santriBerprestasi.update(data);
 	req.flash("msg", `Data berhasil diupdate`);
+	res.redirect("/masyarakat");
+};
+
+const updateAll = async (req, res) => {
+	let data = req.body.NIK;
+	let limit = req.body.limit;
+	let penerima = 0;
+	if (limit > data.length) {
+		limit = data.length;
+	}
+
+	const perubahan = {
+		status: "Sudah",
+		periode: "Pertama",
+	};
+
+	if (typeof data == "string") {
+		penerima = await Masyarakat.findOne({ where: { NIK: data } });
+		penerima.update(perubahan);
+	} else {
+		for (let i = 0; i < limit; i++) {
+			penerima = await Masyarakat.findOne({ where: { NIK: data[i] } });
+			penerima.update(perubahan);
+		}
+	}
+
+	req.flash("msg", `Data santri berprestasi penerima zakat berhasil diupdate`);
 	res.redirect("/masyarakat");
 };
 
@@ -57,8 +116,10 @@ const formUpdate = async (req, res) => {
 
 module.exports = {
 	getSantriBerprestasi,
+	getSantriBerprestasiById,
 	formCreate,
 	formUpdate,
 	createSantriBerprestasi,
 	updateSantriBerprestasi,
+	updateAll,
 };

@@ -1,60 +1,55 @@
 <div class="container mt-3">
-    <div class="row">
-      <div class="col-md-3"></div>
-      <div class="col-md-6">
-        <h2 class="fw-bold text-center">DAFTAR SANTRI DAYAH PENERIMA ZAKAT MAL</h2>
-      </div>
-      <div class="col-md-2">
-        <% if (session?.user?.role=="staf") { %>
-        <form id="formCluster" method="post" action="/clustering/santri-dayah-luar">
-          <button type="submit" class="btn btn-success">Clusterisasi Data</button>
-        </form>
-  
-        <a href="/clustering/santri-dayah-luar" class="btn btn-success"></a>
-        <% } %>
-      </div>
-    </div>
-    <div class="row mt-4">
-      <div class="col-md">
-        <% if (msg.length !== 0) { %>
-        <script>
-          Swal.fire({
-            icon: "success",
-            title: "<%= msg %>",
-            showConfirmButton: false,
-            timer: 2000,
-          });
-        </script>
-        <% } %>
-        <table class="table table-striped text-center">
-          <thead>
-            <tr>
-              <th scope="col">No</th>
-              <th scope="col">NAMA</th>
-              <th scope="col">GOLONGAN</th>
-              <th scope="col">PERIODE</th>
-              <th scope="col">STATUS</th>
-              <th scope="col">KET</th>
-            </tr>
-          </thead>
-          <tbody>
-            <% masyarakat.forEach((orang,i) => { %>
-            <tr>
-              <th scope="row"><%= i+1 %></th>
-              <td><%= orang.nama %></td>
-              <td><%= orang.golongan %></td>
-              <td><%= orang.periode %></td>
-              <td><%= orang.status %></td>
-              <td>
-                <a href="/santri-dayah-luar/<%= orang.NIK %>" class="btn btn-success badge"
-                  >Detail</a
-                >
-              </td>
-            </tr>
-            <% }) %>
-          </tbody>
-        </table>
-      </div>
-    </div>
-  </div>
-  
+	<div class="row">
+		<div class="col-md-3"></div>
+		<div class="col-md-6">
+			<h2 class="fw-bold text-center">DAFTAR SANTRI DAYAH PENERIMA ZAKAT MAL</h2>
+		</div>
+		<div class="col-md-2">
+			<% if (session?.user?.role=="staf") { %>
+			<form id="formCluster" method="post" action="/clustering/santri-dayah-luar">
+				<button type="submit" class="btn btn-success">Clusterisasi Data</button>
+			</form>
+			<% } %>
+		</div>
+	</div>
+	<div class="row mt-4">
+		<div class="col-md">
+			<% if (msg.length !== 0) { %>
+			<script>
+				Swal.fire({
+					icon: "success",
+					title: "<%= msg %>",
+					showConfirmButton: false,
+					timer: 2000,
+				});
+			</script>
+			<% } %>
+			<table class="table table-striped text-center">
+				<thead>
+					<tr>
+						<th scope="col">No</th>
+						<th scope="col">NAMA</th>
+						<th scope="col">GOLONGAN</th>
+						<th scope="col">PERIODE</th>
+						<th scope="col">STATUS</th>
+						<th scope="col">KET</th>
+					</tr>
+				</thead>
+				<tbody>
+					<% masyarakat.forEach((orang,i) => { %>
+					<tr>
+						<th scope="row"><%= i+1 %></th>
+						<td><%= orang.nama %></td>
+						<td><%= orang.golongan %></td>
+						<td><%= orang.periode %></td>
+						<td><%= orang.status %></td>
+						<td>
+							<a href="/santri-dayah-luar/<%= orang.NIK %>" class="btn btn-success badge">Detail</a>
+						</td>
+					</tr>
+					<% }) %>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>

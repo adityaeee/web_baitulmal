@@ -57,6 +57,12 @@ const createFakir = async (req, res) => {
 const updateFakir = async (req, res) => {
 	const data = req.body;
 	let fakir = await Fakir.findByPk(req.params.id);
+
+	console.log(data);
+	if (data.pendapatan === "0") {
+		data.pendapatan = fakir.pendapatan;
+	}
+
 	fakir.update(data);
 	req.flash("msg", `Data berhasil diupdate`);
 	res.redirect("/masyarakat");
@@ -77,7 +83,6 @@ const updateAll = async (req, res) => {
 
 	if (typeof data == "string") {
 		penerima = await Masyarakat.findOne({ where: { NIK: data } });
-		console.log("clear");
 		penerima.update(perubahan);
 	} else {
 		for (let i = 0; i < limit; i++) {

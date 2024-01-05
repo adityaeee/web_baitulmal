@@ -1,10 +1,43 @@
-const { Miskin, Masyarakat } = require("../../../models");
+const { Miskin, Masyarakat, Gampong } = require("../../../models");
 const { dataLayout } = require("../../../utils/index");
 
 const getMiskin = async (req, res) => {
 	try {
-		const miskin = await Miskin.findAll();
-		res.status(200).json(miskin);
+		const masyarakat = await Masyarakat.findAll({
+			where: { golongan: "miskin" },
+		});
+		res.render(
+			"5_daftarMiskin",
+			dataLayout(req, {
+				masyarakat,
+			})
+		);
+		res.status(200);
+	} catch (error) {
+		res.status(500).json({ message: error.message });
+	}
+};
+
+const getMiskinById = async (req, res) => {
+	try {
+		const golongan = await Miskin.findOne({
+			where: {
+				NIK: req.params.NIK,
+			},
+		});
+		const masyarakat = await Masyarakat.findByPk(req.params.NIK);
+		const gampong = await Gampong.findByPk(masyarakat?.kode_gampong);
+		const endpoint = masyarakat.golongan.replace(/\s/g, "-");
+
+		res.render(
+			"5_detailMiskin",
+			dataLayout(req, {
+				masyarakat,
+				golongan,
+				gampong,
+				endpoint,
+			})
+		);
 	} catch (error) {
 		res.status(500).json({ message: error.message });
 	}
@@ -13,6 +46,7 @@ const getMiskin = async (req, res) => {
 const createMiskin = async (req, res) => {
 	const data = req.body;
 	const dataMasyarakat = req.session?.data;
+	// console.log(dataMasyarakat);
 	await Masyarakat.create(dataMasyarakat);
 	await Miskin.create(data);
 	req.session.data = "";
@@ -22,9 +56,36 @@ const createMiskin = async (req, res) => {
 
 const updateMiskin = async (req, res) => {
 	const data = req.body;
-	let miskin = await Miskin.findOne({ where: { NIK: req.body.NIK } });
+	let miskin = await Miskin.findByPk(req.params.id);
 	miskin.update(data);
 	req.flash("msg", `Data berhasil diupdate`);
+	res.redirect("/masyarakat");
+};
+
+const updateAll = async (req, res) => {
+	let data = req.body.NIK;
+	let limit = req.body.limit;
+	let penerima = 0;
+	if (limit > data.length) {
+		limit = data.length;
+	}
+
+	const perubahan = {
+		status: "Sudah",
+		periode: "Pertama",
+	};
+
+	if (typeof data == "string") {
+		penerima = await Masyarakat.findOne({ where: { NIK: data } });
+		penerima.update(perubahan);
+	} else {
+		for (let i = 0; i < limit; i++) {
+			penerima = await Masyarakat.findOne({ where: { NIK: data[i] } });
+			penerima.update(perubahan);
+		}
+	}
+
+	req.flash("msg", `Data penerima zakat miskin berhasil diupdate`);
 	res.redirect("/masyarakat");
 };
 
@@ -55,8 +116,10 @@ const formUpdate = async (req, res) => {
 
 module.exports = {
 	getMiskin,
+	getMiskinById,
 	formCreate,
 	formUpdate,
 	createMiskin,
 	updateMiskin,
+	updateAll,
 };

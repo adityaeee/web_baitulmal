@@ -15,9 +15,11 @@
 				</p>
 				<% if (session?.user?.role=='admin' || session?.user?.role == "gampong") { %>
 				<a href="/gampong/edit/<%= gampong.kode_gampong %>" class="btn btn-warning badge">Edit</a>
-				<% } %>
-
+				<% } %> <% if (session?.user?.role=='gampong') { %>
 				<a href="/masyarakat">&laquo; Kembali</a>
+				<% } else { %>
+				<a href="/gampong">&laquo; Kembali</a>
+				<% } %>
 			</div>
 		</div>
 	</div>

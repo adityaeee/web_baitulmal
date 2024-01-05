@@ -1,8 +1,28 @@
 const { sequelize, Op } = require("sequelize");
-const { Masyarakat, Fakir } = require("../../../models");
 const { default: axios } = require("axios");
 const { dataLayout } = require("../../../utils");
 const { sortingPenerima } = require("../utils");
+const {
+	Masyarakat,
+	Fakir,
+	Miskin,
+	MiskinInsidentil,
+	AnakYatim,
+	Disabilitas,
+	Gharimin,
+	GuruDayah,
+	IbnuSabil,
+	Madrasah,
+	Muallaf,
+	PelajarMiskin,
+	PelajarRantau,
+	SantriBerprestasi,
+	SantriDayah,
+	SantriDayahLuar,
+	SantriMuallaf,
+	Waqaf,
+	Gampong,
+} = require("../../../models");
 
 const clusterFakir = async (req, res) => {
 	try {
@@ -42,10 +62,14 @@ const clusterFakir = async (req, res) => {
 
 		let ranking = await sortingPenerima(result);
 
+		let gampong = await Gampong.findAll();
+
 		res.render(
 			"2_resultGolongan",
 			dataLayout(req, {
 				masyarakat: ranking,
+				endpoint: "fakir",
+				gampong,
 			})
 		);
 	} catch (error) {
@@ -56,7 +80,7 @@ const clusterFakir = async (req, res) => {
 const clusterMiskin = async (req, res) => {
 	try {
 		let masyarakat = await Masyarakat.findAll({
-			where: { status: "belum diproses", golongan: "miskin" },
+			where: { status: "Menunggu", golongan: "miskin" },
 			attributes: ["NIK"],
 		});
 
@@ -99,6 +123,7 @@ const clusterMiskin = async (req, res) => {
 			"2_resultGolongan",
 			dataLayout(req, {
 				masyarakat: ranking,
+				endpoint: "miskin",
 			})
 		);
 	} catch (error) {
@@ -109,7 +134,7 @@ const clusterMiskin = async (req, res) => {
 const clusterMiskinInsidentil = async (req, res) => {
 	try {
 		let masyarakat = await Masyarakat.findAll({
-			where: { status: "belum diproses", golongan: "miskin insidentil" },
+			where: { status: "Menunggu", golongan: "miskin insidentil" },
 			attributes: ["NIK"],
 		});
 
@@ -154,6 +179,7 @@ const clusterMiskinInsidentil = async (req, res) => {
 			"2_resultGolongan",
 			dataLayout(req, {
 				masyarakat: ranking,
+				endpoint: "miskin-insidentil",
 			})
 		);
 	} catch (error) {
@@ -164,7 +190,7 @@ const clusterMiskinInsidentil = async (req, res) => {
 const clusterGuruDayah = async (req, res) => {
 	try {
 		let masyarakat = await Masyarakat.findAll({
-			where: { status: "belum diproses", golongan: "guru dayah" },
+			where: { status: "Menunggu", golongan: "guru dayah" },
 			attributes: ["NIK"],
 		});
 
@@ -208,6 +234,7 @@ const clusterGuruDayah = async (req, res) => {
 			"2_resultGolongan",
 			dataLayout(req, {
 				masyarakat: ranking,
+				endpoint: "guru-dayah",
 			})
 		);
 	} catch (error) {
@@ -218,7 +245,7 @@ const clusterGuruDayah = async (req, res) => {
 const clusterSantriDayah = async (req, res) => {
 	try {
 		let masyarakat = await Masyarakat.findAll({
-			where: { status: "belum diproses", golongan: "santri dayah" },
+			where: { status: "Menunggu", golongan: "santri dayah" },
 			attributes: ["NIK"],
 		});
 
@@ -262,6 +289,7 @@ const clusterSantriDayah = async (req, res) => {
 			"2_resultGolongan",
 			dataLayout(req, {
 				masyarakat: ranking,
+				endpoint: "santri-dayah",
 			})
 		);
 	} catch (error) {
@@ -272,7 +300,7 @@ const clusterSantriDayah = async (req, res) => {
 const clusterAnakYatim = async (req, res) => {
 	try {
 		let masyarakat = await Masyarakat.findAll({
-			where: { status: "belum diproses", golongan: "anak yatim" },
+			where: { status: "Menunggu", golongan: "anak yatim" },
 			attributes: ["NIK"],
 		});
 
@@ -314,6 +342,7 @@ const clusterAnakYatim = async (req, res) => {
 			"2_resultGolongan",
 			dataLayout(req, {
 				masyarakat: ranking,
+				endpoint: "anak-yatim",
 			})
 		);
 	} catch (error) {
@@ -324,7 +353,7 @@ const clusterAnakYatim = async (req, res) => {
 const clusterDisabilitas = async (req, res) => {
 	try {
 		let masyarakat = await Masyarakat.findAll({
-			where: { status: "belum diproses", golongan: "disabilitas" },
+			where: { status: "Menunggu", golongan: "disabilitas" },
 			attributes: ["NIK"],
 		});
 
@@ -368,6 +397,7 @@ const clusterDisabilitas = async (req, res) => {
 			"2_resultGolongan",
 			dataLayout(req, {
 				masyarakat: ranking,
+				endpoint: "disabilitas",
 			})
 		);
 	} catch (error) {
@@ -378,7 +408,7 @@ const clusterDisabilitas = async (req, res) => {
 const clusterSantriDayahLuar = async (req, res) => {
 	try {
 		let masyarakat = await Masyarakat.findAll({
-			where: { status: "belum diproses", golongan: "santri dayah luar" },
+			where: { status: "Menunggu", golongan: "santri dayah luar" },
 			attributes: ["NIK"],
 		});
 
@@ -422,6 +452,7 @@ const clusterSantriDayahLuar = async (req, res) => {
 			"2_resultGolongan",
 			dataLayout(req, {
 				masyarakat: ranking,
+				endpoint: "santri-dayah-luar",
 			})
 		);
 	} catch (error) {
@@ -432,7 +463,7 @@ const clusterSantriDayahLuar = async (req, res) => {
 const clusterPelajarMiskin = async (req, res) => {
 	try {
 		let masyarakat = await Masyarakat.findAll({
-			where: { status: "belum diproses", golongan: "pelajar miskin" },
+			where: { status: "Menunggu", golongan: "pelajar miskin" },
 			attributes: ["NIK"],
 		});
 
@@ -455,7 +486,7 @@ const clusterPelajarMiskin = async (req, res) => {
 				"pekerjaan",
 				"pendapatan",
 				"aset",
-				"jenjang sekolah",
+				"jenjang_sekolah",
 				"bobot_domisili",
 				"bobot_golongan",
 				"bobot_keterangan",
@@ -476,6 +507,7 @@ const clusterPelajarMiskin = async (req, res) => {
 			"2_resultGolongan",
 			dataLayout(req, {
 				masyarakat: ranking,
+				endpoint: "pelajar-miskin",
 			})
 		);
 	} catch (error) {
@@ -486,7 +518,7 @@ const clusterPelajarMiskin = async (req, res) => {
 const clusterMuallaf = async (req, res) => {
 	try {
 		let masyarakat = await Masyarakat.findAll({
-			where: { status: "belum diproses", golongan: "muallaf" },
+			where: { status: "Menunggu", golongan: "muallaf" },
 			attributes: ["NIK"],
 		});
 
@@ -498,7 +530,7 @@ const clusterMuallaf = async (req, res) => {
 
 		const statusTrue = masyarakat.map((user) => Object.values(user.get({ plain: true })));
 
-		let golongan = await Fakir.findAll({
+		let golongan = await Muallaf.findAll({
 			where: {
 				NIK: {
 					[Op.in]: statusTrue.flat(),
@@ -508,7 +540,6 @@ const clusterMuallaf = async (req, res) => {
 				"NIK",
 				"pekerjaan",
 				"pendapatan",
-				"aset",
 				"umur_muallaf",
 				"bobot_domisili",
 				"bobot_golongan",
@@ -529,6 +560,7 @@ const clusterMuallaf = async (req, res) => {
 			"2_resultGolongan",
 			dataLayout(req, {
 				masyarakat: ranking,
+				endpoint: "muallaf",
 			})
 		);
 	} catch (error) {
@@ -539,7 +571,7 @@ const clusterMuallaf = async (req, res) => {
 const clusterSantriMuallaf = async (req, res) => {
 	try {
 		let masyarakat = await Masyarakat.findAll({
-			where: { status: "belum diproses", golongan: "santri muallaf" },
+			where: { status: "Menunggu", golongan: "santri muallaf" },
 			attributes: ["NIK"],
 		});
 
@@ -561,7 +593,6 @@ const clusterSantriMuallaf = async (req, res) => {
 				"NIK",
 				"pekerjaan",
 				"pendapatan",
-				"aset",
 				"umur_muallaf",
 				"bobot_domisili",
 				"bobot_golongan",
@@ -583,6 +614,7 @@ const clusterSantriMuallaf = async (req, res) => {
 			"2_resultGolongan",
 			dataLayout(req, {
 				masyarakat: ranking,
+				endpoint: "santri-muallaf",
 			})
 		);
 	} catch (error) {
@@ -593,7 +625,7 @@ const clusterSantriMuallaf = async (req, res) => {
 const clusterGharimin = async (req, res) => {
 	try {
 		let masyarakat = await Masyarakat.findAll({
-			where: { status: "belum diproses", golongan: "gharimin" },
+			where: { status: "Menunggu", golongan: "gharimin" },
 			attributes: ["NIK"],
 		});
 
@@ -637,6 +669,7 @@ const clusterGharimin = async (req, res) => {
 			"2_resultGolongan",
 			dataLayout(req, {
 				masyarakat: ranking,
+				endpoint: "gharimin",
 			})
 		);
 	} catch (error) {
@@ -647,7 +680,7 @@ const clusterGharimin = async (req, res) => {
 const clusterSantriBerprestasi = async (req, res) => {
 	try {
 		let masyarakat = await Masyarakat.findAll({
-			where: { status: "belum diproses", golongan: "santri berprestasi" },
+			where: { status: "Menunggu", golongan: "santri berprestasi" },
 			attributes: ["NIK"],
 		});
 
@@ -689,6 +722,7 @@ const clusterSantriBerprestasi = async (req, res) => {
 			"2_resultGolongan",
 			dataLayout(req, {
 				masyarakat: ranking,
+				endpoint: "santri-berprestasi",
 			})
 		);
 	} catch (error) {
@@ -699,7 +733,7 @@ const clusterSantriBerprestasi = async (req, res) => {
 const clusterMadrasah = async (req, res) => {
 	try {
 		let masyarakat = await Masyarakat.findAll({
-			where: { status: "belum diproses", golongan: "madrasah" },
+			where: { status: "Menunggu", golongan: "madrasah" },
 			attributes: ["NIK"],
 		});
 
@@ -741,6 +775,7 @@ const clusterMadrasah = async (req, res) => {
 			"2_resultGolongan",
 			dataLayout(req, {
 				masyarakat: ranking,
+				endpoint: "madrasah",
 			})
 		);
 	} catch (error) {
@@ -751,7 +786,7 @@ const clusterMadrasah = async (req, res) => {
 const clusterWaqaf = async (req, res) => {
 	try {
 		let masyarakat = await Masyarakat.findAll({
-			where: { status: "belum diproses", golongan: "waqaf" },
+			where: { status: "Menunggu", golongan: "waqaf" },
 			attributes: ["NIK"],
 		});
 
@@ -785,6 +820,7 @@ const clusterWaqaf = async (req, res) => {
 			"2_resultGolongan",
 			dataLayout(req, {
 				masyarakat: ranking,
+				endpoint: "waqaf",
 			})
 		);
 	} catch (error) {
@@ -795,7 +831,7 @@ const clusterWaqaf = async (req, res) => {
 const clusterPelajarRantau = async (req, res) => {
 	try {
 		let masyarakat = await Masyarakat.findAll({
-			where: { status: "belum diproses", golongan: "pelajar rantau" },
+			where: { status: "Menunggu", golongan: "pelajar rantau" },
 			attributes: ["NIK"],
 		});
 
@@ -838,6 +874,7 @@ const clusterPelajarRantau = async (req, res) => {
 			"2_resultGolongan",
 			dataLayout(req, {
 				masyarakat: ranking,
+				endpoint: "pelajar-rantau",
 			})
 		);
 	} catch (error) {
@@ -848,7 +885,7 @@ const clusterPelajarRantau = async (req, res) => {
 const clusterIbnuSabil = async (req, res) => {
 	try {
 		let masyarakat = await Masyarakat.findAll({
-			where: { status: "belum diproses", golongan: "ibnu sabil" },
+			where: { status: "Menunggu", golongan: "ibnu sabil" },
 			attributes: ["NIK"],
 		});
 
@@ -882,6 +919,7 @@ const clusterIbnuSabil = async (req, res) => {
 			"2_resultGolongan",
 			dataLayout(req, {
 				masyarakat: ranking,
+				endpoint: "ibnu-sabil",
 			})
 		);
 	} catch (error) {

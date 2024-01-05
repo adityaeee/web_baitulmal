@@ -1,12 +1,24 @@
 <div class="container mt-3">
-	<div class="row">
-		<div class="col-md-4">
+	<div class="row text-center">
+		<div class="col-md-3">
 			<a href="/masyarakat/" class="btn btn-success badge">&laquo; Kembali</a>
 		</div>
 		<div class="col-md-6">
-			<h2 class="fw-bold">HASIL CLUSTERING FAKIR</h2>
+			<% let name = endpoint.replace("-", " ")%> <% name = name.replace("-", " ")%>
+			<h2 class="fw-bold">HASIL CLUSTERING GOLONGAN <%= name.toUpperCase() %></h2>
 		</div>
 	</div>
+
+	<script>
+		const namaGampong = (kode) => {
+			gampong.forEach((g) => {
+				if (kode == g.kode_gampong) {
+					nama = g.nama_gampong;
+					return nama;
+				}
+			});
+		};
+	</script>
 
 	<div class="row justify-content-center">
 		<div class="col-md-7 mt-3">
@@ -17,7 +29,7 @@
 				<div class="card-body">
 					<div class="row">
 						<div class="col-md">
-							<form method="post" action="/fakir?_method=PUT">
+							<form method="post" action="/<%= endpoint %>?_method=PUT">
 								<label for="limit" class="form-label">Jumlah Kouta Penerima</label>
 								<input
 									type="number"
@@ -34,7 +46,7 @@
 											<th scope="col">URUTAN</th>
 											<th scope="col">NAMA</th>
 											<th scope="col">NIK</th>
-											<th scope="col">Kode Gampong</th>
+											<th scope="col">Ket</th>
 										</tr>
 									</thead>
 									<tbody>
@@ -43,7 +55,11 @@
 											<th scope="row"><%= i+1 %></th>
 											<td><%= orang.nama %></td>
 											<td><%= orang.NIK %></td>
-											<td><%= orang.kode_gampong %></td>
+											<td>
+												<a href="/<%= endpoint %>/<%= orang.NIK %>" class="btn btn-success badge"
+													>Detail</a
+												>
+											</td>
 										</tr>
 
 										<input type="hidden" name="NIK" value="<%= orang.NIK %>" />

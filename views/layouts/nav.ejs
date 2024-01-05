@@ -103,8 +103,27 @@
 				<% } %>
 			</ul>
 			<ul class="navbar-nav ms-auto">
-				<% if (session?.user?.role=="gampong" || session?.user?.role=="admin" ||
-				session?.user?.role=="staf") { %>
+				<% if (session?.user?.role=="gampong") { %>
+				<span class="navbar-brand mb-0 h1">"Gampong <%= session.user?.nama_gampong %>"</span>
+
+				<li class="nav-item">
+					<button class="btn btn-success badge">
+						<a class="nav-link active" aria-current="page" href="/auth/logout/">Logout </a>
+					</button>
+				</li>
+
+				<% } else if (session?.user?.role=="staf") { %>
+				<span class="navbar-brand mb-0 h1">"<%= session.user?.nama.toUpperCase() %>"</span>
+
+				<li class="nav-item">
+					<button class="btn btn-success badge">
+						<a class="nav-link active" aria-current="page" href="/auth/logout/">Logout </a>
+					</button>
+				</li>
+
+				<% } else if ( session?.user?.role=="admin") { %>
+				<span class="navbar-brand mb-0 h1">"<%= session.user?.nama.toUpperCase() %>"</span>
+
 				<li class="nav-item">
 					<button class="btn btn-success badge">
 						<a class="nav-link active" aria-current="page" href="/auth/logout/">Logout </a>

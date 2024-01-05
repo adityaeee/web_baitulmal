@@ -300,17 +300,19 @@
               </form>
             </div>
           </div>
-          <% } %> <% if (session?.user?.role=="staf") { %>
-          <a href="/<%= endpoint %>">&laquo; Kembali</a>
-          <% } else { %>
-          <a href="/masyarakat">&laquo; Kembali</a>
-          <% } %>
-        </div>
-      </div>
-    </div>
-  </div>
+          <% } %> <div class="container mt-5">
+					<a href="#" class="btn btn-secondary badge" onclick="goBack()">Kembali</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script>
+	function goBack() {
+		window.history.back();
+	}
   
-  <script>
     function confirmHandler(button, nama) {
       const swalWithBootstrapButtons = Swal.mixin({
         customClass: {

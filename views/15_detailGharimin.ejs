@@ -1,349 +1,279 @@
 <div class="container">
-    <div class="d-flex justify-content-center">
-      <div class="card mt-5 mb-5" style="width: 30rem">
-        <div class="card-body">
-          <h5 class="card-title text-center">
-            <%= masyarakat.nama.toUpperCase() %>
-          </h5>
+	<div class="d-flex justify-content-center">
+		<div class="card mt-5 mb-5" style="width: 30rem">
+			<div class="card-body">
+				<h5 class="card-title text-center"><%= masyarakat.nama.toUpperCase() %></h5>
 
-          <p class="card-subtitle mb-3 text-muted text-center">
-            <%= masyarakat.golongan.toUpperCase() %>
-          </p>
+				<p class="card-subtitle mb-3 text-muted text-center">
+					<%= masyarakat.golongan.toUpperCase() %>
+				</p>
 
-          <div class="row mb-2">
-            <label class="col-sm-4 col-form-label">Nomor KK</label>
-            <div class="col-sm-8">
-              <input
-                class="form-control"
-                value="<%= masyarakat.no_KK %>"
-                disabled
-              />
-            </div>
-          </div>
+				<div class="row mb-2">
+					<label class="col-sm-4 col-form-label">Nomor KK</label>
+					<div class="col-sm-8">
+						<input class="form-control" value="<%= masyarakat.no_KK %>" disabled />
+					</div>
+				</div>
 
-          <div class="row mb-2">
-            <label class="col-sm-4 col-form-label">NIK</label>
-            <div class="col-sm-8">
-              <input
-                class="form-control"
-                value="<%= masyarakat.NIK %>"
-                disabled
-              />
-            </div>
-          </div>
+				<div class="row mb-2">
+					<label class="col-sm-4 col-form-label">NIK</label>
+					<div class="col-sm-8">
+						<input class="form-control" value="<%= masyarakat.NIK %>" disabled />
+					</div>
+				</div>
 
-          <div class="row mb-2">
-            <label class="col-sm-4 col-form-label">Tempat Lahir</label>
-            <div class="col-sm-8">
-              <input
-                class="form-control"
-                value="<%= masyarakat.tempat_lahir %>"
-                disabled
-              />
-            </div>
-          </div>
+				<div class="row mb-2">
+					<label class="col-sm-4 col-form-label">Tempat Lahir</label>
+					<div class="col-sm-8">
+						<input class="form-control" value="<%= masyarakat.tempat_lahir %>" disabled />
+					</div>
+				</div>
 
-          <div class="row mb-2">
-            <label class="col-sm-4 col-form-label">Tanggal Lahir</label>
-            <div class="col-sm-8">
-              <input
-                class="form-control"
-                value="<%= masyarakat.tanggal_lahir %>"
-                disabled
-              />
-            </div>
-          </div>
+				<div class="row mb-2">
+					<label class="col-sm-4 col-form-label">Tanggal Lahir</label>
+					<div class="col-sm-8">
+						<input class="form-control" value="<%= masyarakat.tanggal_lahir %>" disabled />
+					</div>
+				</div>
 
-          <div class="row mb-2">
-            <label class="col-sm-4 col-form-label">Alamat</label>
-            <div class="col-sm-8">
-              <input
-                class="form-control"
-                value="<%= masyarakat.dusun %>, <%= gampong.nama_gampong %>, <%=gampong.kecamatan %>, Aceh Besar"
-                disabled
-              />
-            </div>
-          </div>
-  
-          <div class="row mb-2">
-            <label class="col-sm-4 col-form-label">Pekerjaan</label>
-            <div class="col-sm-8">
-              <% if (golongan.pekerjaan == 1) { %>
-              <input class="form-control" disabled value="Tidak Bekerja" />
-              <% } else if (golongan.pekerjaan == 2) { %>
-              <input
-                class="form-control"
-                disabled
-                value="Petani/Nelayan/Ternak/Buruh"
-              />
-              <% } else if (golongan.pekerjaan == 3) { %>
-              <input class="form-control" disabled value="Pedagang" />
-              <% } else if (golongan.pekerjaan == 4) { %>
-              <input class="form-control" disabled value="Pegawai Kontrak" />
-              <% } else if (golongan.pekerjaan == 5) { %>
-                <input class="form-control" disabled value="ASN/Pegawai BUMN" />
-              <% } %>
-            </div>
-          </div>
-  
-          <div class="row mb-2">
-            <label class="col-sm-4 col-form-label">Pendapatan (per Bulan)</label>
-            <div class="col-sm-8">
-              <% if (golongan.pendapatan == 1) { %>
-              <input class="form-control" disabled value="Tidak Ada" />
-              <% } else if (golongan.pendapatan == 2) { %>
-              <input class="form-control" disabled value="< Rp 200.000" />
-              <% } else if (golongan.pendapatan == 3) { %>
-              <input
-                class="form-control"
-                disabled
-                value="Rp 201.000 - Rp 500.000"
-              />
-              <% } else if (golongan.pendapatan == 4) { %>
-              <input
-                class="form-control"
-                disabled
-                value="Rp 501.000 - Rp 800.000"
-              />
-              <% } else if (golongan.pendapatan == 5) { %>
-              <input class="form-control" disabled value="Rp 801.000 - Rp 1.000.000" />
-              <% } else if (golongan.pendapatan == 6) { %>
-                <input class="form-control" disabled value="Rp 1.001.000 - Rp 1.500.000" />
-              <% } else if (golongan.pendapatan == 7) { %>
-                <input class="form-control" disabled value="Rp 1.501.000 - Rp 2.000.000" />
-              <% } else if (golongan.pendapatan == 8) { %>
-                <input class="form-control" disabled value="> Rp 2.000.000" />
-              <% } %>
-            </div>
-          </div>
+				<div class="row mb-2">
+					<label class="col-sm-4 col-form-label">Alamat</label>
+					<div class="col-sm-8">
+						<input
+							class="form-control"
+							value="<%= masyarakat.dusun %>, <%= gampong.nama_gampong %>, <%=gampong.kecamatan %>, Aceh Besar"
+							disabled
+						/>
+					</div>
+				</div>
 
-          <div class="row mb-2">
-            <label class="col-sm-4 col-form-label">Kepemilikan Harta (Aset)</label>
-            <div class="col-sm-8">
-              <% if (golongan.aset == 1) { %>
-              <input class="form-control" disabled value="Tidak Ada" />
-              <% } else if (golongan.aset == 2) { %>
-              <input class="form-control" disabled value="Emas" />
-              <% } else if (golongan.aset == 3) { %>
-              <input
-                class="form-control"
-                disabled
-                value="Tanah Produktif"
-              />
-              <% } else if (golongan.aset == 4) { %>
-              <input
-                class="form-control"
-                disabled
-                value="Rumah/Toko Sewa"
-              />
-              <% } else if (golongan.aset == 5) { %>
-              <input class="form-control" disabled value="Emas + Tanah Produktif" />
-              <% } else if (golongan.aset == 6) { %>
-                <input class="form-control" disabled value="Emas + Rumah/Toko Sewa" />
-              <% } else if (golongan.aset == 7) { %>
-                <input class="form-control" disabled value="Tanah Produktif + Rumah/Toko Sewa" />
-              <% } else if (golongan.aset == 8) { %>
-                <input class="form-control" disabled value="Semua Ada" />
-              <% } %>
-            </div>
-          </div>
-  
-          <div class="row mb-2">
-            <label class="col-sm-4 col-form-label">Besaran Hutang</label>
-            <div class="col-sm-8">
-              <% if (golongan.jumlah_hutang == 1) { %>
-              <input class="form-control" disabled value="> Rp 5.000.000" />
-              <% } else if (golongan.jumlah_hutang == 2) { %>
-              <input class="form-control" disabled value="Rp 4.001.000 - Rp 5.000.000" />
-              <% } else if (golongan.jumlah_hutang == 3) { %>
-              <input class="form-control" disabled value="Rp 3.001.000 - Rp 4.000.000" />
-              <% } else if (golongan.jumlah_hutang == 4) { %>
-              <input class="form-control" disabled value="Rp 2.001.000 - Rp 3.000.000" />
-              <% } else if (golongan.jumlah_hutang == 5) { %>
-              <input class="form-control" disabled value="Rp 1.001.000 - Rp 2.000.000" />
-              <% } else if (golongan.jumlah_hutang == 6) { %>
-              <input class="form-control" disabled value="Rp 500.000 - Rp 1.000.000" />
-              <% } else if (golongan.jumlah_hutang == 7) { %>
-              <input class="form-control" disabled value="< Rp 500.000" />
-              <% }%>
-            </div>
-          </div>
+				<div class="row mb-2">
+					<label class="col-sm-4 col-form-label">Pekerjaan</label>
+					<div class="col-sm-8">
+						<% if (golongan.pekerjaan == 1) { %>
+						<input class="form-control" disabled value="Tidak Bekerja" />
+						<% } else if (golongan.pekerjaan == 2) { %>
+						<input class="form-control" disabled value="Petani/Nelayan/Ternak/Buruh" />
+						<% } else if (golongan.pekerjaan == 3) { %>
+						<input class="form-control" disabled value="Pedagang" />
+						<% } else if (golongan.pekerjaan == 4) { %>
+						<input class="form-control" disabled value="Pegawai Kontrak" />
+						<% } else if (golongan.pekerjaan == 5) { %>
+						<input class="form-control" disabled value="ASN/Pegawai BUMN" />
+						<% } %>
+					</div>
+				</div>
 
-          <div class="row mb-2">
-            <label class="col-sm-4 col-form-label">Nomor Rekening</label>
-            <div class="col-sm-8">
-              <input
-                class="form-control"
-                disabled
-                value="<%= golongan.norekening %> Tahun"
-              />
-            </div>
-          </div>
-  
-          <div class="row mb-2">
-            <label class="col-sm-4 col-form-label">Surat Permohonan ke BMAB</label>
-            <div class="col-sm-8">
-              <% if (golongan.bobot_permohonan == 1) { %>
-              <input
-                class="form-control"
-                disabled
-                value="Memiliki surat permohonan"
-              />
-              <% } else { %>
-              <input class="form-control" disabled value="Tidak Ada" />
-              <% } %>
-            </div>
-          </div>
+				<div class="row mb-2">
+					<label class="col-sm-4 col-form-label">Pendapatan (per Bulan)</label>
+					<div class="col-sm-8">
+						<% if (golongan.pendapatan == 1) { %>
+						<input class="form-control" disabled value="Tidak Ada" />
+						<% } else if (golongan.pendapatan == 2) { %>
+						<input class="form-control" disabled value="< Rp 200.000" />
+						<% } else if (golongan.pendapatan == 3) { %>
+						<input class="form-control" disabled value="Rp 201.000 - Rp 500.000" />
+						<% } else if (golongan.pendapatan == 4) { %>
+						<input class="form-control" disabled value="Rp 501.000 - Rp 800.000" />
+						<% } else if (golongan.pendapatan == 5) { %>
+						<input class="form-control" disabled value="Rp 801.000 - Rp 1.000.000" />
+						<% } else if (golongan.pendapatan == 6) { %>
+						<input class="form-control" disabled value="Rp 1.001.000 - Rp 1.500.000" />
+						<% } else if (golongan.pendapatan == 7) { %>
+						<input class="form-control" disabled value="Rp 1.501.000 - Rp 2.000.000" />
+						<% } else if (golongan.pendapatan == 8) { %>
+						<input class="form-control" disabled value="> Rp 2.000.000" />
+						<% } %>
+					</div>
+				</div>
 
-          <div class="row mb-2">
-            <label class="col-sm-4 col-form-label">Surat Keterangan </label>
-            <div class="col-sm-8">
-              <% if (golongan.bobot_keterangan == 1) { %>
-              <input
-                class="form-control"
-                disabled
-                value="Memiliki surat keterangan tidak mampu"
-              />
-              <% } else { %>
-              <input class="form-control" disabled value="Tidak Ada" />
-              <% } %>
-            </div>
-          </div>
+				<div class="row mb-2">
+					<label class="col-sm-4 col-form-label">Kepemilikan Harta (Aset)</label>
+					<div class="col-sm-8">
+						<% if (golongan.aset == 1) { %>
+						<input class="form-control" disabled value="Tidak Ada" />
+						<% } else if (golongan.aset == 2) { %>
+						<input class="form-control" disabled value="Emas" />
+						<% } else if (golongan.aset == 3) { %>
+						<input class="form-control" disabled value="Tanah Produktif" />
+						<% } else if (golongan.aset == 4) { %>
+						<input class="form-control" disabled value="Rumah/Toko Sewa" />
+						<% } else if (golongan.aset == 5) { %>
+						<input class="form-control" disabled value="Emas + Tanah Produktif" />
+						<% } else if (golongan.aset == 6) { %>
+						<input class="form-control" disabled value="Emas + Rumah/Toko Sewa" />
+						<% } else if (golongan.aset == 7) { %>
+						<input class="form-control" disabled value="Tanah Produktif + Rumah/Toko Sewa" />
+						<% } else if (golongan.aset == 8) { %>
+						<input class="form-control" disabled value="Semua Ada" />
+						<% } %>
+					</div>
+				</div>
 
-          <div class="row mb-2">
-            <label class="col-sm-4 col-form-label">Bukti Kuitansi</label>
-            <div class="col-sm-8">
-              <% if (golongan.bobot_kuitansi == 1) { %>
-              <input
-                class="form-control"
-                disabled
-                value="Memiliki bukti kuitansi"
-              />
-              <% } else { %>
-              <input class="form-control" disabled value="Tidak Ada" />
-              <% } %>
-            </div>
-          </div>
+				<div class="row mb-2">
+					<label class="col-sm-4 col-form-label">Besaran Hutang</label>
+					<div class="col-sm-8">
+						<% if (golongan.jumlah_hutang == 1) { %>
+						<input class="form-control" disabled value="> Rp 5.000.000" />
+						<% } else if (golongan.jumlah_hutang == 2) { %>
+						<input class="form-control" disabled value="Rp 4.001.000 - Rp 5.000.000" />
+						<% } else if (golongan.jumlah_hutang == 3) { %>
+						<input class="form-control" disabled value="Rp 3.001.000 - Rp 4.000.000" />
+						<% } else if (golongan.jumlah_hutang == 4) { %>
+						<input class="form-control" disabled value="Rp 2.001.000 - Rp 3.000.000" />
+						<% } else if (golongan.jumlah_hutang == 5) { %>
+						<input class="form-control" disabled value="Rp 1.001.000 - Rp 2.000.000" />
+						<% } else if (golongan.jumlah_hutang == 6) { %>
+						<input class="form-control" disabled value="Rp 500.000 - Rp 1.000.000" />
+						<% } else if (golongan.jumlah_hutang == 7) { %>
+						<input class="form-control" disabled value="< Rp 500.000" />
+						<% }%>
+					</div>
+				</div>
 
-          <div class="row mb-2">
-            <label class="col-sm-4 col-form-label">Foto Rekening</label>
-            <div class="col-sm-8">
-              <% if (golongan.bobot_rekening == 1) { %>
-              <input
-                class="form-control"
-                disabled
-                value="Memiliki foto rekening"
-              />
-              <% } else { %>
-              <input class="form-control" disabled value="Tidak Ada" />
-              <% } %>
-            </div>
-          </div>
-  
-          <div class="row mb-2">
-            <label class="col-sm-4 col-form-label">Waktu Proses</label>
-            <div class="col-sm-8">
-              <input class="form-control" disabled value="<%=
-              masyarakat.waktu_proses.toLocaleDateString("id") %>" />
-            </div>
-          </div>
-          <div class="row mb-2">
-            <label class="col-sm-4 col-form-label">Update Data</label>
-            <div class="col-sm-8">
-              <input class="form-control" disabled value=" <%=
-              masyarakat.updatedAt.toLocaleDateString("id") %>" />
-            </div>
-          </div>
-          <div class="row mb-2">
-            <label class="col-sm-4 col-form-label">Update Golongan</label>
-            <div class="col-sm-8">
-              <input class="form-control" disabled value="<%=
-              golongan.updatedAt.toLocaleDateString("id") %>" />
-            </div>
-          </div>
-  
-          <% if (session?.user?.role=="gampong") { %>
-  
-          <div class="row text-center mb-2 mt-4">
-            <div class="col">
-              <a
-                href="/masyarakat/edit/<%= masyarakat.NIK %>"
-                class="btn btn-warning badge"
-                >Edit
-              </a>
-            </div>
-            <div class="col">
-              <a
-                href="/<%= endpoint %>/edit/<%= masyarakat.NIK %>"
-                class="btn btn-warning badge"
-                >Edit Data Golongan</a
-              >
-            </div>
-            <div class="col">
-              <form
-                action="/masyarakat/<%= masyarakat.NIK %>?_method=DELETE"
-                id="formDelete"
-                method="POST"
-              >
-                <button
-                  type="button"
-                  class="btn btn-danger badge"
-                  onclick="return confirmHandler(this, '<%= masyarakat.nama %>')"
-                >
-                  Del
-                </button>
-              </form>
-            </div>
-          </div>
-          <% } %> <% if (session?.user?.role=="staf") { %>
-          <a href="/<%= endpoint %>">&laquo; Kembali</a>
-          <% } else { %>
-          <a href="/masyarakat">&laquo; Kembali</a>
-          <% } %>
-        </div>
-      </div>
-    </div>
-  </div>
-  
-  <script>
-    function confirmHandler(button, nama) {
-      const swalWithBootstrapButtons = Swal.mixin({
-        customClass: {
-          confirmButton: "btn btn-success",
-          cancelButton: "btn btn-danger",
-        },
-        buttonsStyling: false,
-      });
-  
-      swalWithBootstrapButtons
-        .fire({
-          title: "Apakah anda yakin?",
-          text: `menghapus data ${nama} ?`,
-          icon: "warning",
-          showCancelButton: true,
-          confirmButtonText: "Ya, hapus!",
-          cancelButtonText: "Batal!",
-          reverseButtons: true,
-        })
-        .then((result) => {
-          if (result.isConfirmed) {
-            button.parentElement.submit();
-            swalWithBootstrapButtons.fire(
-              "Deleted!",
-              `Data ${nama} berhasil dihapus`,
-              "success"
-            );
-          } else if (
-            /* Read more about handling dismissals below */
-            result.dismiss === Swal.DismissReason.cancel
-          ) {
-            swalWithBootstrapButtons.fire(
-              "Cancelled",
-              `Data ${nama} masih tersimpan`,
-              "error"
-            );
-          }
-        });
-    }
-  </script>
-  
+				<div class="row mb-2">
+					<label class="col-sm-4 col-form-label">Nomor Rekening</label>
+					<div class="col-sm-8">
+						<input class="form-control" disabled value="<%= golongan.norekening %> Tahun" />
+					</div>
+				</div>
+
+				<div class="row mb-2">
+					<label class="col-sm-4 col-form-label">Surat Permohonan ke BMAB</label>
+					<div class="col-sm-8">
+						<% if (golongan.bobot_permohonan == 1) { %>
+						<input class="form-control" disabled value="Memiliki surat permohonan" />
+						<% } else { %>
+						<input class="form-control" disabled value="Tidak Ada" />
+						<% } %>
+					</div>
+				</div>
+
+				<div class="row mb-2">
+					<label class="col-sm-4 col-form-label">Surat Keterangan </label>
+					<div class="col-sm-8">
+						<% if (golongan.bobot_keterangan == 1) { %>
+						<input class="form-control" disabled value="Memiliki surat keterangan tidak mampu" />
+						<% } else { %>
+						<input class="form-control" disabled value="Tidak Ada" />
+						<% } %>
+					</div>
+				</div>
+
+				<div class="row mb-2">
+					<label class="col-sm-4 col-form-label">Bukti Kuitansi</label>
+					<div class="col-sm-8">
+						<% if (golongan.bobot_kuitansi == 1) { %>
+						<input class="form-control" disabled value="Memiliki bukti kuitansi" />
+						<% } else { %>
+						<input class="form-control" disabled value="Tidak Ada" />
+						<% } %>
+					</div>
+				</div>
+
+				<div class="row mb-2">
+					<label class="col-sm-4 col-form-label">Foto Rekening</label>
+					<div class="col-sm-8">
+						<% if (golongan.bobot_rekening == 1) { %>
+						<input class="form-control" disabled value="Memiliki foto rekening" />
+						<% } else { %>
+						<input class="form-control" disabled value="Tidak Ada" />
+						<% } %>
+					</div>
+				</div>
+
+				<div class="row mb-2">
+					<label class="col-sm-4 col-form-label">Waktu Proses</label>
+					<div class="col-sm-8">
+						<input class="form-control" disabled value="<%=
+						masyarakat.waktu_proses.toLocaleDateString("id") %>" />
+					</div>
+				</div>
+				<div class="row mb-2">
+					<label class="col-sm-4 col-form-label">Update Data</label>
+					<div class="col-sm-8">
+						<input class="form-control" disabled value=" <%=
+						masyarakat.updatedAt.toLocaleDateString("id") %>" />
+					</div>
+				</div>
+				<div class="row mb-2">
+					<label class="col-sm-4 col-form-label">Update Golongan</label>
+					<div class="col-sm-8">
+						<input class="form-control" disabled value="<%=
+						golongan.updatedAt.toLocaleDateString("id") %>" />
+					</div>
+				</div>
+
+				<% if (session?.user?.role=="gampong") { %>
+
+				<div class="row text-center mb-2 mt-4">
+					<div class="col">
+						<a href="/masyarakat/edit/<%= masyarakat.NIK %>" class="btn btn-warning badge">Edit </a>
+					</div>
+					<div class="col">
+						<a href="/<%= endpoint %>/edit/<%= masyarakat.NIK %>" class="btn btn-warning badge"
+							>Edit Data Golongan</a
+						>
+					</div>
+					<div class="col">
+						<form
+							action="/masyarakat/<%= masyarakat.NIK %>?_method=DELETE"
+							id="formDelete"
+							method="POST"
+						>
+							<button
+								type="button"
+								class="btn btn-danger badge"
+								onclick="return confirmHandler(this, '<%= masyarakat.nama %>')"
+							>
+								Del
+							</button>
+						</form>
+					</div>
+				</div>
+				<% } %>
+				<div class="container mt-5">
+					<a href="#" class="btn btn-secondary badge" onclick="goBack()">Kembali</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script>
+	function goBack() {
+		window.history.back();
+	}
+
+	function confirmHandler(button, nama) {
+		const swalWithBootstrapButtons = Swal.mixin({
+			customClass: {
+				confirmButton: "btn btn-success",
+				cancelButton: "btn btn-danger",
+			},
+			buttonsStyling: false,
+		});
+
+		swalWithBootstrapButtons
+			.fire({
+				title: "Apakah anda yakin?",
+				text: `menghapus data ${nama} ?`,
+				icon: "warning",
+				showCancelButton: true,
+				confirmButtonText: "Ya, hapus!",
+				cancelButtonText: "Batal!",
+				reverseButtons: true,
+			})
+			.then((result) => {
+				if (result.isConfirmed) {
+					button.parentElement.submit();
+					swalWithBootstrapButtons.fire("Deleted!", `Data ${nama} berhasil dihapus`, "success");
+				} else if (
+					/* Read more about handling dismissals below */
+					result.dismiss === Swal.DismissReason.cancel
+				) {
+					swalWithBootstrapButtons.fire("Cancelled", `Data ${nama} masih tersimpan`, "error");
+				}
+			});
+	}
+</script>
