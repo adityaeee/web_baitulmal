@@ -1,5 +1,6 @@
 const { Fakir, Masyarakat, Gampong } = require("../../../models");
 const { dataLayout } = require("../../../utils/index");
+const { filteringDataUpdate } = require("../utils");
 
 const getFakir = async (req, res) => {
 	try {
@@ -46,7 +47,8 @@ const getFakirById = async (req, res) => {
 const createFakir = async (req, res) => {
 	const data = req.body;
 	const dataMasyarakat = req.session?.data;
-	// console.log(dataMasyarakat);
+	console.log(dataMasyarakat);
+	console.log(data);
 	await Masyarakat.create(dataMasyarakat);
 	await Fakir.create(data);
 	req.session.data = "";
@@ -56,13 +58,9 @@ const createFakir = async (req, res) => {
 
 const updateFakir = async (req, res) => {
 	const data = req.body;
+	filteringDataUpdate(data, req.params.id);
+
 	let fakir = await Fakir.findByPk(req.params.id);
-
-	console.log(data);
-	if (data.pendapatan === "0") {
-		data.pendapatan = fakir.pendapatan;
-	}
-
 	fakir.update(data);
 	req.flash("msg", `Data berhasil diupdate`);
 	res.redirect("/masyarakat");
