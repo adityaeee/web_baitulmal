@@ -34,6 +34,7 @@ const waqafRouter = require("./modules/waqaf/route/index");
 const pelajarRantauRouter = require("./modules/pelajarRantau/route/index");
 const ibnuSabilRouter = require("./modules/ibnuSabil/route/index");
 const clusteringRouter = require("./modules/clustering/route/index");
+const stafRouter = require("./modules/staf/route/index");
 
 var app = express();
 
@@ -57,11 +58,11 @@ app.use(cookieParser());
 
 //configurasi flash
 app.use(
-  session({
-    secret: "secret",
-    resave: true,
-    saveUninitialized: true,
-  })
+	session({
+		secret: "secret",
+		resave: true,
+		saveUninitialized: true,
+	})
 );
 app.use(flash());
 
@@ -93,21 +94,22 @@ app.use("/waqaf", waqafRouter);
 app.use("/pelajar-rantau", pelajarRantauRouter);
 app.use("/ibnu-sabil", ibnuSabilRouter);
 app.use("/clustering", clusteringRouter);
+app.use("/staf", stafRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
-  next(createError(404));
+	next(createError(404));
 });
 
 // error handler
 app.use(function (err, req, res, next) {
-  // set locals, only providing error in development
-  res.locals.message = err.message;
-  res.locals.error = req.app.get("env") === "development" ? err : {};
+	// set locals, only providing error in development
+	res.locals.message = err.message;
+	res.locals.error = req.app.get("env") === "development" ? err : {};
 
-  // render the error page
-  res.status(err.status || 500);
-  res.render("error");
+	// render the error page
+	res.status(err.status || 500);
+	res.render("error");
 });
 
 module.exports = app;

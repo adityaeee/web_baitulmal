@@ -2,6 +2,7 @@ const { Masyarakat, Gampong } = require("../../../models");
 const { findGolongan } = require("../utils/index");
 
 const { dataLayout } = require("../../../utils/index");
+
 const getMasyarakat = async (req, res) => {
 	try {
 		let masyarakat = await Masyarakat.findAll();
@@ -12,10 +13,13 @@ const getMasyarakat = async (req, res) => {
 			});
 		}
 
+		let data = await Masyarakat.findAll();
+
 		res.render(
 			"1_daftarPenerima",
 			dataLayout(req, {
 				masyarakat,
+				data,
 			})
 		);
 		res.status(200);
@@ -61,6 +65,7 @@ const createMasyarakat = async (req, res) => {
 		);
 		return;
 	}
+	// console.log(req.body);
 	const kodeGampong = req.session.user?.kode_gampong;
 	let data = { ...req.body, kode_gampong: kodeGampong };
 

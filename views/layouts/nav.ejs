@@ -17,9 +17,12 @@
 				<li class="nav-item">
 					<a class="nav-link active" aria-current="page" href="/masyarakat">Home</a>
 				</li>
-				<% if (session?.user?.role=='admin' || session?.user?.role=='staf') { %>
+				<% if (session?.user?.role=='admin') { %>
 				<li class="nav-item">
 					<a class="nav-link active" aria-current="page" href="/gampong">Gampong</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link active" aria-current="page" href="/staf">Staf</a>
 				</li>
 				<% } %> <% if (session?.user?.role=='gampong') { %>
 				<li class="nav-item">
@@ -31,6 +34,17 @@
 					>
 				</li>
 				<% } %> <% if (session?.user?.role=='staf') { %>
+				<li class="nav-item">
+					<a class="nav-link active" aria-current="page" href="/gampong">Gampong</a>
+				</li>
+				<li class="nav-item">
+					<a
+						class="nav-link active"
+						aria-current="page"
+						href="/staf/<%= session.user.NIK %>"
+						>Biodata Staf</a
+					>
+				</li>
 				<li class="nav-item dropdown">
 					<a
 						class="nav-link dropdown-toggle"

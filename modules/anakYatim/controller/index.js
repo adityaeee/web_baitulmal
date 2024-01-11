@@ -86,7 +86,7 @@ const updateAll = async (req, res) => {
 	}
 
 	req.flash("msg", `Data anak yatim penerima zakat berhasil diupdate`);
-	res.redirect("/masyarakat");
+	res.redirect("/anak-yatim");
 };
 
 const formCreate = async (req, res) => {

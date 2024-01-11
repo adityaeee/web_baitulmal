@@ -1,6 +1,6 @@
 <div class="container mt-3">
-	<div class="row">
-		<div class="col-md-3"></div>
+	<div class="row mb-3">
+		<div class="col-md-4"></div>
 		<div class="col-md-6">
 			<h2 class="fw-bold">DAFTAR PENERIMA ZAKAT MAL</h2>
 		</div>
@@ -22,33 +22,1266 @@
 				});
 			</script>
 			<% } %>
-			<table class="table table-striped text-center mb-5">
-				<thead>
-					<tr>
-						<th scope="col">No</th>
-						<th scope="col">NAMA</th>
-						<th scope="col">GOLONGAN</th>
-						<th scope="col">PERIODE</th>
-						<th scope="col">STATUS</th>
-						<th scope="col">KET</th>
-					</tr>
-				</thead>
-				<tbody>
-					<% masyarakat.forEach((orang,i) => { %>
-					<tr>
-						<th scope="row"><%= i+1 %></th>
-						<td><%= orang.nama %></td>
-						<td><%= orang.golongan %></td>
-						<td><%= orang.periode %></td>
-						<td><%= orang.status %></td>
-						<td>
-							<% let endpoint = orang.golongan.replace(/\s/g, "-")%>
-							<a href="/<%= endpoint %>/<%= orang.NIK %>" class="btn btn-success badge">Detail</a>
-						</td>
-					</tr>
-					<% }) %>
-				</tbody>
-			</table>
+
+
+			<div class="row mb-5">
+				<div class="col-5 col-sm-3">
+				  <div class="nav flex-column nav-tabs h-100" id="vert-tabs-tab" role="tablist" aria-orientation="vertical">
+					<a class="nav-link active" id="semua-tab" data-toggle="pill" href="#semua" role="tab" aria-controls="semua" aria-selected="true">Semua</a>
+					<a class="nav-link" id="fakir-tab" data-toggle="pill" href="#fakir" role="tab" aria-controls="fakir" aria-selected="false">Fakir</a>
+					<a class="nav-link" id="miskin-tab" data-toggle="pill" href="#miskin" role="tab" aria-controls="miskin" aria-selected="false">Miskin</a>
+					<a class="nav-link" id="miskin-insidentil-tab" data-toggle="pill" href="#miskin-insidentil" role="tab" aria-controls="miskin-insidentil" aria-selected="false">Miskin Insidentil</a>
+					<a class="nav-link" id="guru-dayah-tab" data-toggle="pill" href="#guru-dayah" role="tab" aria-controls="guru-dayah" aria-selected="false">Guru Dayah</a>
+					<a class="nav-link" id="santri-dayah-tab" data-toggle="pill" href="#santri-dayah" role="tab" aria-controls="santri-dayah" aria-selected="false">Santri Dayah</a>
+					<a class="nav-link" id="santri-dayah-luar-tab" data-toggle="pill" href="#santri-dayah-luar" role="tab" aria-controls="santri-dayah-luar" aria-selected="false">Santri Dayah Luar</a>
+					<a class="nav-link" id="anak-yatim-tab" data-toggle="pill" href="#anak-yatim" role="tab" aria-controls="anak-yatim" aria-selected="false">Anak Yatim</a>
+					<a class="nav-link" id="disabilitas-tab" data-toggle="pill" href="#disabilitas" role="tab" aria-controls="disabilitas" aria-selected="false">Disabilitas</a>
+					<a class="nav-link" id="pelajar-miskin-tab" data-toggle="pill" href="#pelajar-miskin" role="tab" aria-controls="pelajar-miskin" aria-selected="false">Pelajar Miskin</a>
+					<a class="nav-link" id="santri-muallaf-tab" data-toggle="pill" href="#santri-muallaf" role="tab" aria-controls="santri-muallaf" aria-selected="false">Santri Muallaf</a>
+					<a class="nav-link" id="muallaf-tab" data-toggle="pill" href="#muallaf" role="tab" aria-controls="muallaf" aria-selected="false">Muallaf</a>
+					<a class="nav-link" id="gharimin-tab" data-toggle="pill" href="#gharimin" role="tab" aria-controls="gharimin" aria-selected="false">Gharimin</a>
+					<a class="nav-link" id="santri-berprestasi-tab" data-toggle="pill" href="#santri-berprestasi" role="tab" aria-controls="santri-berprestasi" aria-selected="false">Santri Berprestasi</a>
+					<a class="nav-link" id="madrasah-tab" data-toggle="pill" href="#madrasah" role="tab" aria-controls="madrasah" aria-selected="false">Madrasah</a>
+					<a class="nav-link" id="waqaf-tab" data-toggle="pill" href="#waqaf" role="tab" aria-controls="waqaf" aria-selected="false">Waqaf</a>
+					<a class="nav-link" id="pelajar-rantau-tab" data-toggle="pill" href="#pelajar-rantau" role="tab" aria-controls="pelajar-rantau" aria-selected="false">Pelajar Rantau</a>
+					<a class="nav-link" id="ibnu-sabil-tab" data-toggle="pill" href="#ibnu-sabil" role="tab" aria-controls="ibnu-sabil" aria-selected="false">Ibnu Sabil</a>
+				  </div>
+				</div>
+				
+				<div class="col-7 col-sm-9">
+					
+				  <div class="tab-content" id="vert-tabs-tabContent">
+					<div class="tab-pane text-left fade show active" id="semua" role="tabpanel" aria-labelledby="semua-tab">
+						<table class="table table-striped table-head-fixed text-center mb-5">
+							<thead>
+								<tr>
+									<th scope="col">No</th>
+									<th scope="col">NAMA</th>
+									<th scope="col">GOLONGAN</th>
+									<th scope="col">PERIODE</th>
+									<th scope="col">STATUS</th>
+									<th scope="col">KET</th>
+								</tr>
+							</thead>
+							<tbody>
+								<% let j = 1%>
+								<% masyarakat.forEach((orang) => { %>
+									<tr>
+											<th scope="row"><%= j++ %></th>
+											<td><%= orang.nama %></td>
+											<td><%= orang.golongan %></td>
+											<td><%= orang.periode %></td>
+											<td><%= orang.status %></td>
+											<td>
+												<% let endpoint = orang.golongan.replace(/\s/g, "-")%>
+												<a href="/<%= endpoint %>/<%= orang.NIK %>" class="btn btn-success badge">Detail</a>
+											</td>
+										</tr>
+								<% }) %>
+							</tbody>
+							<div class="row g">
+								<div class="col-4">
+									<button type="button" class="btn btn-secondary btn-sm">Total Data</button>
+									<button type="button" class="btn btn-outline-secondary btn-sm"><%= j-1 %></button>
+								</div>
+							  </div>
+						</table>
+						<% if (session.user?.role == "gampong") { %>
+							<div class="row justify-content-center mb-1">
+								<div class="col-lg-5 col-6">
+									<% persen = (masyarakat.length/data.length)*100 %>
+								  <!-- small card -->
+								  <div class="small-box bg-secondary">
+									<div class="inner">
+										<h4>Total Data Gampong Dari Keseluruhan</h4>
+										<h3><%= Math.round(persen)%><sup style="font-size: 20px">%</sup></h3>
+									</div>
+									<div class="icon">
+										<i class="fas fa-chart-pie"></i>
+									  </div>
+								  </div>
+								</div>
+								<!-- ./col -->
+							</div>
+						<% } %>
+					</div>
+
+					<div class="tab-pane fade" id="fakir" role="tabpanel" aria-labelledby="fakir-tab">
+						<table class="table table-striped table-head-fixed text-center mb-5">
+							<thead>
+								<tr>
+									<th scope="col">No</th>
+									<th scope="col">NAMA</th>
+									<th scope="col">PERIODE</th>
+									<th scope="col">STATUS</th>
+									<th scope="col">KET</th>
+								</tr>
+							</thead>
+							<tbody>
+								<% j = 1%>
+								<% masyarakat.forEach((orang) => { %>
+									<% if (orang.golongan == "fakir") { %>
+									<tr>
+											<th scope="row"><%= j++ %></th>
+											<td><%= orang.nama %></td>
+											<td><%= orang.periode %></td>
+											<td><%= orang.status %></td>
+											<td>
+												<% let endpoint = orang.golongan.replace(/\s/g, "-")%>
+												<a href="/<%= endpoint %>/<%= orang.NIK %>" class="btn btn-success badge">Detail</a>
+											</td>
+										</tr>
+									<% } %>
+								<% }) %>
+							</tbody>
+							<div class="row g">
+								<div class="col-4">
+									<button type="button" class="btn btn-secondary btn-sm">Data Fakir</button>
+									<button type="button" class="btn btn-outline-secondary btn-sm"><%= j -1 %></button>
+								</div>
+							  </div>
+						</table>
+						<% if (session.user?.role == "gampong") { %>
+							<div class="row justify-content-center mb-1">
+								<div class="col-lg-5 col-6">
+									<% let a=0%>
+									<% let b=0%>
+									<% data.forEach((d) => { %>
+										<% if (d.golongan == "fakir") { %>
+											<% b++ %>
+											<% if (d.kode_gampong == session.user.kode_gampong) { %>
+												<% a++ %>
+											<% } %>
+										<% } %>
+									<% }) %>
+									<% if (a == 0) { %>
+										<% persen = 0 %>
+									<% } else {%>
+										<% persen = (a/b)*100 %>
+									<% } %>
+								  <!-- small card -->
+								  <div class="small-box bg-info">
+									<div class="inner">
+										<h4>Fakir</h4>
+										<h3><%= Math.round(persen)%><sup style="font-size: 20px">%</sup></h3>
+									</div>
+									<div class="icon">
+										<i class="fas fa-chart-pie"></i>
+									  </div>
+								  </div>
+								</div>
+								<!-- ./col -->
+							</div>
+						<% } %>
+					</div>
+					
+
+					<div class="tab-pane fade" id="miskin" role="tabpanel" aria-labelledby="miskin-tab">
+						<table class="table table-striped table-head-fixed text-center mb-5">
+							<thead>
+								<tr>
+									<th scope="col">No</th>
+									<th scope="col">NAMA</th>
+									<th scope="col">PERIODE</th>
+									<th scope="col">STATUS</th>
+									<th scope="col">KET</th>
+								</tr>
+							</thead>
+							<tbody>
+								<% j = 1%>
+								<% masyarakat.forEach((orang) => { %>
+									<% if (orang.golongan == "miskin") { %>
+									<tr>
+											<th scope="row"><%= j++ %></th>
+											<td><%= orang.nama %></td>
+											<td><%= orang.periode %></td>
+											<td><%= orang.status %></td>
+											<td>
+												<% let endpoint = orang.golongan.replace(/\s/g, "-")%>
+												<a href="/<%= endpoint %>/<%= orang.NIK %>" class="btn btn-success badge">Detail</a>
+											</td>
+										</tr>
+									<% } %>
+								<% }) %>
+							</tbody>
+							<div class="row g">
+								<div class="col-4">
+									<button type="button" class="btn btn-secondary btn-sm">Data Miskin</button>
+									<button type="button" class="btn btn-outline-secondary btn-sm"><%= j -1 %></button>
+								</div>
+							  </div>
+						</table>
+						<% if (session.user?.role == "gampong") { %>
+							<div class="row justify-content-center mb-1">
+								<div class="col-lg-5 col-6">
+									<% a=0%>
+										<% b=0%>
+										<% data.forEach((d) => { %>
+											<% if (d.golongan == "miskin") { %>
+												<% b++ %>
+												<% if (d.kode_gampong == session.user.kode_gampong) { %>
+													<% a++ %>
+												<% } %>
+											<% } %>
+										<% }) %>
+										<% if (a == 0) { %>
+											<% persen = 0 %>
+										<% } else {%>
+											<% persen = (a/b)*100 %>
+										<% } %>
+									<!-- small card -->
+									<div class="small-box bg-success">
+										<div class="inner">
+											<h4>Miskin</h4>
+											<h3><%= Math.round(persen)%><sup style="font-size: 20px">%</sup></h3>
+										</div>
+										<div class="icon">
+											<i class="fas fa-chart-pie"></i>
+										</div>
+									</div>
+								</div>
+								<!-- ./col -->
+							</div>
+						<% } %>
+					</div>
+
+					<div class="tab-pane fade" id="miskin-insidentil" role="tabpanel" aria-labelledby="miskin-insidentil-tab">
+						<table class="table table-striped table-head-fixed text-center mb-5">
+							<thead>
+								<tr>
+									<th scope="col">No</th>
+									<th scope="col">NAMA</th>
+									<th scope="col">PERIODE</th>
+									<th scope="col">STATUS</th>
+									<th scope="col">KET</th>
+								</tr>
+							</thead>
+							<tbody>
+								<% j = 1%>
+								<% masyarakat.forEach((orang) => { %>
+									<% if (orang.golongan == "miskin insidentil") { %>
+									<tr>
+											<th scope="row"><%= j++ %></th>
+											<td><%= orang.nama %></td>
+											<td><%= orang.periode %></td>
+											<td><%= orang.status %></td>
+											<td>
+												<% let endpoint = orang.golongan.replace(/\s/g, "-")%>
+												<a href="/<%= endpoint %>/<%= orang.NIK %>" class="btn btn-success badge">Detail</a>
+											</td>
+										</tr>
+									<% } %>
+								<% }) %>
+							</tbody>
+							<div class="row g">
+								<div class="col-4">
+									<button type="button" class="btn btn-secondary btn-sm">Data Miskin Insidentil</button>
+									<button type="button" class="btn btn-outline-secondary btn-sm"><%= j -1 %></button>
+								</div>
+							  </div>
+						</table>
+						<% if (session.user?.role == "gampong") { %>
+							<div class="row justify-content-center mb-1">
+								<div class="col-lg-5 col-6">
+									<% a= 0%>
+										<% b= 0%>
+										<% data.forEach((d) => { %>
+											<% if (d.golongan == "miskin insidentil") { %>
+												<% b++ %>
+												<% if (d.kode_gampong == session.user.kode_gampong) { %>
+													<% a++ %>
+												<% } %>
+											<% } %>
+										<% }) %>
+										<% if (a == 0) { %>
+											<% persen = 0 %>
+										<% } else {%>
+											<% persen = (a/b)*100 %>
+										<% } %>
+									<!-- small card -->
+									<div class="small-box bg-warning">
+										<div class="inner">
+											<h4>Miskin Insidentil</h4>
+											<h3><%= Math.round(persen)%><sup style="font-size: 20px">%</sup></h3>
+										</div>
+										<div class="icon">
+											<i class="fas fa-chart-pie"></i>
+										</div>
+									</div>
+								</div>
+								<!-- ./col -->
+							</div>
+						<% } %>
+					</div>
+
+					<div class="tab-pane fade" id="guru-dayah" role="tabpanel" aria-labelledby="guru-dayah-tab">
+						<table class="table table-striped table-head-fixed text-center mb-5">
+							<thead>
+								<tr>
+									<th scope="col">No</th>
+									<th scope="col">NAMA</th>
+									<th scope="col">PERIODE</th>
+									<th scope="col">STATUS</th>
+									<th scope="col">KET</th>
+								</tr>
+							</thead>
+							<tbody>
+								<% j = 1%>
+								<% masyarakat.forEach((orang) => { %>
+									<% if (orang.golongan == "guru dayah") { %>
+									<tr>
+											<th scope="row"><%= j++ %></th>
+											<td><%= orang.nama %></td>
+											<td><%= orang.periode %></td>
+											<td><%= orang.status %></td>
+											<td>
+												<% let endpoint = orang.golongan.replace(/\s/g, "-")%>
+												<a href="/<%= endpoint %>/<%= orang.NIK %>" class="btn btn-success badge">Detail</a>
+											</td>
+										</tr>
+									<% } %>
+								<% }) %>
+							</tbody>
+							<div class="row g">
+								<div class="col-4">
+									<button type="button" class="btn btn-secondary btn-sm">Data Guru Dayah</button>
+									<button type="button" class="btn btn-outline-secondary btn-sm"><%= j - 1 %></button>
+								</div>
+							  </div>
+						</table>
+						<% if (session.user?.role == "gampong") { %>
+							<div class="row justify-content-center mb-1">
+								<div class="col-lg-5 col-6">
+									<% a= 0%>
+									<% b= 0%>
+									<% data.forEach((d) => { %>
+										<% if (d.golongan == "guru dayah") { %>
+											<% b++ %>
+											<% if (d.kode_gampong == session.user.kode_gampong) { %>
+												<% a++ %>
+											<% } %>
+										<% } %>
+									<% }) %>
+									<% if (a == 0) { %>
+										<% persen = 0 %>
+									<% } else {%>
+										<% persen = (a/b)*100 %>
+									<% } %>
+								<!-- small card -->
+								<div class="small-box bg-danger">
+									<div class="inner">
+										<h4>Guru Dayah</h4>
+										<h3><%= Math.round(persen)%><sup style="font-size: 20px">%</sup></h3>
+									</div>
+									<div class="icon">
+										<i class="fas fa-chart-pie"></i>
+									</div>
+								</div>
+								</div>
+								<!-- ./col -->
+							</div>
+						<% } %>
+					</div>
+
+					<div class="tab-pane fade" id="santri-dayah" role="tabpanel" aria-labelledby="santri-dayah-tab">
+						<table class="table table-striped table-head-fixed text-center mb-5">
+							<thead>
+								<tr>
+									<th scope="col">No</th>
+									<th scope="col">NAMA</th>
+									<th scope="col">PERIODE</th>
+									<th scope="col">STATUS</th>
+									<th scope="col">KET</th>
+								</tr>
+							</thead>
+							<tbody>
+								<% j = 1%>
+								<% masyarakat.forEach((orang) => { %>
+									<% if (orang.golongan == "santri dayah") { %>
+									<tr>
+											<th scope="row"><%= j++ %></th>
+											<td><%= orang.nama %></td>
+											<td><%= orang.periode %></td>
+											<td><%= orang.status %></td>
+											<td>
+												<% let endpoint = orang.golongan.replace(/\s/g, "-")%>
+												<a href="/<%= endpoint %>/<%= orang.NIK %>" class="btn btn-success badge">Detail</a>
+											</td>
+										</tr>
+									<% } %>
+								<% }) %>
+							</tbody>
+							<div class="row g">
+								<div class="col-4">
+									<button type="button" class="btn btn-secondary btn-sm">Data Santri Dayah</button>
+									<button type="button" class="btn btn-outline-secondary btn-sm"><%= j -1 %></button>
+								</div>
+							  </div>
+						</table>
+						<% if (session.user?.role == "gampong") { %>
+							<div class="row justify-content-center mb-1">
+								<div class="col-lg-5 col-6">
+									<% a= 0%>
+									<% b= 0%>
+									<% data.forEach((d) => { %>
+										<% if (d.golongan == "santri dayah") { %>
+											<% b++ %>
+											<% if (d.kode_gampong == session.user.kode_gampong) { %>
+												<% a++ %>
+											<% } %>
+										<% } %>
+									<% }) %>
+									<% if (a == 0) { %>
+										<% persen = 0 %>
+									<% } else {%>
+										<% persen = (a/b)*100 %>
+									<% } %>
+								  <!-- small card -->
+								  <div class="small-box bg-info">
+									<div class="inner">
+										<h4>Santri Dayah</h4>
+										<h3><%= Math.round(persen)%><sup style="font-size: 20px">%</sup></h3>
+									</div>
+									<div class="icon">
+										<i class="fas fa-chart-pie"></i>
+									  </div>
+								  </div>
+								</div>
+								<!-- ./col -->
+							</div>
+						<% } %>
+					</div>
+
+					<div class="tab-pane fade" id="santri-dayah-luar" role="tabpanel" aria-labelledby="santri-dayah-luar-tab">
+						<table class="table table-striped table-head-fixed text-center mb-5">
+							<thead>
+								<tr>
+									<th scope="col">No</th>
+									<th scope="col">NAMA</th>
+									<th scope="col">PERIODE</th>
+									<th scope="col">STATUS</th>
+									<th scope="col">KET</th>
+								</tr>
+							</thead>
+							<tbody>
+								<% j = 1%>
+								<% masyarakat.forEach((orang) => { %>
+									<% if (orang.golongan == "santri dayah luar") { %>
+									<tr>
+											<th scope="row"><%= j++ %></th>
+											<td><%= orang.nama %></td>
+											<td><%= orang.periode %></td>
+											<td><%= orang.status %></td>
+											<td>
+												<% let endpoint = orang.golongan.replace(/\s/g, "-")%>
+												<a href="/<%= endpoint %>/<%= orang.NIK %>" class="btn btn-success badge">Detail</a>
+											</td>
+										</tr>
+									<% } %>
+								<% }) %>
+							</tbody>
+							<div class="row g">
+								<div class="col-4">
+									<button type="button" class="btn btn-secondary btn-sm">Data Santri Dayah Luar</button>
+									<button type="button" class="btn btn-outline-secondary btn-sm"><%= j -1 %></button>
+								</div>
+							  </div>
+						</table>
+						<% if (session.user?.role == "gampong") { %>
+							<div class="row justify-content-center mb-1">
+								<div class="col-lg-5 col-6">
+									<% a=0%>
+										<% b=0%>
+										<% data.forEach((d) => { %>
+											<% if (d.golongan == "santri dayah luar") { %>
+												<% b++ %>
+												<% if (d.kode_gampong == session.user.kode_gampong) { %>
+													<% a++ %>
+												<% } %>
+											<% } %>
+										<% }) %>
+										<% if (a == 0) { %>
+											<% persen = 0 %>
+										<% } else {%>
+											<% persen = (a/b)*100 %>
+										<% } %>
+									<!-- small card -->
+									<div class="small-box bg-success">
+										<div class="inner">
+											<h4>Santri Dayah Luar</h4>
+											<h3><%= Math.round(persen)%><sup style="font-size: 20px">%</sup></h3>
+										</div>
+										<div class="icon">
+											<i class="fas fa-chart-pie"></i>
+										</div>
+									</div>
+								</div>
+								<!-- ./col -->
+							</div>
+						<% } %>
+					</div>
+
+					<div class="tab-pane fade" id="anak-yatim" role="tabpanel" aria-labelledby="anak-yatim-tab">
+						<table class="table table-striped table-head-fixed text-center mb-5">
+							<thead>
+								<tr>
+									<th scope="col">No</th>
+									<th scope="col">NAMA</th>
+									<th scope="col">PERIODE</th>
+									<th scope="col">STATUS</th>
+									<th scope="col">KET</th>
+								</tr>
+							</thead>
+							<tbody>
+								<% j = 1%>
+								<% masyarakat.forEach((orang) => { %>
+									<% if (orang.golongan == "anak yatim") { %>
+									<tr>
+											<th scope="row"><%= j++ %></th>
+											<td><%= orang.nama %></td>
+											<td><%= orang.periode %></td>
+											<td><%= orang.status %></td>
+											<td>
+												<% let endpoint = orang.golongan.replace(/\s/g, "-")%>
+												<a href="/<%= endpoint %>/<%= orang.NIK %>" class="btn btn-success badge">Detail</a>
+											</td>
+										</tr>
+									<% } %>
+								<% }) %>
+							</tbody>
+							<div class="row g">
+								<div class="col-4">
+									<button type="button" class="btn btn-secondary btn-sm">Data Anak Yatim</button>
+									<button type="button" class="btn btn-outline-secondary btn-sm"><%= j -1 %></button>
+								</div>
+							  </div>
+						</table>
+						<% if (session.user?.role == "gampong") { %>
+							<div class="row justify-content-center mb-1">
+								<div class="col-lg-5 col-6">
+									<% a= 0%>
+										<% b= 0%>
+										<% data.forEach((d) => { %>
+											<% if (d.golongan == "anak yatim") { %>
+												<% b++ %>
+												<% if (d.kode_gampong == session.user.kode_gampong) { %>
+													<% a++ %>
+												<% } %>
+											<% } %>
+										<% }) %>
+										<% if (a == 0) { %>
+											<% persen = 0 %>
+										<% } else {%>
+											<% persen = (a/b)*100 %>
+										<% } %>
+									<!-- small card -->
+									<div class="small-box bg-warning">
+										<div class="inner">
+											<h4>Anak Yatim</h4>
+											<h3><%= Math.round(persen)%><sup style="font-size: 20px">%</sup></h3>
+										</div>
+										<div class="icon">
+											<i class="fas fa-chart-pie"></i>
+										</div>
+									</div>
+								</div>
+								<!-- ./col -->
+							</div>
+						<% } %>
+					</div>
+
+					<div class="tab-pane fade" id="disabilitas" role="tabpanel" aria-labelledby="disabilitas-tab">
+						<table class="table table-striped table-head-fixed text-center mb-5">
+							<thead>
+								<tr>
+									<th scope="col">No</th>
+									<th scope="col">NAMA</th>
+									<th scope="col">PERIODE</th>
+									<th scope="col">STATUS</th>
+									<th scope="col">KET</th>
+								</tr>
+							</thead>
+							<tbody>
+								<% j = 1%>
+								<% masyarakat.forEach((orang) => { %>
+									<% if (orang.golongan == "disabilitas") { %>
+									<tr>
+											<th scope="row"><%= j++ %></th>
+											<td><%= orang.nama %></td>
+											<td><%= orang.periode %></td>
+											<td><%= orang.status %></td>
+											<td>
+												<% let endpoint = orang.golongan.replace(/\s/g, "-")%>
+												<a href="/<%= endpoint %>/<%= orang.NIK %>" class="btn btn-success badge">Detail</a>
+											</td>
+										</tr>
+									<% } %>
+								<% }) %>
+							</tbody>
+							<div class="row g">
+								<div class="col-4">
+									<button type="button" class="btn btn-secondary btn-sm">Data Disabilitas</button>
+									<button type="button" class="btn btn-outline-secondary btn-sm"><%= j -1 %></button>
+								</div>
+							  </div>
+						</table>
+						<% if (session.user?.role == "gampong") { %>
+							<div class="row justify-content-center mb-1">
+								<div class="col-lg-5 col-6">
+									<% a= 0%>
+									<% b= 0%>
+									<% data.forEach((d) => { %>
+										<% if (d.golongan == "disabilitas") { %>
+											<% b++ %>
+											<% if (d.kode_gampong == session.user.kode_gampong) { %>
+												<% a++ %>
+											<% } %>
+										<% } %>
+									<% }) %>
+									<% if (a == 0) { %>
+										<% persen = 0 %>
+									<% } else {%>
+										<% persen = (a/b)*100 %>
+									<% } %>
+								  <!-- small card -->
+								  <div class="small-box bg-danger">
+									<div class="inner">
+										<h4>Disabilitas</h4>
+										<h3><%= Math.round(persen)%><sup style="font-size: 20px">%</sup></h3>
+									</div>
+									<div class="icon">
+										<i class="fas fa-chart-pie"></i>
+									  </div>
+								  </div>	
+								</div>
+								<!-- ./col -->
+							</div>
+						<% } %>
+					</div>
+
+					<div class="tab-pane fade" id="pelajar-miskin" role="tabpanel" aria-labelledby="pelajar-miskin-tab">
+						<table class="table table-striped table-head-fixed text-center mb-5">
+							<thead>
+								<tr>
+									<th scope="col">No</th>
+									<th scope="col">NAMA</th>
+									<th scope="col">PERIODE</th>
+									<th scope="col">STATUS</th>
+									<th scope="col">KET</th>
+								</tr>
+							</thead>
+							<tbody>
+								<% j = 1%>
+								<% masyarakat.forEach((orang) => { %>
+									<% if (orang.golongan == "pelajar miskin") { %>
+									<tr>
+											<th scope="row"><%= j++ %></th>
+											<td><%= orang.nama %></td>
+											<td><%= orang.periode %></td>
+											<td><%= orang.status %></td>
+											<td>
+												<% let endpoint = orang.golongan.replace(/\s/g, "-")%>
+												<a href="/<%= endpoint %>/<%= orang.NIK %>" class="btn btn-success badge">Detail</a>
+											</td>
+										</tr>
+									<% } %>
+								<% }) %>
+							</tbody>
+							<div class="row g">
+								<div class="col-4">
+									<button type="button" class="btn btn-secondary btn-sm">Data Pelajar Miskin</button>
+									<button type="button" class="btn btn-outline-secondary btn-sm"><%= j -1 %></button>
+								</div>
+							  </div>
+						</table>
+						<% if (session.user?.role == "gampong") { %>
+							<div class="row justify-content-center mb-1">
+								<div class="col-lg-5 col-6">
+									<% a= 0%>
+									<% b= 0%>
+									<% data.forEach((d) => { %>
+										<% if (d.golongan == "pelajar miskin") { %>
+											<% b++ %>
+											<% if (d.kode_gampong == session.user.kode_gampong) { %>
+												<% a++ %>
+											<% } %>
+										<% } %>
+									<% }) %>
+									<% if (a == 0) { %>
+										<% persen = 0 %>
+									<% } else {%>
+										<% persen = (a/b)*100 %>
+									<% } %>
+								  <!-- small card -->
+								  <div class="small-box bg-info">
+									<div class="inner">
+										<h4>Pelajar Miskin</h4>
+										<h3><%= Math.round(persen)%><sup style="font-size: 20px">%</sup></h3>
+									</div>
+									<div class="icon">
+										<i class="fas fa-chart-pie"></i>
+									  </div>
+								  </div>	
+								</div>
+								<!-- ./col -->
+							</div>
+						<% } %>
+					</div>
+
+					<div class="tab-pane fade" id="santri-muallaf" role="tabpanel" aria-labelledby="santri-muallaf-tab">
+						<table class="table table-striped table-head-fixed text-center mb-5">
+							<thead>
+								<tr>
+									<th scope="col">No</th>
+									<th scope="col">NAMA</th>
+									<th scope="col">PERIODE</th>
+									<th scope="col">STATUS</th>
+									<th scope="col">KET</th>
+								</tr>
+							</thead>
+							<tbody>
+								<% j = 1%>
+								<% masyarakat.forEach((orang) => { %>
+									<% if (orang.golongan == "santri muallaf") { %>
+									<tr>
+											<th scope="row"><%= j++ %></th>
+											<td><%= orang.nama %></td>
+											<td><%= orang.periode %></td>
+											<td><%= orang.status %></td>
+											<td>
+												<% let endpoint = orang.golongan.replace(/\s/g, "-")%>
+												<a href="/<%= endpoint %>/<%= orang.NIK %>" class="btn btn-success badge">Detail</a>
+											</td>
+										</tr>
+									<% } %>
+								<% }) %>
+							</tbody>
+							<div class="row g">
+								<div class="col-4">
+									<button type="button" class="btn btn-secondary btn-sm">Data Santri Muallaf</button>
+									<button type="button" class="btn btn-outline-secondary btn-sm"><%= j -1 %></button>
+								</div>
+							  </div>
+						</table>
+						<% if (session.user?.role == "gampong") { %>
+							<div class="row justify-content-center mb-1">
+								<div class="col-lg-5 col-6">
+									<% a=0%>
+									<% b=0%>
+									<% data.forEach((d) => { %>
+										<% if (d.golongan == "santri muallaf") { %>
+											<% b++ %>
+											<% if (d.kode_gampong == session.user.kode_gampong) { %>
+												<% a++ %>
+											<% } %>
+										<% } %>
+									<% }) %>
+									<% if (a == 0) { %>
+										<% persen = 0 %>
+									<% } else {%>
+										<% persen = (a/b)*100 %>
+									<% } %>
+								  <!-- small card -->
+								  <div class="small-box bg-success">
+									<div class="inner">
+										<h4>Santri Muallaf</h4>
+										<h3><%= Math.round(persen)%><sup style="font-size: 20px">%</sup></h3>
+									</div>
+									<div class="icon">
+										<i class="fas fa-chart-pie"></i>
+									  </div>
+								  </div>	
+								</div>
+								<!-- ./col -->
+							</div>
+						<% } %>
+					</div>
+
+					<div class="tab-pane fade" id="muallaf" role="tabpanel" aria-labelledby="muallaf-tab">
+						<table class="table table-striped table-head-fixed text-center mb-5">
+							<thead>
+								<tr>
+									<th scope="col">No</th>
+									<th scope="col">NAMA</th>
+									<th scope="col">PERIODE</th>
+									<th scope="col">STATUS</th>
+									<th scope="col">KET</th>
+								</tr>
+							</thead>
+							<tbody>
+								<% j = 1%>
+								<% masyarakat.forEach((orang) => { %>
+									<% if (orang.golongan == "muallaf") { %>
+									<tr>
+											<th scope="row"><%= j++ %></th>
+											<td><%= orang.nama %></td>
+											<td><%= orang.periode %></td>
+											<td><%= orang.status %></td>
+											<td>
+												<% let endpoint = orang.golongan.replace(/\s/g, "-")%>
+												<a href="/<%= endpoint %>/<%= orang.NIK %>" class="btn btn-success badge">Detail</a>
+											</td>
+										</tr>
+									<% } %>
+								<% }) %>
+							</tbody>
+							<div class="row g">
+								<div class="col-4">
+									<button type="button" class="btn btn-secondary btn-sm">Data Muallafs</button>
+									<button type="button" class="btn btn-outline-secondary btn-sm"><%= j -1 %></button>
+								</div>
+							  </div>
+						</table>
+						<% if (session.user?.role == "gampong") { %>
+							<div class="row justify-content-center mb-1">
+								<div class="col-lg-5 col-6">
+									<% a= 0%>
+									<% b= 0%>
+									<% data.forEach((d) => { %>
+										<% if (d.golongan == "muallaf") { %>
+											<% b++ %>
+											<% if (d.kode_gampong == session.user.kode_gampong) { %>
+												<% a++ %>
+											<% } %>
+										<% } %>
+									<% }) %>
+									<% if (a == 0) { %>
+										<% persen = 0 %>
+									<% } else {%>
+										<% persen = (a/b)*100 %>
+									<% } %>
+								  <!-- small card -->
+								  <div class="small-box bg-warning">
+									<div class="inner">
+										<h4>Muallaf</h4>
+										<h3><%= Math.round(persen)%><sup style="font-size: 20px">%</sup></h3>
+									</div>
+									<div class="icon">
+										<i class="fas fa-chart-pie"></i>
+									  </div>
+								  </div>	
+								</div>
+								<!-- ./col -->
+							</div>
+						<% } %>
+					</div>
+
+					<div class="tab-pane fade" id="gharimin" role="tabpanel" aria-labelledby="gharimin-tab">
+						<table class="table table-striped table-head-fixed text-center mb-5">
+							<thead>
+								<tr>
+									<th scope="col">No</th>
+									<th scope="col">NAMA</th>
+									<th scope="col">PERIODE</th>
+									<th scope="col">STATUS</th>
+									<th scope="col">KET</th>
+								</tr>
+							</thead>
+							<tbody>
+								<% j = 1%>
+								<% masyarakat.forEach((orang) => { %>
+									<% if (orang.golongan == "gharimin") { %>
+									<tr>
+											<th scope="row"><%= j++ %></th>
+											<td><%= orang.nama %></td>
+											<td><%= orang.periode %></td>
+											<td><%= orang.status %></td>
+											<td>
+												<% let endpoint = orang.golongan.replace(/\s/g, "-")%>
+												<a href="/<%= endpoint %>/<%= orang.NIK %>" class="btn btn-success badge">Detail</a>
+											</td>
+										</tr>
+									<% } %>
+								<% }) %>
+							</tbody>
+							<div class="row g">
+								<div class="col-4">
+									<button type="button" class="btn btn-secondary btn-sm">Data Gharimin</button>
+									<button type="button" class="btn btn-outline-secondary btn-sm"><%= j -1 %></button>
+								</div>
+							  </div>
+						</table>
+						<% if (session.user?.role == "gampong") { %>
+							<div class="row justify-content-center mb-1">
+								<div class="col-lg-5 col-6">
+									<% a= 0%>
+									<% b= 0%>
+									<% data.forEach((d) => { %>
+										<% if (d.golongan == "gharimin") { %>
+											<% b++ %>
+											<% if (d.kode_gampong == session.user.kode_gampong) { %>
+												<% a++ %>
+											<% } %>
+										<% } %>
+									<% }) %>
+									<% if (a == 0) { %>
+										<% persen = 0 %>
+									<% } else {%>
+										<% persen = (a/b)*100 %>
+									<% } %>
+								  <!-- small card -->
+								  <div class="small-box bg-danger">
+									<div class="inner">
+										<h4>Gharimin</h4>
+										<h3><%= Math.round(persen)%><sup style="font-size: 20px">%</sup></h3>
+									</div>
+									<div class="icon">
+										<i class="fas fa-chart-pie"></i>
+									  </div>
+								  </div>	
+								</div>
+								<!-- ./col -->
+							</div>
+						<% } %>
+					</div>
+
+					<div class="tab-pane fade" id="santri-berprestasi" role="tabpanel" aria-labelledby="santri-berprestasi-tab">
+						<table class="table table-striped table-head-fixed text-center mb-5">
+							<thead>
+								<tr>
+									<th scope="col">No</th>
+									<th scope="col">NAMA</th>
+									<th scope="col">PERIODE</th>
+									<th scope="col">STATUS</th>
+									<th scope="col">KET</th>
+								</tr>
+							</thead>
+							<tbody>
+								<% j = 1%>
+								<% masyarakat.forEach((orang) => { %>
+									<% if (orang.golongan == "santri berprestasi") { %>
+									<tr>
+											<th scope="row"><%= j++ %></th>
+											<td><%= orang.nama %></td>
+											<td><%= orang.periode %></td>
+											<td><%= orang.status %></td>
+											<td>
+												<% let endpoint = orang.golongan.replace(/\s/g, "-")%>
+												<a href="/<%= endpoint %>/<%= orang.NIK %>" class="btn btn-success badge">Detail</a>
+											</td>
+										</tr>
+									<% } %>
+								<% }) %>
+							</tbody>
+							<div class="row g">
+								<div class="col-4">
+									<button type="button" class="btn btn-secondary btn-sm">Data Santri Berprestasi</button>
+									<button type="button" class="btn btn-outline-secondary btn-sm"><%= j -1 %></button>
+								</div>
+							  </div>
+						</table>
+						<% if (session.user?.role == "gampong") { %>
+							<div class="row justify-content-center mb-1">
+								<div class="col-lg-5 col-6">
+									<% a= 0%>
+									<% b= 0%>
+									<% data.forEach((d) => { %>
+										<% if (d.golongan == "santri berprestasi") { %>
+											<% b++ %>
+											<% if (d.kode_gampong == session.user.kode_gampong) { %>
+												<% a++ %>
+											<% } %>
+										<% } %>
+									<% }) %>
+									<% if (a == 0) { %>
+										<% persen = 0 %>
+									<% } else {%>
+										<% persen = (a/b)*100 %>
+									<% } %>
+								  <!-- small card -->
+								  <div class="small-box bg-info">
+									<div class="inner">
+										<h4>Santri Berprestasi</h4>
+										<h3><%= Math.round(persen)%><sup style="font-size: 20px">%</sup></h3>
+									</div>
+									<div class="icon">
+										<i class="fas fa-chart-pie"></i>
+									  </div>
+								  </div>	
+								</div>
+								<!-- ./col -->
+							</div>
+						<% } %>
+					</div>
+
+					<div class="tab-pane fade" id="madrasah" role="tabpanel" aria-labelledby="madrasah-tab">
+						<table class="table table-striped table-head-fixed text-center mb-5">
+							<thead>
+								<tr>
+									<th scope="col">No</th>
+									<th scope="col">NAMA</th>
+									<th scope="col">PERIODE</th>
+									<th scope="col">STATUS</th>
+									<th scope="col">KET</th>
+								</tr>
+							</thead>
+							<tbody>
+								<% j = 1%>
+								<% masyarakat.forEach((orang) => { %>
+									<% if (orang.golongan == "madrasah") { %>
+									<tr>
+											<th scope="row"><%= j++ %></th>
+											<td><%= orang.nama %></td>
+											<td><%= orang.periode %></td>
+											<td><%= orang.status %></td>
+											<td>
+												<% let endpoint = orang.golongan.replace(/\s/g, "-")%>
+												<a href="/<%= endpoint %>/<%= orang.NIK %>" class="btn btn-success badge">Detail</a>
+											</td>
+										</tr>
+									<% } %>
+								<% }) %>
+							</tbody>
+							<div class="row g">
+								<div class="col-4">
+									<button type="button" class="btn btn-secondary btn-sm">Data Madrasah</button>
+									<button type="button" class="btn btn-outline-secondary btn-sm"><%= j -1 %></button>
+								</div>
+							  </div>
+						</table>
+						<% if (session.user?.role == "gampong") { %>
+							<div class="row justify-content-center mb-1">
+								<div class="col-lg-5 col-6">
+									<% a=0%>
+									<% b=0%>
+									<% data.forEach((d) => { %>
+										<% if (d.golongan == "madrasah") { %>
+											<% b++ %>
+											<% if (d.kode_gampong == session.user.kode_gampong) { %>
+												<% a++ %>
+											<% } %>
+										<% } %>
+									<% }) %>
+									<% if (a == 0) { %>
+										<% persen = 0 %>
+									<% } else {%>
+										<% persen = (a/b)*100 %>
+									<% } %>
+								  <!-- small card -->
+								  <div class="small-box bg-success">
+									<div class="inner">
+										<h4>Madrasah</h4>
+										<h3><%= Math.round(persen)%><sup style="font-size: 20px">%</sup></h3>
+									</div>
+									<div class="icon">
+										<i class="fas fa-chart-pie"></i>
+									  </div>
+								  </div>	
+								</div>
+								<!-- ./col -->
+							</div>
+						<% } %>
+					</div>
+
+					<div class="tab-pane fade" id="waqaf" role="tabpanel" aria-labelledby="waqaf-tab">
+						<table class="table table-striped table-head-fixed text-center mb-5">
+							<thead>
+								<tr>
+									<th scope="col">No</th>
+									<th scope="col">NAMA</th>
+									<th scope="col">PERIODE</th>
+									<th scope="col">STATUS</th>
+									<th scope="col">KET</th>
+								</tr>
+							</thead>
+							<tbody>
+								<% j = 1%>
+								<% masyarakat.forEach((orang) => { %>
+									<% if (orang.golongan == "waqaf") { %>
+									<tr>
+											<th scope="row"><%= j++ %></th>
+											<td><%= orang.nama %></td>
+											<td><%= orang.periode %></td>
+											<td><%= orang.status %></td>
+											<td>
+												<% let endpoint = orang.golongan.replace(/\s/g, "-")%>
+												<a href="/<%= endpoint %>/<%= orang.NIK %>" class="btn btn-success badge">Detail</a>
+											</td>
+										</tr>
+									<% } %>
+								<% }) %>
+							</tbody>
+							<div class="row g">
+								<div class="col-4">
+									<button type="button" class="btn btn-secondary btn-sm">Data Waqaf</button>
+									<button type="button" class="btn btn-outline-secondary btn-sm"><%= j -1 %></button>
+								</div>
+							  </div>
+						</table>
+						<% if (session.user?.role == "gampong") { %>
+							<div class="row justify-content-center mb-1">
+								<div class="col-lg-5 col-6">
+									<% a= 0%>
+									<% b= 0%>
+									<% data.forEach((d) => { %>
+										<% if (d.golongan == "waqaf") { %>
+											<% b++ %>
+											<% if (d.kode_gampong == session.user.kode_gampong) { %>
+												<% a++ %>
+											<% } %>
+										<% } %>
+									<% }) %>
+									<% if (a == 0) { %>
+										<% persen = 0 %>
+									<% } else {%>
+										<% persen = (a/b)*100 %>
+									<% } %>
+								  <!-- small card -->
+								  <div class="small-box bg-warning">
+									<div class="inner">
+										<h4>Waqaf</h4>
+										<h3><%= Math.round(persen)%><sup style="font-size: 20px">%</sup></h3>
+									</div>
+									<div class="icon">
+										<i class="fas fa-chart-pie"></i>
+									  </div>
+								  </div>	
+								</div>
+								<!-- ./col -->
+							</div>
+						<% } %>
+					</div>
+
+					<div class="tab-pane fade" id="pelajar-rantau" role="tabpanel" aria-labelledby="pelajar-rantau-tab">
+						<table class="table table-striped table-head-fixed text-center mb-5">
+							<thead>
+								<tr>
+									<th scope="col">No</th>
+									<th scope="col">NAMA</th>
+									<th scope="col">PERIODE</th>
+									<th scope="col">STATUS</th>
+									<th scope="col">KET</th>
+								</tr>
+							</thead>
+							<tbody>
+								<% j = 1%>
+								<% masyarakat.forEach((orang) => { %>
+									<% if (orang.golongan == "pelajar rantau") { %>
+									<tr>
+											<th scope="row"><%= j++ %></th>
+											<td><%= orang.nama %></td>
+											<td><%= orang.periode %></td>
+											<td><%= orang.status %></td>
+											<td>
+												<% let endpoint = orang.golongan.replace(/\s/g, "-")%>
+												<a href="/<%= endpoint %>/<%= orang.NIK %>" class="btn btn-success badge">Detail</a>
+											</td>
+										</tr>
+									<% } %>
+								<% }) %>
+							</tbody>
+							<div class="row g">
+								<div class="col-4">
+									<button type="button" class="btn btn-secondary btn-sm">Data Pelajar Rantau</button>
+									<button type="button" class="btn btn-outline-secondary btn-sm"><%= j -1 %></button>
+								</div>
+							  </div>
+						</table>
+						<% if (session.user?.role == "gampong") { %>
+							<div class="row justify-content-center mb-1">
+								<div class="col-lg-5 col-6">
+									<% a= 0%>
+									<% b= 0%>
+									<% data.forEach((d) => { %>
+										<% if (d.golongan == "pelajar rantau") { %>
+											<% b++ %>
+											<% if (d.kode_gampong == session.user.kode_gampong) { %>
+												<% a++ %>
+											<% } %>
+										<% } %>
+									<% }) %>
+									<% if (a == 0) { %>
+										<% persen = 0 %>
+									<% } else {%>
+										<% persen = (a/b)*100 %>
+									<% } %>
+								  <!-- small card -->
+								  <div class="small-box bg-danger">
+									<div class="inner">
+										<h4>Pelajar Rantau</h4>
+										<h3><%= Math.round(persen)%><sup style="font-size: 20px">%</sup></h3>
+									</div>
+									<div class="icon">
+										<i class="fas fa-chart-pie"></i>
+									  </div>
+								  </div>	
+								</div>
+								<!-- ./col -->
+							</div>
+						<% } %>
+					</div>
+
+					<div class="tab-pane fade" id="ibnu-sabil" role="tabpanel" aria-labelledby="ibnu-sabil-tab">
+						<table class="table table-striped table-head-fixed text-center mb-5">
+							<thead>
+								<tr>
+									<th scope="col">No</th>
+									<th scope="col">NAMA</th>
+									<th scope="col">PERIODE</th>
+									<th scope="col">STATUS</th>
+									<th scope="col">KET</th>
+								</tr>
+							</thead>
+							<tbody>
+								<% j = 1%>
+								<% masyarakat.forEach((orang) => { %>
+									<% if (orang.golongan == "ibnu sabil") { %>
+									<tr>
+											<th scope="row"><%= j++ %></th>
+											<td><%= orang.nama %></td>
+											<td><%= orang.periode %></td>
+											<td><%= orang.status %></td>
+											<td>
+												<% let endpoint = orang.golongan.replace(/\s/g, "-")%>
+												<a href="/<%= endpoint %>/<%= orang.NIK %>" class="btn btn-success badge">Detail</a>
+											</td>
+										</tr>
+									<% } %>
+								<% }) %>
+							</tbody>
+							<div class="row g">
+								<div class="col-4">
+									<button type="button" class="btn btn-secondary btn-sm">Data Ibnu Sabil</button>
+									<button type="button" class="btn btn-outline-secondary btn-sm"><%= j -1 %></button>
+								</div>
+							  </div>
+						</table>
+						<% if (session.user?.role == "gampong") { %>
+							<div class="row justify-content-center mb-1">
+								<div class="col-lg-5 col-6">
+									<% a= 0%>
+									<% b= 0%>
+									<% data.forEach((d) => { %>
+										<% if (d.golongan == "ibnu sabil") { %>
+											<% b++ %>
+											<% if (d.kode_gampong == session.user.kode_gampong) { %>
+												<% a++ %>
+											<% } %>
+										<% } %>
+									<% }) %>
+									<% if (a == 0) { %>
+										<% persen = 0 %>
+									<% } else {%>
+										<% persen = (a/b)*100 %>
+									<% } %>
+								  <!-- small card -->
+								  <div class="small-box bg-info">
+									<div class="inner">
+										<h4>Ibnu Sabil</h4>
+										<h3><%= Math.round(persen)%><sup style="font-size: 20px">%</sup></h3>
+									</div>
+									<div class="icon">
+										<i class="fas fa-chart-pie"></i>
+									  </div>
+								  </div>	
+								</div>
+								<!-- ./col -->
+							</div>
+						<% } %>
+					</div>
+				  </div>
+				</div>
+			  </div>
 		</div>
 	</div>
 </div>

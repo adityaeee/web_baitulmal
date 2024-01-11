@@ -86,7 +86,7 @@ const updateAll = async (req, res) => {
 	}
 
 	req.flash("msg", `Data penerima zakat miskin berhasil diupdate`);
-	res.redirect("/masyarakat");
+	res.redirect("/miskin");
 };
 
 const formCreate = async (req, res) => {

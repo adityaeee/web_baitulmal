@@ -6,21 +6,21 @@ const { addSchema, updateSchema } = require("../constans/validatorSchema");
 const authentication = require("../../../middleware/auth");
 
 const {
-  getMasyarakat,
-  createMasyarakat,
-  getMasyarakatById,
-  updateMasyarakatById,
-  deleteMasyarakatById,
-  formUpdate,
-  formCreate,
+	getMasyarakat,
+	createMasyarakat,
+	getMasyarakatById,
+	updateMasyarakatById,
+	deleteMasyarakatById,
+	formUpdate,
+	formCreate,
 } = require("../controller/index");
 
 router.get("/", getMasyarakat);
 router.post(
-  "/",
-  authentication(["gampong"]),
-  validate(addSchema),
-  createMasyarakat
+	"/",
+	authentication(["gampong"]),
+	validate(addSchema),
+	createMasyarakat
 );
 router.get("/tambah", authentication(["gampong"]), formCreate);
 router.get("/edit/:NIK", authentication(["gampong"]), formUpdate);

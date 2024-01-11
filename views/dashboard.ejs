@@ -1,39 +1,74 @@
-<div class="container-fluid">
-  <div class="row">
-    <!-- Sidebar -->
-    <nav id="sidebar" class="col-md-3 col-lg-2 d-md-block bg-light sidebar">
-      <div class="position-sticky">
-        <ul class="nav flex-column">
-          <li class="nav-item">
-            <a class="nav-link active" href="http://localhost:3000/masyarakat">
-              Menu 1
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="http://localhost:3000/masyarakat">
-              Menu 2
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="http://localhost:3000/masyarakat">
-              Menu 3
-            </a>
-          </li>
-        </ul>
-      </div>
-    </nav>
+<body id="page-top">
 
-    <!-- Konten Utama -->
-    <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-      <div
-        class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom"
-      >
-        <h1 class="h2">BAITUL MAL</h1>
-      </div>
-      <div class="container">
-        <!-- Isi konten utama di sini -->
-        <p>Selamat datang di website penerimaan zakat mal Aceh Besar.</p>
-      </div>
-    </main>
-  </div>
-</div>
+    <style>
+        body {
+            background-color: #f8f9fa; /* Warna latar belakang */
+            color: #343a40; /* Warna teks */
+            margin: 0;
+        }
+
+        header.masthead {
+            min-height: 100vh; /* Gunakan tinggi 100% untuk full layar */
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('your-background-image.jpg'); /* Ganti dengan URL gambar latar belakang Anda */
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            color: #fff; /* Warna teks header */
+        }
+
+        header.masthead h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        header.masthead h3 {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+        }
+
+        .btn-primary {
+            background-color: #007bff; /* Warna tombol */
+            border-color: #007bff;
+        }
+
+        footer.footer {
+            background-color: #343a40; /* Warna latar belakang footer */
+            color: #fff; /* Warna teks footer */
+            padding: 50px 0;
+        }
+
+        .social-link {
+            font-size: 2rem;
+        }
+
+        p.text-muted {
+            margin-top: 20px;
+        }
+    </style>
+    <!-- Header-->
+    <header class="masthead d-flex align-items-center">
+        <div class="container px-4 px-lg-5 text-center">
+            <h1 class="mb-1">Baitul Mal Aceh Besar</h1>
+            <h3 class="mb-5"><em>Informasi pembagian zakat untuk masyarakat Aceh Besar</em></h3>
+            <a class="btn btn-secondary btn-xl" href="/masyarakat">Lanjutkan</a>
+        </div>
+    </header>
+    <!-- Footer-->
+    <footer class="footer text-center">
+        <div class="container px-4 px-lg-5">
+            <ul class="list-inline mb-5">
+                <li class="list-inline-item">
+                    <a class="social-link rounded-circle text-white mr-3" href="#!"><i class="icon-social-facebook"></i></a>
+                </li>
+                <li class="list-inline-item">
+                    <a class="social-link rounded-circle text-white mr-3" href="#!"><i class="icon-social-twitter"></i></a>
+                </li>
+                <li class="list-inline-item">
+                    <a class="social-link rounded-circle text-white" href="#!"><i class="icon-social-github"></i></a>
+                </li>
+            </ul>
+            <p class="text-muted small mb-0">Copyright &copy; Asyi 2023</p>
+        </div>
+    </footer>
+</body>

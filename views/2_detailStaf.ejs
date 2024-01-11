@@ -1,0 +1,72 @@
+<div class="container">
+	<div class="d-flex justify-content-center">
+		<div class="card mt-5" style="width: 18rem">
+			<div class="card-body">
+				<h5 class="card-title text-center"><%= staf.nama.toUpperCase() %></h5>
+				<p class="card-subtitle mb-3 text-muted text-center"><%= staf.NIK %></p>
+				<p class="card-text mb-1">Alamat: <%= staf.alamat %></p>
+				<p class="card-text mb-1">Email: <%= staf.email %></p>
+				<p class="card-text mb-1">Password: <%= staf.password %></p>
+				<p class="" card-text mb-1>
+					Waktu Input: <%= staf.createdAt.toLocaleDateString("id") %>
+				</p>
+				<p class="" card-text mb-1>
+					Waktu Update: <%= staf.updatedAt.toLocaleDateString("id") %>
+				</p>
+				<p class="" card-text mb-1>
+					Didaftarkan oleh: <%= staf.createdBy %>
+				</p>
+				<p class="" card-text mb-1>
+					Diperbarui oleh: <%= staf.updatedBy %>
+				</p>
+				<% if (session?.user?.role=='admin' || session?.user?.role == "staf") { %>
+				<a href="/staf/edit/<%= staf.NIK %>" class="btn btn-warning badge">Edit</a>
+				<% } %>
+
+				<a href="/masyarakat">&laquo; Kembali</a>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script>
+	function confirmHandler(button, nama_staf) {
+		const swalWithBootstrapButtons = Swal.mixin({
+			customClass: {
+				confirmButton: "btn btn-success",
+				cancelButton: "btn btn-danger",
+			},
+			buttonsStyling: false,
+		});
+
+		swalWithBootstrapButtons
+			.fire({
+				title: "Apakah anda yakin?",
+				text: `menghapus data ${nama_staf} ?`,
+				icon: "warning",
+				showCancelButton: true,
+				confirmButtonText: "Ya, hapus!",
+				cancelButtonText: "Batal!",
+				reverseButtons: true,
+			})
+			.then((result) => {
+				if (result.isConfirmed) {
+					button.parentElement.submit();
+					swalWithBootstrapButtons.fire(
+						"Deleted!",
+						`Data ${nama_gampong} berhasil dihapus`,
+						"success"
+					);
+				} else if (
+					/* Read more about handling dismissals below */
+					result.dismiss === Swal.DismissReason.cancel
+				) {
+					swalWithBootstrapButtons.fire(
+						"Cancelled",
+						`Data ${nama_gampong} masih tersimpan`,
+						"error"
+					);
+				}
+			});
+	}
+</script>
