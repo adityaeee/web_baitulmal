@@ -7,28 +7,31 @@ const { updateSchema } = require("../constans/validatorSchema");
 const authentication = require("../../../middleware/auth");
 
 const {
-  getGampong,
-  getGampongById,
-  formUpdate,
-  updateGampongById,
+	getGampong,
+	getGampongById,
+	formUpdate,
+	updateGampongById,
+	deleteGamponById,
 } = require("../controller/index");
 
 router.get("/", getGampong);
 router.get(
-  "/:kode_gampong",
-  authentication(["gampong", "admin", "staf"]),
-  getGampongById
+	"/:kode_gampong",
+	authentication(["gampong", "admin", "staf"]),
+	getGampongById
 );
 router.get(
-  "/edit/:kode_gampong",
-  authentication(["gampong", "admin"]),
-  formUpdate
+	"/edit/:kode_gampong",
+	authentication(["gampong", "admin"]),
+	formUpdate
 );
 router.put(
-  "/:id",
-  authentication(["gampong", "admin"]),
-  validate(updateSchema),
-  updateGampongById
+	"/:kode_gampong",
+	authentication(["gampong", "admin"]),
+	validate(updateSchema),
+	updateGampongById
 );
+
+router.delete("/:kode_gampong", authentication(["admin"]), deleteGamponById);
 
 module.exports = router;

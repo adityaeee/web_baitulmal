@@ -2,7 +2,9 @@
 	<div class="d-flex justify-content-center">
 		<div class="card mt-5" style="width: 18rem">
 			<div class="card-body">
-				<h5 class="card-title text-center"><%= staf.nama.toUpperCase() %></h5>
+				<div class="row mb-2">
+					<h5 class="card-title text-center"><%= staf.nama.toUpperCase() %></h5>
+				</div>
 				<p class="card-subtitle mb-3 text-muted text-center"><%= staf.NIK %></p>
 				<p class="card-text mb-1">Alamat: <%= staf.alamat %></p>
 				<p class="card-text mb-1">Email: <%= staf.email %></p>
@@ -14,22 +16,47 @@
 					Waktu Update: <%= staf.updatedAt.toLocaleDateString("id") %>
 				</p>
 				<p class="" card-text mb-1>
-					Didaftarkan oleh: <%= staf.createdBy %>
+					Didaftarkan oleh: Admin
 				</p>
 				<p class="" card-text mb-1>
-					Diperbarui oleh: <%= staf.updatedBy %>
+					Diperbarui oleh: Admin
 				</p>
 				<% if (session?.user?.role=='admin' || session?.user?.role == "staf") { %>
-				<a href="/staf/edit/<%= staf.NIK %>" class="btn btn-warning badge">Edit</a>
+				<div class="col">
+					<a href="/staf/edit/<%= staf.NIK %>" class="btn btn-warning badge">Edit</a>
+				</div>
+				<% } %>
+				<% if (session?.user?.role=='admin') { %>
+					<div class="col">
+						<form
+						  action="/staf/<%= staf.NIK %>?_method=DELETE"
+						  id="formDelete"
+						  method="POST"
+						>
+						  <button
+							type="button"
+							class="btn btn-danger badge"
+							onclick="return confirmHandler(this, '<%= staf.nama %>')"
+						  >
+							Del
+						  </button>
+						</form>
+					  </div>
 				<% } %>
 
-				<a href="/masyarakat">&laquo; Kembali</a>
+				<div class="col mt-1">
+					<a href="#" class="btn btn-secondary badge" onclick="goBack()">&laquo; Kembali</a>
+				</div>
 			</div>
 		</div>
 	</div>
 </div>
 
 <script>
+	function goBack() {
+		window.history.back();
+	}
+
 	function confirmHandler(button, nama_staf) {
 		const swalWithBootstrapButtons = Swal.mixin({
 			customClass: {

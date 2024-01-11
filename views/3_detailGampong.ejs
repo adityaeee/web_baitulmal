@@ -2,7 +2,9 @@
 	<div class="d-flex justify-content-center">
 		<div class="card mt-5" style="width: 18rem">
 			<div class="card-body">
-				<h5 class="card-title text-center"><%= gampong.nama_gampong.toUpperCase() %></h5>
+				<div class="row mb-2">
+					<h5 class="card-title text-center"><%= gampong.nama_gampong.toUpperCase() %></h5>
+				</div>
 				<p class="card-subtitle mb-3 text-muted text-center"><%= gampong.nama.toUpperCase() %></p>
 				<p class="card-text mb-1">NIK: <%= gampong.NIK %></p>
 				<p class="card-text mb-1">Email: <%= gampong.email %></p>
@@ -14,18 +16,40 @@
 					Waktu Update: <%= gampong.updatedAt.toLocaleDateString("id") %>
 				</p>
 				<% if (session?.user?.role=='admin' || session?.user?.role == "gampong") { %>
-				<a href="/gampong/edit/<%= gampong.kode_gampong %>" class="btn btn-warning badge">Edit</a>
-				<% } %> <% if (session?.user?.role=='gampong') { %>
-				<a href="/masyarakat">&laquo; Kembali</a>
-				<% } else { %>
-				<a href="/gampong">&laquo; Kembali</a>
+				<div class="col">
+					<a href="/gampong/edit/<%= gampong.kode_gampong %>" class="btn btn-warning badge">Edit</a>
+				</div>
 				<% } %>
+				<% if (session?.user?.role=='admin') { %>
+					<div class="col mt-1">
+						<form
+						  action="/gampong/<%= gampong.kode_gampong %>?_method=DELETE"
+						  id="formDelete"
+						  method="POST"
+						>
+						  <button
+							type="button"
+							class="btn btn-danger badge"
+							onclick="return confirmHandler(this, '<%= gampong.nama_gampong %>')"
+						  >
+							Del
+						  </button>
+						</form>
+					  </div>
+				<% } %>
+				<div class="col mt-1">
+					<a href="#" class="btn btn-secondary badge" onclick="goBack()">&laquo; Kembali</a>
+				</div>
 			</div>
 		</div>
 	</div>
 </div>
 
 <script>
+	function goBack() {
+		window.history.back();
+	}
+
 	function confirmHandler(button, nama_gampong) {
 		const swalWithBootstrapButtons = Swal.mixin({
 			customClass: {
