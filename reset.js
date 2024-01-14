@@ -25,3 +25,20 @@ reset();
 // const something = angka.some([2, 11]);
 
 // console.log(something); // Output: true
+
+// let data = [
+// 	[12, 45, 3],
+// 	[5, 6, 87, 9],
+// 	[0, 0, 6],
+// ];
+
+// let data2 = [
+// 	{
+// 		a: "adad",
+// 		b: "eeeqrqw",
+// 		c: "qreqr",
+// 	},
+// ];
+
+// let d = JSON.stringify(data2);
+// console.log(d);
