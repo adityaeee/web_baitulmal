@@ -70,23 +70,26 @@ const updateAll = async (req, res) => {
 		limit = data.length;
 	}
 
-	const perubahan = {
-		status: "Sudah",
-		periode: "Pertama",
-	};
-
 	if (typeof data == "string") {
 		penerima = await Masyarakat.findOne({ where: { NIK: data } });
+		let perubahan = {
+			status: "Sudah",
+			periode: Number(penerima.periode) + 1,
+		};
 		penerima.update(perubahan);
 	} else {
 		for (let i = 0; i < limit; i++) {
 			penerima = await Masyarakat.findOne({ where: { NIK: data[i] } });
+			let perubahan = {
+				status: "Sudah",
+				periode: Number(penerima.periode) + 1,
+			};
 			penerima.update(perubahan);
 		}
 	}
 
-	req.flash("msg", `Data harta waqaf bantuan zaqat berhasil diupdate`);
-	res.redirect("/masyarakat");
+	req.flash("msg", `Data bantuan zaqat harta waqaf  berhasil diupdate`);
+	res.redirect("/waqaf");
 };
 
 const formCreate = async (req, res) => {

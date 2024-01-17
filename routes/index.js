@@ -24,7 +24,7 @@ router.get("/dashboard", async function (req, res) {
 	const totPenyaluran = await jumPenyaluran();
 	const totGolongan = await jumGolongan();
 	const totPembagianGol = await jumPembagianGol();
-	console.log(totPembagianGol);
+
 	const data = {
 		totPenyaluran,
 		totGolongan,
