@@ -55,21 +55,37 @@ const getMasyarakatById = async (req, res) => {
 };
 
 const createMasyarakat = async (req, res) => {
-	// console.log(req.errorValidation?.errors);
+	req.session.data = req.body;
+
 	if (req.errorValidation) {
 		res.render(
 			"1_tambahPenerima",
 			dataLayout(req, {
 				errors: req.errorValidation.errors,
+				data: req?.session?.data,
 			})
 		);
 		return;
 	}
+
+	let cekNIK = await Masyarakat.findByPk(req.body.NIK);
+	console.log(cekNIK?.NIK);
+	if (req.body.NIK == cekNIK?.NIK) {
+		console.log(cekNIK.nama);
+		res.render(
+			"1_tambahPenerima",
+			dataLayout(req, {
+				errors: ["Nomor KTP telah terdaftar "],
+				data: req?.session?.data,
+			})
+		);
+		return;
+	}
+
 	// console.log(req.body);
 	const kodeGampong = req.session.user?.kode_gampong;
 	let data = { ...req.body, kode_gampong: kodeGampong };
 
-	req.session.data = data;
 	let golongan = req.body.golongan;
 	const endpoint = golongan.replace(/\s/g, "-");
 	res.redirect(`/${endpoint}/tambah?NIK=${req.body.NIK}`);
@@ -131,6 +147,37 @@ const formUpdate = async (req, res) => {
 	);
 };
 
+const reset = async (req, res) => {
+	let masyarakat = await Masyarakat.findByPk(req.params.NIK);
+	// console.log(masyarakat);
+
+	let perubahan = {
+		status: "Menunggu",
+	};
+
+	masyarakat.update(perubahan);
+
+	let endpoint = req.body.golongan.replace(/\s/g, "-");
+	res.redirect(`/${endpoint}`);
+};
+
+const resetAll = async (req, res) => {
+	let masyarakat = await Masyarakat.findAll({
+		where: { golongan: req.body.golongan },
+	});
+
+	let perubahan = {
+		status: "Menunggu",
+	};
+
+	masyarakat.forEach((m) => {
+		m.update(perubahan);
+	});
+
+	let endpoint = req.body.golongan.replace(/\s/g, "-");
+	res.redirect(`/${endpoint}`);
+};
+
 module.exports = {
 	getMasyarakat,
 	createMasyarakat,
@@ -139,4 +186,6 @@ module.exports = {
 	deleteMasyarakatById,
 	formCreate,
 	formUpdate,
+	reset,
+	resetAll,
 };

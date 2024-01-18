@@ -41,7 +41,11 @@
 						<th scope="row"><%= i+1 %></th>
 						<td><%= orang.nama %></td>
 						<td><%= orang.golongan %></td>
-						<td><%= orang.periode %></td>
+						<% if (orang.periode == "0") { %>
+							<td>Belum menerima</td>
+						<% } else {%>
+							<td>ke-<%= orang.periode %></td>
+						<% }%>
 						<td><%= orang.status %></td>
 						<td>
 							<a href="/gharimin/<%= orang.NIK %>" class="btn btn-success badge">Detail</a>

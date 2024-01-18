@@ -1,17 +1,25 @@
 <div class="container mt-3">
 	<div class="row">
-		<div class="col-md-3"></div>
+		<div class="col-md-2"></div>
 		<div class="col-md-6">
 			<h2 class="fw-bold text-center">DAFTAR FAKIR PENERIMA ZAKAT MAL</h2>
 		</div>
+		<% if (session?.user?.role=="staf") { %>
 		<div class="col-md-2">
-			<% if (session?.user?.role=="staf") { %>
 			<form id="formCluster" method="post" action="/clustering/fakir">
 				<button type="submit" class="btn btn-success">Clusterisasi Data</button>
 			</form>
-
-			<% } %>
 		</div>
+		<div class="col-md-2">
+			<form
+				action="/masyarakat/reset/all?_method=PUT" method="POST">
+				<button
+					type="button"
+					class="btn btn-warning" onclick="confirmHandlerReset(this)">Reset Status</button>
+					<input type="hidden" name="golongan"  value="fakir">
+			</form>
+		</div>
+		<% } %>
 	</div>
 	<div class="row mt-4">
 		<div class="col-md">
@@ -25,6 +33,12 @@
 				});
 			</script>
 			<% } %>
+
+			<div class="d-flex flex-row-reverse bd-highlight">
+				
+			</div>
+
+
 			<table class="table table-striped text-center">
 				<thead>
 					<tr>
@@ -42,7 +56,11 @@
 						<th scope="row"><%= i+1 %></th>
 						<td><%= orang.nama %></td>
 						<td><%= orang.golongan %></td>
-						<td><%= orang.periode %></td>
+						<% if (orang.periode == "0") { %>
+							<td>Belum menerima</td>
+						<% } else {%>
+							<td>ke-<%= orang.periode %></td>
+						<% }%>
 						<td><%= orang.status %></td>
 						<td>
 							<a href="/fakir/<%= orang.NIK %>" class="btn btn-success badge">Detail</a>
@@ -54,3 +72,38 @@
 		</div>
 	</div>
 </div>
+
+
+<script>
+	function confirmHandlerReset(button) {
+		const swalWithBootstrapButtons = Swal.mixin({
+			customClass: {
+				confirmButton: "btn btn-success",
+				cancelButton: "btn btn-danger",
+			},
+			buttonsStyling: false,
+		});
+
+		swalWithBootstrapButtons
+			.fire({
+				title: "Apakah anda yakin?",
+				text: `mereset semua status penerima?`,
+				icon: "warning",
+				showCancelButton: true,
+				confirmButtonText: "Ya, reset!",
+				cancelButtonText: "Batal!",
+				reverseButtons: true,
+			})
+			.then((result) => {
+				if (result.isConfirmed) {
+					button.parentElement.submit();
+					swalWithBootstrapButtons.fire("Reset!", `Status berhasil direset semua`, "success");
+				} else if (
+					/* Read more about handling dismissals below */
+					result.dismiss === Swal.DismissReason.cancel
+				) {
+					swalWithBootstrapButtons.fire("Cancelled", `Status masih tersimpan`, "error");
+				}
+			});
+	}
+</script>

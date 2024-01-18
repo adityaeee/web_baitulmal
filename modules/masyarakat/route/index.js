@@ -13,19 +13,23 @@ const {
 	deleteMasyarakatById,
 	formUpdate,
 	formCreate,
+	reset,
+	resetAll,
 } = require("../controller/index");
 
 router.get("/", getMasyarakat);
-router.post(
-	"/",
-	authentication(["gampong"]),
-	validate(addSchema),
-	createMasyarakat
-);
+router.post("/", validate(addSchema), createMasyarakat);
 router.get("/tambah", authentication(["gampong"]), formCreate);
 router.get("/edit/:NIK", authentication(["gampong"]), formUpdate);
 router.get("/:NIK", getMasyarakatById);
-router.put("/:NIK", validate(updateSchema), updateMasyarakatById);
-router.delete("/:NIK", deleteMasyarakatById);
+router.put("/reset/all", authentication(["staf"]), resetAll);
+router.put("/reset/:NIK", authentication(["staf"]), reset);
+router.put(
+	"/:NIK",
+	authentication(["gampong"]),
+	validate(updateSchema),
+	updateMasyarakatById
+);
+router.delete("/:NIK", authentication(["gampong"]), deleteMasyarakatById);
 
 module.exports = router;

@@ -267,20 +267,30 @@
             </div>
           </div>
   
-          <% if (session?.user?.role=="gampong") { %>
-  
           <div class="row text-center mb-2 mt-4">
+            <% if (session?.user?.role=="staf") { %>
+              <div class="col">
+                <form
+                  action="/masyarakat/reset/<%= masyarakat.NIK %>?_method=PUT" method="POST"
+                >
+                  <button
+                    type="button"
+                    class="btn btn-info badge"
+                    onclick="return confirmHandlerReset(this, '<%= masyarakat.nama %>')"
+                  >
+                    Reset
+                  </button>
+                  <input type="hidden" name="golongan" value="<%= masyarakat.golongan %>">
+                </form>
+              </div>
+            <% } %>
+  
+            <% if (session?.user?.role=="gampong") { %>
             <div class="col">
-              <a
-                href="/masyarakat/edit/<%= masyarakat.NIK %>"
-                class="btn btn-warning badge"
-                >Edit
-              </a>
+              <a href="/masyarakat/edit/<%= masyarakat.NIK %>" class="btn btn-warning badge">Edit </a>
             </div>
             <div class="col">
-              <a
-                href="/<%= endpoint %>/edit/<%= masyarakat.NIK %>"
-                class="btn btn-warning badge"
+              <a href="/<%= endpoint %>/edit/<%= masyarakat.NIK %>" class="btn btn-warning badge"
                 >Edit Data Golongan</a
               >
             </div>
@@ -299,19 +309,21 @@
                 </button>
               </form>
             </div>
+            
           </div>
-          <% } %> <div class="container mt-5">
-					<a href="#" class="btn btn-secondary badge" onclick="goBack()">Kembali</a>
-				</div>
-			</div>
-		</div>
-	</div>
-</div>
-
-<script>
-	function goBack() {
-		window.history.back();
-	}
+          <% } %>
+          <div class="flex mt-5">
+            <a href="#" class="btn btn-secondary badge" onclick="goBack()">Kembali</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <script>
+    function goBack() {
+      window.history.back();
+    }
   
     function confirmHandler(button, nama) {
       const swalWithBootstrapButtons = Swal.mixin({
@@ -335,22 +347,45 @@
         .then((result) => {
           if (result.isConfirmed) {
             button.parentElement.submit();
-            swalWithBootstrapButtons.fire(
-              "Deleted!",
-              `Data ${nama} berhasil dihapus`,
-              "success"
-            );
+            swalWithBootstrapButtons.fire("Deleted!", `Data ${nama} berhasil dihapus`, "success");
           } else if (
             /* Read more about handling dismissals below */
             result.dismiss === Swal.DismissReason.cancel
           ) {
-            swalWithBootstrapButtons.fire(
-              "Cancelled",
-              `Data ${nama} masih tersimpan`,
-              "error"
-            );
+            swalWithBootstrapButtons.fire("Cancelled", `Data ${nama} masih tersimpan`, "error");
+          }
+        });
+    }
+  
+    function confirmHandlerReset(button, nama) {
+      const swalWithBootstrapButtons = Swal.mixin({
+        customClass: {
+          confirmButton: "btn btn-success",
+          cancelButton: "btn btn-danger",
+        },
+        buttonsStyling: false,
+      });
+  
+      swalWithBootstrapButtons
+        .fire({
+          title: "Apakah anda yakin?",
+          text: `mereset data ${nama} ?`,
+          icon: "warning",
+          showCancelButton: true,
+          confirmButtonText: "Ya, reset!",
+          cancelButtonText: "Batal!",
+          reverseButtons: true,
+        })
+        .then((result) => {
+          if (result.isConfirmed) {
+            button.parentElement.submit();
+            swalWithBootstrapButtons.fire("Reset!", `Data ${nama} berhasil direset`, "success");
+          } else if (
+            /* Read more about handling dismissals below */
+            result.dismiss === Swal.DismissReason.cancel
+          ) {
+            swalWithBootstrapButtons.fire("Cancelled", `Data ${nama} masih tersimpan`, "error");
           }
         });
     }
   </script>
-  
