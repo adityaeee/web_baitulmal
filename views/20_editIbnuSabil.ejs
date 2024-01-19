@@ -1,7 +1,7 @@
 <div class="container mt-3">
     <div class="row">
       <div class="col-md-3">
-        <a href="/masyarakat/<%= ibnuSabil.NIK %>" class="btn btn-success badge"
+        <a href="#" onclick="goBack()" class="btn btn-success badge"
           >&laquo; Kembali</a
         >
       </div>
@@ -80,3 +80,8 @@
     </div>
   </div>
   
+  <script>
+    function goBack(){
+      window.history.back();
+    }
+  </script>

@@ -75,6 +75,7 @@ const updateAll = async (req, res) => {
 		let perubahan = {
 			status: "Sudah",
 			periode: Number(penerima.periode) + 1,
+			waktu_proses: new Date(),
 		};
 		penerima.update(perubahan);
 	} else {
@@ -83,6 +84,7 @@ const updateAll = async (req, res) => {
 			let perubahan = {
 				status: "Sudah",
 				periode: Number(penerima.periode) + 1,
+				waktu_proses: new Date(),
 			};
 			penerima.update(perubahan);
 		}

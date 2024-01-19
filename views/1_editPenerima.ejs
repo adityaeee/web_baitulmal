@@ -1,106 +1,108 @@
 <div class="container mt-3">
-  <div class="row center">
-    <div class="col-md-3">
-      <a href="/masyarakat/<%= masyarakat.NIK %>" class="btn btn-success badge"
-        >&laquo; Kembali</a
-      >
-    </div>
-    <div class="col-md-6">
-      <h2 class="fw-bold">FORM UBAH DATA MASYARAKAT</h2>
-    </div>
-  </div>
-  <% if (typeof errors != 'undefined') { %>
-  <div class="alert alert-danger" role="alert">
-    <ul>
-      <% errors.forEach(error => { %>
-      <li><%= error %></li>
-      <% }) %>
-    </ul>
-    <% } %>
-  </div>
-  <div class="row justify-content-center">
-    <div class="col-md-6">
-      <form
-        method="post"
-        id="formUbah"
-        action="/masyarakat/<%= masyarakat.NIK %>?_method=PUT"
-        enctype="multipart/form-data"
-      >
-        <div class="mb-3">
-          <label for="no_KK" class="form-label">Nomor Kartu Keluarga</label>
-          <input
-            type="text"
-            class="form-control"
-            id="no_KK"
-            name="no_KK"
-            value="<%=masyarakat.no_KK%>"
-          />
-        </div>
-        <div class="mb-3">
-          <label for="nama" class="form-label">Nama</label>
-          <input
-            type="text"
-            class="form-control"
-            id="nama"
-            name="nama"
-            value="<%= masyarakat.nama %>"
-          />
-        </div>
-        <div class="mb-3">
-          <label for="tempat_lahir" class="form-label">Tempat Lahir</label>
-          <input
-            type="text"
-            class="form-control"
-            id="tempat_lahir"
-            name="tempat_lahir"
-            value="<%= masyarakat.tempat_lahir %>"
-          />
-        </div>
-        <div class="mb-3">
-          <label for="tanggal_lahir" class="form-label">Tanggal Lahir</label>
-          <input
-            type="date"
-            class="form-control"
-            id="tanggal_lahir"
-            name="tanggal_lahir"
-            value="<%=masyarakat.tanggal_lahir%>"
-          />
-        </div>
-        <div class="mb-3">
-          <label for="dusun" class="form-label">Dusun</label>
-          <input
-            type="text"
-            class="form-control"
-            id="dusun"
-            name="dusun"
-            value="<%=masyarakat.dusun%>"
-          />
-        </div>
-        <button
-          type="button"
-          class="btn btn-success"
-          onclick="return confirmHandler(this, '<%= masyarakat.nama %>')"
-        >
-          Simpan perubahan
-        </button>
-      </form>
-    </div>
-  </div>
+	<div class="row center">
+		<div class="col-md-3">
+			<a href="#" onclick="goBack()" class="btn btn-success badge">&laquo; Kembali</a>
+		</div>
+		<div class="col-md-6">
+			<h2 class="fw-bold">FORM UBAH DATA MASYARAKAT</h2>
+		</div>
+	</div>
+	<% if (typeof errors != 'undefined') { %>
+	<div class="alert alert-danger" role="alert">
+		<ul>
+			<% errors.forEach(error => { %>
+			<li><%= error %></li>
+			<% }) %>
+		</ul>
+		<% } %>
+	</div>
+	<div class="row justify-content-center">
+		<div class="col-md-6">
+			<form
+				method="post"
+				id="formUbah"
+				action="/masyarakat/<%= masyarakat.NIK %>?_method=PUT"
+				enctype="multipart/form-data"
+			>
+				<div class="mb-3">
+					<label for="no_KK" class="form-label">Nomor Kartu Keluarga</label>
+					<input
+						type="text"
+						class="form-control"
+						id="no_KK"
+						name="no_KK"
+						value="<%=masyarakat.no_KK%>"
+					/>
+				</div>
+				<div class="mb-3">
+					<label for="nama" class="form-label">Nama</label>
+					<input
+						type="text"
+						class="form-control"
+						id="nama"
+						name="nama"
+						value="<%= masyarakat.nama %>"
+					/>
+				</div>
+				<div class="mb-3">
+					<label for="tempat_lahir" class="form-label">Tempat Lahir</label>
+					<input
+						type="text"
+						class="form-control"
+						id="tempat_lahir"
+						name="tempat_lahir"
+						value="<%= masyarakat.tempat_lahir %>"
+					/>
+				</div>
+				<div class="mb-3">
+					<label for="tanggal_lahir" class="form-label">Tanggal Lahir</label>
+					<input
+						type="date"
+						class="form-control"
+						id="tanggal_lahir"
+						name="tanggal_lahir"
+						value="<%=masyarakat.tanggal_lahir%>"
+					/>
+				</div>
+				<div class="mb-3">
+					<label for="dusun" class="form-label">Dusun</label>
+					<input
+						type="text"
+						class="form-control"
+						id="dusun"
+						name="dusun"
+						value="<%=masyarakat.dusun%>"
+					/>
+				</div>
+				<button
+					type="button"
+					class="btn btn-success"
+					onclick="return confirmHandler(this, '<%= masyarakat.nama %>')"
+				>
+					Simpan perubahan
+				</button>
+			</form>
+		</div>
+	</div>
 </div>
 
 <script>
-  function confirmHandler(button, nama) {
-    Swal.fire({
-      title: `Apakah Anda yakin ingin mengubah data ${nama}?`,
-      showCancelButton: true,
-      confirmButtonText: "Update",
-    }).then((result) => {
-      /* Read more about isConfirmed, isDenied below */
-      if (result.isConfirmed) {
-        document.getElementById("formUbah").submit();
-      } else if (result.isDenied) {
-        Swal.fire("Perubahan tidak disimpan", "", "info");
-      }
-    });
-  }
+	function goBack() {
+		window.history.back();
+	}
+
+	function confirmHandler(button, nama) {
+		Swal.fire({
+			title: `Apakah Anda yakin ingin mengubah data ${nama}?`,
+			showCancelButton: true,
+			confirmButtonText: "Update",
+		}).then((result) => {
+			/* Read more about isConfirmed, isDenied below */
+			if (result.isConfirmed) {
+				document.getElementById("formUbah").submit();
+			} else if (result.isDenied) {
+				Swal.fire("Perubahan tidak disimpan", "", "info");
+			}
+		});
+	}
 </script>
