@@ -2,7 +2,9 @@
 	<div class="d-flex justify-content-center">
 		<div class="card mt-5 mb-5" style="width: 30rem">
 			<div class="card-body">
-				<h5 class="card-title text-center"><%= masyarakat.nama.toUpperCase() %></h5>
+				<div class="row mb-2">
+					<h5 class="card-title text-center"><%= masyarakat.nama.toUpperCase() %></h5>
+				</div>
 
 				<p class="card-subtitle mb-3 text-muted text-center">
 					<%= masyarakat.golongan.toUpperCase() %>
@@ -109,7 +111,7 @@
 				<div class="row mb-2">
 					<label class="col-sm-4 col-form-label">Nomor Rekening</label>
 					<div class="col-sm-8">
-						<input class="form-control" disabled value="<%= golongan.norekening %> Tahun" />
+						<input class="form-control" disabled value="<%= golongan.norekening %>" />
 					</div>
 				</div>
 
@@ -181,23 +183,19 @@
 
 				<div class="row text-center mb-2 mt-4">
 					<% if (session?.user?.role=="staf") { %>
-						<div class="col">
-							<form
-								action="/masyarakat/reset/<%= masyarakat.NIK %>?_method=PUT" method="POST"
+					<div class="col">
+						<form action="/masyarakat/reset/<%= masyarakat.NIK %>?_method=PUT" method="POST">
+							<button
+								type="button"
+								class="btn btn-info badge"
+								onclick="return confirmHandlerReset(this, '<%= masyarakat.nama %>')"
 							>
-								<button
-									type="button"
-									class="btn btn-info badge"
-									onclick="return confirmHandlerReset(this, '<%= masyarakat.nama %>')"
-								>
-									Reset
-								</button>
-								<input type="hidden" name="golongan" value="<%= masyarakat.golongan %>">
-							</form>
-						</div>
-					<% } %>
-
-					<% if (session?.user?.role=="gampong") { %>
+								Reset
+							</button>
+							<input type="hidden" name="golongan" value="<%= masyarakat.golongan %>" />
+						</form>
+					</div>
+					<% } %> <% if (session?.user?.role=="gampong") { %>
 					<div class="col">
 						<a href="/masyarakat/edit/<%= masyarakat.NIK %>" class="btn btn-warning badge">Edit </a>
 					</div>
@@ -221,7 +219,6 @@
 							</button>
 						</form>
 					</div>
-					
 				</div>
 				<% } %>
 				<div class="flex mt-5">

@@ -4,14 +4,29 @@
 		<div class="col-md-6">
 			<h2 class="fw-bold text-center">DAFTAR ANAK YATIM PENERIMA ZAKAT MAL</h2>
 		</div>
+	</div>
+	<% if (session?.user?.role=="staf") { %>
+	<div class="row mt-4">
 		<div class="col-md-2">
-			<% if (session?.user?.role=="staf") { %>
 			<form id="formCluster" method="post" action="/clustering/anak-yatim">
 				<button type="submit" class="btn btn-success">Clusterisasi Data</button>
 			</form>
-			<% } %>
+		</div>
+		<div class="col md-2">
+			<a href="/print?golongan=anak yatim">
+				<button type="submit" class="btn btn-success">Print Report</button>
+			</a>
+		</div>
+		<div class="col-md-2">
+			<form action="/masyarakat/reset/all?_method=PUT" method="POST">
+				<button type="button" class="btn btn-warning" onclick="confirmHandlerReset(this)">
+					Reset Status
+				</button>
+				<input type="hidden" name="golongan" value="anak yatim" />
+			</form>
 		</div>
 	</div>
+	<% } %>
 	<div class="row mt-4">
 		<div class="col-md">
 			<% if (msg.length !== 0) { %>
@@ -42,9 +57,9 @@
 						<td><%= orang.nama %></td>
 						<td><%= orang.golongan %></td>
 						<% if (orang.periode == "0") { %>
-							<td>Belum menerima</td>
+						<td>Belum menerima</td>
 						<% } else {%>
-							<td>ke-<%= orang.periode %></td>
+						<td>ke-<%= orang.periode %></td>
 						<% }%>
 						<td><%= orang.status %></td>
 						<td>
@@ -57,3 +72,37 @@
 		</div>
 	</div>
 </div>
+
+<script>
+	function confirmHandlerReset(button) {
+		const swalWithBootstrapButtons = Swal.mixin({
+			customClass: {
+				confirmButton: "btn btn-success",
+				cancelButton: "btn btn-danger",
+			},
+			buttonsStyling: false,
+		});
+
+		swalWithBootstrapButtons
+			.fire({
+				title: "Apakah anda yakin?",
+				text: `mereset semua status penerima?`,
+				icon: "warning",
+				showCancelButton: true,
+				confirmButtonText: "Ya, reset!",
+				cancelButtonText: "Batal!",
+				reverseButtons: true,
+			})
+			.then((result) => {
+				if (result.isConfirmed) {
+					button.parentElement.submit();
+					swalWithBootstrapButtons.fire("Reset!", `Status berhasil direset semua`, "success");
+				} else if (
+					/* Read more about handling dismissals below */
+					result.dismiss === Swal.DismissReason.cancel
+				) {
+					swalWithBootstrapButtons.fire("Cancelled", `Status masih tersimpan`, "error");
+				}
+			});
+	}
+</script>
