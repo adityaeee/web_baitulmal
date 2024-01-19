@@ -11,6 +11,7 @@ const reset = async () => {
 	const perubahan = {
 		status: "Menunggu",
 		periode: 0,
+		waktu_proses: "-",
 	};
 
 	masyarakat.forEach((org) => {

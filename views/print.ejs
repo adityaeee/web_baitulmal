@@ -1,0 +1,104 @@
+<style>
+    /* Gaya khusus untuk cetak */
+    @media print {
+      body {
+        margin: 0;
+        padding: 0;
+      }
+      .container {
+        width: 100%;
+        margin: 0;
+        padding: 0;
+      }
+      button {
+        display: none;
+      }
+    }
+</style>
+
+
+<div class="container mt-4">
+  <h2 class="mb-4">Laporan Penerima Zakat</h2>
+  
+  <!-- Isi laporan -->
+  <div class="row">
+    <div class="col-md-6">
+      <p><strong>Tanggal : </strong> <%= date.toLocaleDateString("id") %></p>
+      <p><strong>Staf Penanggung Jawab : </strong>  <%= user?.nama %></p>
+      <p><strong>Golongan : </strong>  <%= golongan.toUpperCase() %></p>
+      <!-- Tambahkan data laporan lainnya -->
+    </div>
+    <div class="col-md-6">
+      <!-- Tambahkan elemen lain yang sesuai -->
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-11"></div>
+    <div class="col-md-1">
+        <button class="btn-secondary rounded " onclick="cetakHalaman()">Cetak</button>
+    </div>
+  </div>
+
+  <!-- Tabel data atau bagian lain dari laporan -->
+  <div class="table-responsive mt-4">
+    <table class="table table-bordered">
+      <thead>
+        <tr class="text-center">
+            <th scope="col">No</th>
+            <th scope="col">NIK</th>
+            <th scope="col">NAMA</th>
+            <th scope="col">PERIODE</th>
+            <th scope="col">WAKTU PROSES</th>
+            <th scope="col">ALAMAT</th>
+        </tr>
+      </thead>
+      <tbody style="font-size: small;">
+        <% masyarakat.forEach((orang,i) => { %>
+            <tr>
+                <th scope="row" class="text-center"><%= i+1 %></th>
+                <td class="text-center"><%= orang.NIK %></td>
+                <td><%= orang.nama %></td>
+                <% if (orang.periode == "0") { %>
+                    <td class="text-center">Belum menerima</td>
+                <% } else {%>
+                    <td class="text-center">ke-<%= orang.periode %></td>
+                <% }%>
+                <td class="text-center"><%= orang.waktu_proses.toLocaleDateString("id") %></td>
+                <% gampong.forEach(g => { %>
+                    <% if (g.kode_gampong == orang.kode_gampong) { %>
+                        <td><%=g.nama_gampong%>, <%=g.kecamatan%>, Aceh Besar</td>
+                        <% return%>
+                    <% } %>
+                <% }) %>
+            </tr>
+            <% }) %>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="row mt-4" style="font-size: small;">
+    <div class="d-flex flex-row-reverse">
+        <div class="flex-column-reverse">
+            <p class="mb-5">Kota Jantho, ____________________ <br>Kepala Sekretariat Baitul Mal Aceh Besar</p> 
+            <p class="mt-5">HERU SAPUTRA, SH, MH<br>Pembina(IV/a) <br>NIP 197903182002121009</p>
+        </div>
+    </div>
+    </div>
+  </div>
+
+  
+</div>
+
+
+
+<script>
+  function cetakHalaman() {
+    window.print(); // Memicu dialog pencetakan
+  }
+</script>
+
+<!-- Bootstrap JavaScript dan jQuery (opsional, tergantung kebutuhan) -->
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>

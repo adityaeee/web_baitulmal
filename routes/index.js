@@ -1,6 +1,8 @@
 var express = require("express");
 var router = express.Router();
 
+const { Sequelize, DataTypes } = require("sequelize");
+
 const { Masyarakat, Gampong } = require("../models");
 
 const {
@@ -36,6 +38,27 @@ router.get("/dashboard", async function (req, res) {
 		"dashboard",
 		dataLayout(req, {
 			data,
+		})
+	);
+});
+
+router.get("/print", async function (req, res) {
+	const golongan = req.query.golongan;
+	const masyarakat = await Masyarakat.findAll({
+		where: { golongan, periode: { [Sequelize.Op.not]: 0 } },
+	});
+	const gampong = await Gampong.findAll();
+	const date = new Date();
+	const user = req.session?.user;
+
+	res.render(
+		"print",
+		dataLayout(req, {
+			masyarakat,
+			date,
+			user,
+			golongan,
+			gampong,
 		})
 	);
 });
