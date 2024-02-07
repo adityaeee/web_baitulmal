@@ -26,6 +26,41 @@
       <p><strong>Tanggal : </strong> <%= date.toLocaleDateString("id") %></p>
       <p><strong>Staf Penanggung Jawab : </strong>  <%= user?.nama %></p>
       <p><strong>Golongan : </strong>  <%= golongan.toUpperCase() %></p>
+      <p><strong>Jumlah yang diterima per periode : </strong>
+        <% if (golongan == 'fakir') { %>
+				Rp. 300.000 / orang
+				<% } else if (golongan == 'miskin') { %>
+				Rp. 700.000 / orang
+				<% } else if (golongan == 'miskin insidentil') { %>
+				Rp. 700.000 / orang
+				<% } else if (golongan == 'guru dayah') { %>
+				Rp. 1.500.000 / orang
+				<% } else if (golongan == 'santri dayah') { %>
+				Rp. 1.000.000 / orang
+				<% } else if (golongan == 'santri dayah luar') { %>
+				Rp. 1.000.000 / orang
+				<% } else if (golongan == 'anak yatim') { %>
+				Rp. 700.000 / orang
+				<% } else if (golongan == 'disabilitas') { %>
+				Rp. 700.000 / orang
+				<% } else if (golongan == 'pelajar miskin') { %>
+				Rp. 2.000.000 / orang
+				<% } else if (golongan == 'santri muallaf') { %>
+				Rp. 6.000.000 / orang
+				<% } else if (golongan == 'muallaf') { %>
+				Rp. 2.500.000 / orang
+				<% } else if (golongan == 'gharimin') { %>
+				Rp. 1.000.000 / orang
+				<% } else if (golongan == 'santri berprestasi') { %>
+				Rp. 1.000.000 / orang
+				<% } else if (golongan == 'madrasah') { %>
+				Rp. 6.000.000 / orang
+				<% } else if (golongan == 'waqaf') { %>
+				Rp. 1.000.000 / orang
+				<% } else if (golongan == 'pelajar rantau') { %>
+				Rp. 5.000.000 / orang
+				<% } %>
+      </p>
       <!-- Tambahkan data laporan lainnya -->
     </div>
     <div class="col-md-6">

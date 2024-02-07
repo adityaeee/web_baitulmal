@@ -56,12 +56,34 @@
 						value="<%= gampong.password %>"
 					/>
 				</div>
-				<button type="submit" class="btn btn-success mb-5">Simpan</button>
+				<button
+					type="button"
+					class="btn btn-success"
+					onclick="return confirmHandler(this, '<%= gampong.nama_gampong %>')"
+				>
+					Simpan perubahan
+				</button>
 			</form>
 		</div>
 	</div>
 </div>
 
+<script>
+	function confirmHandler(button, nama_gampong) {
+		Swal.fire({
+			title: `Apakah Anda yakin ingin mengubah data ${nama_gampong}?`,
+			showCancelButton: true,
+			confirmButtonText: "Update",
+		}).then((result) => {
+			/* Read more about isConfirmed, isDenied below */
+			if (result.isConfirmed) {
+				document.getElementById("formUbah").submit();
+			} else if (result.isDenied) {
+				Swal.fire("Perubahan tidak disimpan", "", "info");
+			}
+		});
+	}
+</script>
 <!-- <script>
   function confirmHandler(button, nama) {
     Swal.fire({

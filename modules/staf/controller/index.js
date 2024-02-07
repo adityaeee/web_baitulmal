@@ -35,6 +35,21 @@ const getStafById = async (req, res) => {
 
 const createStaf = async (req, res) => {
 	const data = req.body;
+
+	let cekNIK = await Staf.findByPk(req.body.NIK);
+	console.log(cekNIK?.NIK);
+	if (req.body.NIK == cekNIK?.NIK) {
+		console.log(cekNIK.nama);
+		res.render(
+			"2_tambahStaf",
+			dataLayout(req, {
+				errors: ["Nomor KTP telah terdaftar "],
+				data: req?.session?.data,
+			})
+		);
+		return;
+	}
+
 	await Staf.create(data);
 	req.flash("msg", `Data staf berhasil ditambahkan`);
 	res.redirect("/staf");

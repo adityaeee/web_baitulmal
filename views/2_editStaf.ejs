@@ -1,9 +1,7 @@
 <div class="container mt-3">
 	<div class="row center">
 		<div class="col-md-4">
-			<a href="/staf/<%= staf.NIK %>" class="btn btn-success badge"
-				>&laquo; Kembali</a
-			>
+			<a href="/staf/<%= staf.NIK %>" class="btn btn-success badge">&laquo; Kembali</a>
 		</div>
 		<div class="col-md-6 mb-4">
 			<h2 class="fw-bold">UPDATE DATA STAF</h2>
@@ -19,73 +17,83 @@
 	</div>
 	<div class="row justify-content-center">
 		<div class="col-md-6">
-				<form method="post" id="formUbah" action="/staf/<%= staf.NIK%>?_method=PUT">
-					<div class="mb-3">
-						<label for="NIK" class="form-label">Nomor KTP</label>
-						<input
-							type="text"
-							class="form-control"
-							id="NIK"
-							name="NIK"
-							value="<%= staf.NIK %>"
-						/>
-					</div>
-					<div class="mb-3">
-						<label for="nama" class="form-label">Nama Lengkap</label>
-						<input
-							type="text"
-							class="form-control"
-							id="nama"
-							name="nama"
-							value="<%= staf.nama %>"
-						/>
-					</div>
-					<div class="mb-3">
-						<label for="email" class="form-label">Email</label>
-						<input
-						  type="email"
-						  class="form-control"
-						  id="email"
-						  name="email"
-						  value="<%= staf.email %>"
-						/>
-					  </div>
-					<div class="mb-3">
-						<label for="username" class="form-label">Username</label>
-						<input
-						  type="username"
-						  class="form-control"
-						  id="username"
-						  name="username"
-						  value="<%= staf.username %>"
-						/>
-					  </div>
-					  <div class="mb-3">
-						<label for="password" class="form-label">Password</label>
-						<input
-						  type="password"
-						  class="form-control"
-						  id="password"
-						  name="password"
-						  value="<%= staf.password %>"
-						/>
-					  </div>
-					  <div class="mb-3">
-						<label for="alamat" class="form-label">Alamat</label>
-						<input
-						  type="alamat"
-						  class="form-control"
-						  id="alamat"
-						  name="alamat"
-						  value="<%= staf.alamat %>"
-						/>
-					  </div>
-					<button type="submit" class="btn btn-success mb-5">Simpan</button>
-				</form>
-			</div>
+			<form method="post" id="formUbah" action="/staf/<%= staf.NIK%>?_method=PUT">
+				<div class="mb-3">
+					<label for="NIK" class="form-label">Nomor KTP</label>
+					<input type="text" class="form-control" id="NIK" name="NIK" value="<%= staf.NIK %>" />
+				</div>
+				<div class="mb-3">
+					<label for="nama" class="form-label">Nama Lengkap</label>
+					<input type="text" class="form-control" id="nama" name="nama" value="<%= staf.nama %>" />
+				</div>
+				<div class="mb-3">
+					<label for="email" class="form-label">Email</label>
+					<input
+						type="email"
+						class="form-control"
+						id="email"
+						name="email"
+						value="<%= staf.email %>"
+					/>
+				</div>
+				<div class="mb-3">
+					<label for="username" class="form-label">Username</label>
+					<input
+						type="username"
+						class="form-control"
+						id="username"
+						name="username"
+						value="<%= staf.username %>"
+					/>
+				</div>
+				<div class="mb-3">
+					<label for="password" class="form-label">Password</label>
+					<input
+						type="password"
+						class="form-control"
+						id="password"
+						name="password"
+						value="<%= staf.password %>"
+					/>
+				</div>
+				<div class="mb-3">
+					<label for="alamat" class="form-label">Alamat</label>
+					<input
+						type="alamat"
+						class="form-control"
+						id="alamat"
+						name="alamat"
+						value="<%= staf.alamat %>"
+					/>
+				</div>
+				<button
+					type="button"
+					class="btn btn-success"
+					onclick="return confirmHandler(this, '<%= staf.nama %>')"
+				>
+					Simpan perubahan
+				</button>
+			</form>
 		</div>
+	</div>
 </div>
 
+<script>
+	function confirmHandler(button, nama) {
+		Swal.fire({
+			title: `Apakah Anda yakin ingin mengubah data ${nama}?`,
+			showCancelButton: true,
+			confirmButtonText: "Update",
+		}).then((result) => {
+			/* Read more about isConfirmed, isDenied below */
+			if (result.isConfirmed) {
+				document.getElementById("formUbah").submit();
+			} else if (result.isDenied) {
+				Swal.fire("Perubahan tidak disimpan", "", "info");
+			}
+		});
+	}
+</script>
 <!-- <script>
   function confirmHandler(button, nama) {
     Swal.fire({

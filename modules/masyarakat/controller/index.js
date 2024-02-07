@@ -82,9 +82,10 @@ const createMasyarakat = async (req, res) => {
 		return;
 	}
 
-	// console.log(req.body);
 	const kodeGampong = req.session.user?.kode_gampong;
 	let data = { ...req.body, kode_gampong: kodeGampong };
+	req.session.data = data;
+	console.log(req.session.data);
 
 	let golongan = req.body.golongan;
 	const endpoint = golongan.replace(/\s/g, "-");
